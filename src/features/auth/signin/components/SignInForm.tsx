@@ -1,31 +1,17 @@
 import { useForm } from 'react-hook-form';
 
 import { Lock } from 'lucide-react';
-import * as z from 'zod';
 
+import LoadingSpinner from '@/components/LoadingSpinner';
 import { Button, Input, Label } from '@/components/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-const SignInFormSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z
-    .string()
-    .min(8, { message: 'Password must be at least 8 characters long' })
-    .regex(/[A-Z]/, {
-      message: 'Password must contain at least one uppercase letter',
-    })
-    .regex(/[a-z]/, {
-      message: 'Password must contain at least one lowercase letter',
-    })
-    .regex(/[0-9]/, { message: 'Password must contain at least one number' })
-    .regex(/[\W_]/, {
-      message: 'Password must contain at least one special character',
-    }),
-});
-
-type SignInFormValues = z.infer<typeof SignInFormSchema>;
+import useSignIn from '../hooks/useSignIn';
+import { SignInFormSchema, SignInFormValues } from '../schema';
 
 const SignInForm = () => {
+  const { mutate: signIn, isPending } = useSignIn();
+
   const {
     register,
     handleSubmit,
@@ -40,7 +26,7 @@ const SignInForm = () => {
   });
 
   const onSubmit = (values: SignInFormValues) => {
-    console.log(values);
+    signIn(values);
   };
 
   return (
@@ -48,12 +34,7 @@ const SignInForm = () => {
       {/* Email */}
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          type="email"
-          {...register('email')}
-          error={errors.email?.message}
-        />
+        <Input id="email" type="email" {...register('email')} error={errors.email?.message} />
       </div>
 
       {/* Password */}
@@ -69,7 +50,8 @@ const SignInForm = () => {
 
       {/* Submit */}
       <Button className="w-full">
-        <Lock className="mr-2 h-4 w-4" /> Login
+        {isPending ? <LoadingSpinner /> : <Lock className="mr-2 size-4" />}
+        Login
       </Button>
     </form>
   );

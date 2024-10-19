@@ -1,18 +1,17 @@
 import { useForm } from 'react-hook-form';
 
 import { Mail } from 'lucide-react';
-import * as z from 'zod';
 
+import LoadingSpinner from '@/components/LoadingSpinner';
 import { Button, Input, Label } from '@/components/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-const ForgotPasswordFormSchema = z.object({
-  email: z.string().email('Invalid email address'),
-});
-
-type ForgotPasswordFormValues = z.infer<typeof ForgotPasswordFormSchema>;
+import useForgotPassword from '../hooks/useForgotPassword';
+import { ForgotPasswordFormSchema, ForgotPasswordFormValues } from '../schema';
 
 const ForgotPasswordForm = () => {
+  const { mutate: forgotPassword, isPending } = useForgotPassword();
+
   const {
     register,
     handleSubmit,
@@ -26,7 +25,7 @@ const ForgotPasswordForm = () => {
   });
 
   const onSubmit = (values: ForgotPasswordFormValues) => {
-    console.log(values);
+    forgotPassword(values);
   };
 
   return (
@@ -34,17 +33,13 @@ const ForgotPasswordForm = () => {
       {/* Email */}
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          type="email"
-          {...register('email')}
-          error={errors.email?.message}
-        />
+        <Input id="email" type="email" {...register('email')} error={errors.email?.message} />
       </div>
 
       {/* Submit */}
       <Button className="w-full">
-        <Mail className="mr-2 h-4 w-4" /> Send Reset Link
+        {isPending ? <LoadingSpinner /> : <Mail className="mr-2 size-4" />}
+        Send Reset Link
       </Button>
     </form>
   );

@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 
 import { UserPlus } from 'lucide-react';
-import * as z from 'zod';
 
+import LoadingSpinner from '@/components/LoadingSpinner';
 import { Button, Input, Label } from '@/components/ui';
 import {
   Select,
@@ -13,34 +13,8 @@ import {
 } from '@/components/ui/select';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-const SignUpFormSchema = z
-  .object({
-    name: z.string().min(1, 'Name is required'),
-    email: z.string().email('Invalid email address'),
-    password: z
-      .string()
-      .min(8, { message: 'Password must be at least 8 characters long' })
-      .regex(/[A-Z]/, {
-        message: 'Password must contain at least one uppercase letter',
-      })
-      .regex(/[a-z]/, {
-        message: 'Password must contain at least one lowercase letter',
-      })
-      .regex(/[0-9]/, { message: 'Password must contain at least one number' })
-      .regex(/[\W_]/, {
-        message: 'Password must contain at least one special character',
-      }),
-    confirmPassword: z
-      .string()
-      .min(6, 'Password must be at least 6 characters'),
-    userType: z.enum(['passenger', 'driver', 'administrator']),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'Password and Confirm Password must match',
-    params: ['confirmPassword'],
-  });
-
-type SignUpFormValues = z.infer<typeof SignUpFormSchema>;
+import useSignUp from '../hooks/useSignUp';
+import { SignUpFormSchema, SignUpFormValues } from '../schema';
 
 const defaultValues: SignUpFormValues = {
   name: '',
@@ -51,6 +25,8 @@ const defaultValues: SignUpFormValues = {
 };
 
 const SignUpForm = () => {
+  const { mutate: signUp, isPending } = useSignUp();
+
   const {
     register,
     handleSubmit,
@@ -62,7 +38,7 @@ const SignUpForm = () => {
   });
 
   const onSubmit = (values: SignUpFormValues) => {
-    console.log(values);
+    signUp(values);
   };
 
   return (
@@ -70,23 +46,13 @@ const SignUpForm = () => {
       {/* Name */}
       <div className="space-y-2">
         <Label htmlFor="name">Full Name</Label>
-        <Input
-          id="name"
-          type="text"
-          {...register('name')}
-          error={errors.name?.message}
-        />
+        <Input id="name" type="text" {...register('name')} error={errors.name?.message} />
       </div>
 
       {/* Email */}
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          type="email"
-          {...register('email')}
-          error={errors.email?.message}
-        />
+        <Input id="email" type="email" {...register('email')} error={errors.email?.message} />
       </div>
 
       {/* Password */}
@@ -126,15 +92,14 @@ const SignUpForm = () => {
         </Select>
 
         {errors.userType && (
-          <div className="text-sm text-destructive">
-            {errors.userType.message}
-          </div>
+          <div className="text-sm text-destructive">{errors.userType.message}</div>
         )}
       </div>
 
       {/* Submit */}
       <Button className="w-full">
-        <UserPlus className="mr-2 h-4 w-4" /> Sign Up
+        {isPending ? <LoadingSpinner /> : <UserPlus className="mr-2 h-4 w-4" />}
+        Sign Up
       </Button>
     </form>
   );
