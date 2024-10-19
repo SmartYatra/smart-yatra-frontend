@@ -1,0 +1,54 @@
+name: Continuous Integration 🚀
+
+# Trigger CI on push to main branch and pull requests to main branch
+on:
+  push:
+    branches: [main, development]
+  pull_request:
+    branches: [main, development]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.17.0]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js 🟢
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: "latest"
+      
+      - name: Cache pnpm store 📦
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-store-${{ matrix.node-version }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-${{ matrix.node-version }}-
+
+      - name: Install dependencies 📦
+        run: pnpm install
+
+      - name: Run lint 🧹
+        run: pnpm lint
+
+      - name: Run format check 📝
+        run: pnpm format:check
+
+      - name: Check commit messages 📚
+        uses: wagoid/commitlint-github-action@v6
+
+    # Optional: If you have tests, uncomment the following lines
+      # - name: Run tests 🧪
+      #   run: pnpm test

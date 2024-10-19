@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node Modules
+node_modules
+
+# Build Directories
+dist
+dist-ssr
+
+# Local Environment Files
+*.local
+
+# Editor Directories and Files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Test Results and Reports
+/test-results/
+/coverage/
+/playwright-report/
+/playwright/.cache/
+
+# ESLint Cache
+.eslintcache
+
+# Storybook
+storybook-static
