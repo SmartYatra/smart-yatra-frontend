@@ -47,17 +47,13 @@ export default function NotFound() {
             Sorry, we couldn't find this page.
           </p>
           <p className="mb-8">
-            Please head back to the homepage or contact us if you think this is
-            an error.
+            Please head back to the homepage or contact us if you think this is an error.
           </p>
 
           <Link to={'/'}>
-            <Button
-              className="group min-w-48 gap-3 border py-6"
-              variant="ghost"
-            >
-              <ArrowLeft className="transition-all duration-300 group-hover:-translate-x-1" />{' '}
-              Back to Home
+            <Button className="group min-w-48 gap-3 border py-6" variant="ghost">
+              <ArrowLeft className="transition-all duration-300 group-hover:-translate-x-1" /> Back
+              to Home
             </Button>
           </Link>
         </div>

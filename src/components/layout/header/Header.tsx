@@ -52,11 +52,7 @@ const Header = () => {
 
         {/* Mobile Menu and Overlay */}
         <Overlay isOpen={isMenuOpen} onClick={closeMenu} />
-        <MobileMenu
-          closeMenu={closeMenu}
-          isOpen={isMenuOpen}
-          links={NAV_LINKS}
-        />
+        <MobileMenu closeMenu={closeMenu} isOpen={isMenuOpen} links={NAV_LINKS} />
       </div>
     </header>
   );

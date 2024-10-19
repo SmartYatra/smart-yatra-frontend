@@ -25,23 +25,14 @@ const MobileMenu = ({ isOpen, links, closeMenu }: IMobileMenuProps) => (
       <Logo />
 
       {/* Close Button */}
-      <Button
-        aria-label="Close menu"
-        className="p-2"
-        variant="ghost"
-        onClick={closeMenu}
-      >
+      <Button aria-label="Close menu" className="p-2" variant="ghost" onClick={closeMenu}>
         <X className="size-6 cursor-pointer" />
       </Button>
     </div>
 
     {/* Mobile Navigation Links */}
     <nav className="flex flex-col items-start gap-2 px-5 pt-10">
-      <NavLinks
-        className="w-full px-2 py-3 text-start"
-        links={links}
-        onClick={closeMenu}
-      />
+      <NavLinks className="w-full px-2 py-3 text-start" links={links} onClick={closeMenu} />
     </nav>
   </div>
 );

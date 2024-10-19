@@ -1,8 +1,4 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-} from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 
 import App from '@/app';
 import NotFound from '@/components/errors/NotFound';
