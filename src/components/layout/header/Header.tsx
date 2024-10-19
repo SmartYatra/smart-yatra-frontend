@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import { Menu } from 'lucide-react';
 
+import Logo from '@/components/Logo';
 import { Button } from '@/components/ui';
 
 import MobileMenu from './MobileMenu';
@@ -33,9 +33,7 @@ const Header = () => {
     <header className="sticky top-0 w-full bg-background/90 py-4 shadow-sm backdrop-blur-md">
       <div className="max-container flex w-full items-center justify-between">
         {/* Logo */}
-        <Link className="flex items-center justify-center" to="/">
-          <p className="text-xl font-semibold">SmartYatra</p>
-        </Link>
+        <Logo />
 
         {/* Desktop Navigation Links */}
         <nav className="hidden items-center gap-1 md:flex">

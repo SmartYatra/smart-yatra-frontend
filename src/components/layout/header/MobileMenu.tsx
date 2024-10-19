@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
-
 import { X } from 'lucide-react';
 
+import Logo from '@/components/Logo';
 import { Button } from '@/components/ui';
 import { cn } from '@/lib/utils';
 
@@ -21,11 +20,9 @@ const MobileMenu = ({ isOpen, links, closeMenu }: IMobileMenuProps) => (
       isOpen ? 'translate-y-0' : '-translate-y-full'
     )}
   >
-    <div className="max-container flex w-full items-center justify-between py-4">
+    <div className="max-container flex w-full items-center justify-between py-5">
       {/* Logo */}
-      <Link className="flex items-center justify-center" to="/">
-        <p className="text-xl font-semibold">Logo</p>
-      </Link>
+      <Logo />
 
       {/* Close Button */}
       <Button
@@ -39,7 +36,7 @@ const MobileMenu = ({ isOpen, links, closeMenu }: IMobileMenuProps) => (
     </div>
 
     {/* Mobile Navigation Links */}
-    <nav className="flex flex-col items-start gap-5 px-5 pt-10">
+    <nav className="flex flex-col items-start gap-2 px-5 pt-10">
       <NavLinks
         className="w-full px-2 py-3 text-start"
         links={links}
