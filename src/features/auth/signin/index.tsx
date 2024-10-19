@@ -1,0 +1,64 @@
+import { Link } from 'react-router-dom';
+
+import { Bus } from 'lucide-react';
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui';
+
+import { SignInForm } from './components';
+
+const SignIn = () => {
+  return (
+    <div className="flex min-h-screen flex-col">
+      <main className="flex flex-1 flex-col items-center justify-center gap-8">
+        <Card className="w-full max-w-sm">
+          <CardHeader className="space-y-1">
+            <Link className="flex items-center justify-center space-x-2" to="/">
+              <Bus className="h-6 w-6 text-green-600" />
+              <CardTitle className="text-center text-2xl font-bold">
+                SmartYatra
+              </CardTitle>
+            </Link>
+
+            <CardDescription className="text-center">
+              Public Transport Digitization System
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent className="space-y-4">
+            <SignInForm />
+          </CardContent>
+
+          <CardFooter className="flex flex-col space-y-2.5">
+            <div className="text-center text-sm text-muted-foreground">
+              <Link
+                className="font-medium underline underline-offset-4 hover:text-primary"
+                to="/auth/forgot-password"
+              >
+                Forgot your password?
+              </Link>
+            </div>
+
+            <div className="text-center text-sm text-muted-foreground">
+              Don't have an account?{' '}
+              <Link
+                className="font-medium underline underline-offset-4 hover:text-primary"
+                to="/auth/signup"
+              >
+                Sign up
+              </Link>
+            </div>
+          </CardFooter>
+        </Card>
+      </main>
+    </div>
+  );
+};
+
+export default SignIn;
