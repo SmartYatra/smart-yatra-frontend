@@ -4,6 +4,7 @@ import { Menu } from 'lucide-react';
 
 import Logo from '@/components/Logo';
 import { Button } from '@/components/ui';
+import { ROUTES } from '@/constants/routes';
 
 import MobileMenu from './MobileMenu';
 import Overlay from './MobileMenuOverlay';
@@ -11,12 +12,12 @@ import NavLinks from './NavLinks';
 
 // Navigation links data
 const NAV_LINKS = [
-  { title: 'Home', to: '/' },
-  { title: 'Services', to: '/services' },
-  { title: 'About', to: '/about' },
-  { title: 'Contact', to: '/contact' },
-  { title: 'Sign In', to: '/auth/signin' },
-  { title: 'Sign Up', to: '/auth/signup' },
+  { title: 'Home', to: ROUTES.HOME },
+  { title: 'Services', to: ROUTES.SERVICES },
+  { title: 'About', to: ROUTES.ABOUT },
+  { title: 'Contact', to: ROUTES.CONTACT },
+  { title: 'Sign In', to: ROUTES.SIGN_IN },
+  { title: 'Sign Up', to: ROUTES.SIGN_UP },
 ];
 
 const Header = () => {

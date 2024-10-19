@@ -2,6 +2,8 @@ import { Link, useRouteError } from 'react-router-dom';
 
 import { ArrowLeft } from 'lucide-react';
 
+import { ROUTES } from '@/constants/routes';
+
 import { Button } from '../ui/button';
 
 /**
@@ -50,7 +52,7 @@ export default function NotFound() {
             Please head back to the homepage or contact us if you think this is an error.
           </p>
 
-          <Link to={'/'}>
+          <Link to={ROUTES.HOME}>
             <Button className="group min-w-48 gap-3 border py-6" variant="ghost">
               <ArrowLeft className="transition-all duration-300 group-hover:-translate-x-1" /> Back
               to Home

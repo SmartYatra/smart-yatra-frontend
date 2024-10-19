@@ -1,5 +1,6 @@
 import { Route } from 'react-router-dom';
 
+import { ROUTES } from '@/constants/routes';
 import Home from '@/features/home';
 
 /**
@@ -7,7 +8,7 @@ import Home from '@/features/home';
  */
 const UnAuthRoutes = () => (
   <>
-    <Route index element={<Home />} path="/" />
+    <Route index element={<Home />} path={ROUTES.HOME} />
   </>
 );
 

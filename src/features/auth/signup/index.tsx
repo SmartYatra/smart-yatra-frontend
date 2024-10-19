@@ -1,8 +1,16 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
 import Logo from '@/components/Logo';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui';
+import { ROUTES } from '@/constants/routes';
 
 import { SignUpForm } from './components';
 
@@ -17,9 +25,9 @@ const SignUp = () => {
         <main className="flex flex-1 flex-col items-center justify-center gap-8">
           <Card className="w-full max-w-sm">
             <CardHeader className="space-y-1">
-              <div className="flex items-center justify-center">
+              <CardTitle className="flex items-center justify-center">
                 <Logo />
-              </div>
+              </CardTitle>
 
               <CardDescription className="text-center">
                 Public Transport Digitization System
@@ -35,7 +43,7 @@ const SignUp = () => {
                 Already have an account?{' '}
                 <Link
                   className="font-medium underline underline-offset-4 hover:text-primary"
-                  to="/auth/signin"
+                  to={ROUTES.SIGN_IN}
                 >
                   Sign in
                 </Link>

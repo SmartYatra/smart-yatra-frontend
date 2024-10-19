@@ -1,8 +1,9 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
 import Logo from '@/components/Logo';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui';
+import { ROUTES } from '@/constants/routes';
 
 import { ForgotPasswordForm } from './components';
 
@@ -35,7 +36,7 @@ const ForgotPassword = () => {
                 Remembered your password?{' '}
                 <Link
                   className="font-medium underline underline-offset-4 hover:text-primary"
-                  to="/auth/signin"
+                  to={ROUTES.SIGN_IN}
                 >
                   Sign in
                 </Link>

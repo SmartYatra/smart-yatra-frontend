@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 import { UserPlus } from 'lucide-react';
 
@@ -31,6 +31,7 @@ const SignUpForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    control, // Add control here
   } = useForm({
     resolver: zodResolver(SignUpFormSchema),
     defaultValues,
@@ -80,16 +81,22 @@ const SignUpForm = () => {
       {/* User Type */}
       <div className="space-y-2">
         <Label htmlFor="user-type">User Type</Label>
-        <Select {...register('userType')}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select user type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="passenger">Passenger</SelectItem>
-            <SelectItem value="driver">Driver</SelectItem>
-            <SelectItem value="administrator">Administrator</SelectItem>
-          </SelectContent>
-        </Select>
+        <Controller
+          control={control}
+          name="userType"
+          render={({ field }) => (
+            <Select defaultValue={field.value} onValueChange={field.onChange}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select user type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="passenger">Passenger</SelectItem>
+                <SelectItem value="driver">Driver</SelectItem>
+                <SelectItem value="administrator">Administrator</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+        />
 
         {errors.userType && (
           <div className="text-sm text-destructive">{errors.userType.message}</div>
