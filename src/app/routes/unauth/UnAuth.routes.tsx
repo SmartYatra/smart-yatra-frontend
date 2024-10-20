@@ -1,8 +1,7 @@
 import { Route } from 'react-router-dom';
 
 import { ROUTES } from '@/constants/routes';
-import { About, Home } from '@/features/passenger';
-import Contact from '@/features/passenger/contact';
+import { About, Contact, Home } from '@/features/passenger';
 
 /**
  * UnAuth routes are used to define the unauth routes.
