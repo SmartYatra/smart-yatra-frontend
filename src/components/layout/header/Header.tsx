@@ -31,7 +31,7 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 w-full bg-background/90 py-4 shadow-sm backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full bg-background/90 py-4 shadow-sm backdrop-blur-md">
       <div className="max-container flex w-full items-center justify-between">
         {/* Logo */}
         <Logo />

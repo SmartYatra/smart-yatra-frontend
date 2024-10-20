@@ -77,6 +77,7 @@ const typescriptConfig = {
     '@typescript-eslint/return-await': 'error',
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
     '@typescript-eslint/no-misused-promises': [
       'error',
       {
@@ -106,10 +107,7 @@ const reactConfig = {
   rules: {
     'import/no-anonymous-default-export': 'error',
     'react/jsx-boolean-value': 'error',
-    'react/jsx-filename-extension': [
-      2,
-      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
-    ],
+    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/jsx-no-target-blank': 'off',
     'react/jsx-max-props-per-line': 'off',
     'react/jsx-sort-props': [

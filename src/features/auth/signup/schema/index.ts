@@ -22,7 +22,7 @@ export const SignUpFormSchema = z
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Password and Confirm Password must match',
-    params: ['confirmPassword'],
+    path: ['confirmPassword'],
   });
 
 export type SignUpFormValues = z.infer<typeof SignUpFormSchema>;
