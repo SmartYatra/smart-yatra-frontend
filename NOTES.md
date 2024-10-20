@@ -116,9 +116,9 @@ Admin Panel Pages
 Common Pages:
 
 - Settings Page: Update personal information, notification preferences, etc.
-- Help/Support Page:FAQs, contact information, etc.
 
 Done:
 
 - 404/NotFound Page: Displayed when users navigate to an invalid page.
 - Login / Sign-up Pages: Separate login/sign-up flows for drivers, passengers, and admins.
+- Help/Support Page: About, contact information, etc.

@@ -5,7 +5,7 @@ import { Footer, Header } from '@/components/layout';
 
 import { ContactForm, ContactInformation } from './components';
 
-export const Contact = () => (
+const Contact = () => (
   <>
     <Helmet>
       <title>Contact SmartYatra - Get in Touch</title>
@@ -51,3 +51,5 @@ export const Contact = () => (
     </div>
   </>
 );
+
+export default Contact;
