@@ -1,4 +1,4 @@
-import { CreditCard, History, Map, Settings2, User } from 'lucide-react';
+import { History, Map, Settings2, User, Users } from 'lucide-react';
 
 import { AppSidebar } from '@/components/AppSidebar';
 import {
@@ -12,8 +12,8 @@ import {
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { Separator } from '@radix-ui/react-select';
 
-const passengerSidebarData = {
-  user: { name: 'Passenger', email: 'passenger@example.com', avatar: '/avatars/passenger.jpg' },
+const adminSidebarData = {
+  user: { name: 'Admin', email: 'admin@example.com', avatar: '/avatars/admin.jpg' },
   navMain: [
     {
       title: 'Dashboard',
@@ -22,34 +22,35 @@ const passengerSidebarData = {
       isActive: true,
       items: [
         { title: 'Overview', url: '#' },
-        { title: 'Notifications', url: '#' },
+        { title: 'System Notifications', url: '#' },
       ],
     },
     {
-      title: 'Trip History',
+      title: 'User Management',
+      url: '#',
+      icon: Users,
+      items: [
+        { title: 'Passengers', url: '#' },
+        { title: 'Drivers', url: '#' },
+        { title: 'Admins', url: '#' },
+      ],
+    },
+    {
+      title: 'Trip Management',
       url: '#',
       icon: History,
       items: [
-        { title: 'Past Trips', url: '#' },
-        { title: 'Favorite Routes', url: '#' },
+        { title: 'All Trips', url: '#' },
+        { title: 'Ongoing Trips', url: '#' },
       ],
     },
     {
-      title: 'Routes & Maps',
+      title: 'Reports',
       url: '#',
       icon: Map,
       items: [
-        { title: 'Live Map', url: '#' },
-        { title: 'Saved Routes', url: '#' },
-      ],
-    },
-    {
-      title: 'Payments',
-      url: '#',
-      icon: CreditCard,
-      items: [
-        { title: 'Payment History', url: '#' },
-        { title: 'Top-up Account', url: '#' },
+        { title: 'Earnings Reports', url: '#' },
+        { title: 'User Activity Reports', url: '#' },
       ],
     },
     {
@@ -63,12 +64,12 @@ const passengerSidebarData = {
     },
   ],
   projects: [
-    { name: 'Upcoming Trips', url: '#', icon: Map },
-    { name: 'Frequent Routes', url: '#', icon: History },
+    { name: 'Manage Routes', url: '#', icon: Map },
+    { name: 'View Analytics', url: '#', icon: History },
   ],
 };
 
-const PassengerHome = () => {
+const AdminHome = () => {
   return (
     <SidebarProvider
       style={
@@ -77,7 +78,7 @@ const PassengerHome = () => {
         } as React.CSSProperties
       }
     >
-      <AppSidebar {...passengerSidebarData} />
+      <AppSidebar {...adminSidebarData} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 px-4">
           <SidebarTrigger className="-ml-1" />
@@ -85,7 +86,7 @@ const PassengerHome = () => {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">Passenger Dashboard</BreadcrumbLink>
+                <BreadcrumbLink href="#">Admin Dashboard</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
@@ -107,4 +108,4 @@ const PassengerHome = () => {
   );
 };
 
-export default PassengerHome;
+export default AdminHome;

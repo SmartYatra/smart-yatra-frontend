@@ -12,8 +12,8 @@ import {
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { Separator } from '@radix-ui/react-select';
 
-const passengerSidebarData = {
-  user: { name: 'Passenger', email: 'passenger@example.com', avatar: '/avatars/passenger.jpg' },
+const driverSidebarData = {
+  user: { name: 'Driver', email: 'driver@example.com', avatar: '/avatars/driver.jpg' },
   navMain: [
     {
       title: 'Dashboard',
@@ -26,12 +26,12 @@ const passengerSidebarData = {
       ],
     },
     {
-      title: 'Trip History',
+      title: 'Trip Management',
       url: '#',
       icon: History,
       items: [
-        { title: 'Past Trips', url: '#' },
-        { title: 'Favorite Routes', url: '#' },
+        { title: 'Current Trips', url: '#' },
+        { title: 'Completed Trips', url: '#' },
       ],
     },
     {
@@ -40,16 +40,16 @@ const passengerSidebarData = {
       icon: Map,
       items: [
         { title: 'Live Map', url: '#' },
-        { title: 'Saved Routes', url: '#' },
+        { title: 'Route History', url: '#' },
       ],
     },
     {
-      title: 'Payments',
+      title: 'Earnings',
       url: '#',
       icon: CreditCard,
       items: [
-        { title: 'Payment History', url: '#' },
-        { title: 'Top-up Account', url: '#' },
+        { title: 'Earnings Overview', url: '#' },
+        { title: 'Payouts', url: '#' },
       ],
     },
     {
@@ -64,11 +64,11 @@ const passengerSidebarData = {
   ],
   projects: [
     { name: 'Upcoming Trips', url: '#', icon: Map },
-    { name: 'Frequent Routes', url: '#', icon: History },
+    { name: 'Driver Ratings', url: '#', icon: History },
   ],
 };
 
-const PassengerHome = () => {
+const DriverHome = () => {
   return (
     <SidebarProvider
       style={
@@ -77,7 +77,7 @@ const PassengerHome = () => {
         } as React.CSSProperties
       }
     >
-      <AppSidebar {...passengerSidebarData} />
+      <AppSidebar {...driverSidebarData} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 px-4">
           <SidebarTrigger className="-ml-1" />
@@ -85,7 +85,7 @@ const PassengerHome = () => {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">Passenger Dashboard</BreadcrumbLink>
+                <BreadcrumbLink href="#">Driver Dashboard</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
@@ -107,4 +107,4 @@ const PassengerHome = () => {
   );
 };
 
-export default PassengerHome;
+export default DriverHome;

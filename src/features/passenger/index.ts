@@ -1,6 +1,3 @@
-import About from './about';
-import Contact from './contact';
-import Home from './home';
-import Settings from './settings';
+import PassengerHome from './home';
 
-export { About, Contact, Home, Settings };
+export { PassengerHome };

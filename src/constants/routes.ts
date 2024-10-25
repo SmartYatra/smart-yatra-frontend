@@ -1,5 +1,6 @@
 export const ROUTES = {
   HOME: '/',
+
   AUTH: {
     ROOT: '/auth',
     SIGN_IN: 'signin',
@@ -9,10 +10,25 @@ export const ROUTES = {
   SIGN_IN: '/auth/signin',
   SIGN_UP: '/auth/signup',
   FORGOT_PASSWORD: '/auth/forgot-password',
-  SERVICES: '/services',
-  ABOUT: '/about',
-  CONTACT: '/contact',
-  TERMS_OF_SERVICE: '/terms-of-service',
-  PRIVACY_POLICY: '/privacy-policy',
-  SETTINGS: '/settings',
+
+  // Passenger Routes
+  PASSENGER_HOME: '/passenger',
+  PASSENGER_TRIPS: '/passenger/trips',
+  PASSENGER_FAVORITES: '/passenger/favorites',
+  PASSENGER_PROFILE: '/passenger/profile',
+  PASSENGER_PAYMENTS: '/passenger/payments',
+
+  // Driver Routes
+  DRIVER_HOME: '/driver',
+  DRIVER_TRIPS: '/driver/trips',
+  DRIVER_PROFILE: '/driver/profile',
+  DRIVER_EARNINGS: '/driver/earnings',
+  DRIVER_SETTINGS: '/driver/settings',
+
+  // Admin Routes
+  ADMIN_HOME: '/admin',
+  ADMIN_USER_MANAGEMENT: '/admin/users',
+  ADMIN_TRIP_MANAGEMENT: '/admin/trips',
+  ADMIN_REPORTS: '/admin/reports',
+  ADMIN_SETTINGS: '/admin/settings',
 };
