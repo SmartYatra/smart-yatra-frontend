@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-import { Lock, Mail } from 'lucide-react';
+import { Lock, LogIn, Mail } from 'lucide-react';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { Button, Input, Label } from '@/components/ui';
@@ -30,7 +30,7 @@ const SignInForm = () => {
   };
 
   return (
-    <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
+    <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
       {/* Email */}
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
@@ -59,7 +59,7 @@ const SignInForm = () => {
 
       {/* Submit */}
       <Button className="w-full">
-        {isPending ? <LoadingSpinner /> : <Lock className="mr-2 size-4" />}
+        {isPending ? <LoadingSpinner /> : <LogIn className="mr-2 size-5" />}
         Login
       </Button>
     </form>

@@ -39,7 +39,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
 
-        {error && <div className="text-sm text-destructive">{error}</div>}
+        <div
+          className={cn(
+            'text-sm text-destructive transition-all duration-300',
+            { 'pointer-events-none h-0': !error },
+            { 'pointer-events-auto h-6': error }
+          )}
+        >
+          {error}
+        </div>
       </div>
     );
   }
