@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-import { Mail } from 'lucide-react';
+import { Mail, SendHorizonal } from 'lucide-react';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { Button, Input, Label } from '@/components/ui';
@@ -29,16 +29,23 @@ const ForgotPasswordForm = () => {
   };
 
   return (
-    <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+    <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
       {/* Email */}
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" {...register('email')} error={errors.email?.message} />
+        <Input
+          id="email"
+          placeholder="Enter your email"
+          type="email"
+          {...register('email')}
+          error={errors.email?.message}
+          leftIcon={Mail}
+        />
       </div>
 
       {/* Submit */}
       <Button className="w-full">
-        {isPending ? <LoadingSpinner /> : <Mail className="mr-2 size-4" />}
+        {isPending ? <LoadingSpinner /> : <SendHorizonal className="mr-2 size-5" />}
         Send Reset Link
       </Button>
     </form>

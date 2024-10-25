@@ -2,7 +2,14 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
 import Logo from '@/components/Logo';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui';
 import { ROUTES } from '@/constants/routes';
 
 import { SignInForm } from './components';
@@ -16,14 +23,15 @@ const SignIn = () => {
       </Helmet>
       <div className="flex min-h-screen flex-col">
         <main className="flex flex-1 flex-col items-center justify-center gap-8">
-          <Card className="w-full max-w-sm">
-            <CardHeader className="space-y-1">
-              <div className="flex items-center justify-center">
+          <Card className="w-full max-w-md px-2 py-4">
+            <CardHeader className="space-y-6">
+              <CardTitle className="flex">
                 <Logo />
-              </div>
+              </CardTitle>
 
-              <CardDescription className="text-center">
-                Public Transport Digitization System
+              <CardDescription className="flex flex-col gap-1">
+                <span className="text-lg text-card-foreground">Welcome to SmartYatra</span>
+                <span>Please sign-in to your account and start the journey with us.</span>
               </CardDescription>
             </CardHeader>
 

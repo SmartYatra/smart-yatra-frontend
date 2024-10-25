@@ -21,16 +21,20 @@ const SignUp = () => {
         <title>Sign Up | SmartYatra - Public Transport Digitization System</title>
         <meta content="Sign in to SmartYatra" name="description" />
       </Helmet>
-      <div className="flex min-h-screen flex-col">
+      <div className="flex min-h-screen flex-col overflow-hidden">
         <main className="flex flex-1 flex-col items-center justify-center gap-8">
-          <Card className="w-full max-w-sm">
-            <CardHeader className="space-y-1">
-              <CardTitle className="flex items-center justify-center">
+          <Card className="w-full max-w-lg px-2 py-4">
+            <CardHeader className="space-y-6">
+              <CardTitle className="flex">
                 <Logo />
               </CardTitle>
 
-              <CardDescription className="text-center">
-                Public Transport Digitization System
+              <CardDescription className="flex flex-col gap-1">
+                <span className="text-lg text-card-foreground">Sign up to SmartYatra</span>
+                <span>
+                  Create an account to access the full features of SmartYatra and start your
+                  journey.
+                </span>
               </CardDescription>
             </CardHeader>
 

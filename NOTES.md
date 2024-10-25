@@ -10,12 +10,6 @@ Features:
 
 Passenger Panel Pages
 
-- Home Page:
-
-  - Display real-time bus locations on a map.
-  - Search bar for finding routes and buses.
-  - CTA for login/sign-up.
-
 - Live Bus Tracking Page:
 
   - Map view showing buses in real-time.
@@ -113,12 +107,17 @@ Admin Panel Pages
   - View trends in bus usage, busiest routes, passenger satisfaction.
   - Download reports for operational improvements.
 
-Common Pages:
-
-- Settings Page: Update personal information, notification preferences, etc.
-
 Done:
 
 - 404/NotFound Page: Displayed when users navigate to an invalid page.
 - Login / Sign-up Pages: Separate login/sign-up flows for drivers, passengers, and admins.
 - Help/Support Page: About, contact information, etc.
+- Settings Page: Update personal information, notification preferences, etc.
+
+Passenger Panel Pages
+
+- Home Page:
+
+  - Display real-time bus locations on a map.
+  - Search bar for finding routes and buses.
+  - CTA for login/sign-up.

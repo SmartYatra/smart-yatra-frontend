@@ -1,6 +1,6 @@
 import { Controller, useForm } from 'react-hook-form';
 
-import { UserPlus } from 'lucide-react';
+import { Lock, Mail, User, UserPlus } from 'lucide-react';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { Button, Input, Label } from '@/components/ui';
@@ -47,13 +47,27 @@ const SignUpForm = () => {
       {/* Name */}
       <div className="space-y-2">
         <Label htmlFor="name">Full Name</Label>
-        <Input id="name" type="text" {...register('name')} error={errors.name?.message} />
+        <Input
+          id="name"
+          placeholder="Enter your full name"
+          type="text"
+          {...register('name')}
+          error={errors.name?.message}
+          leftIcon={User}
+        />
       </div>
 
       {/* Email */}
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" {...register('email')} error={errors.email?.message} />
+        <Input
+          id="email"
+          placeholder="Enter your email"
+          type="email"
+          {...register('email')}
+          error={errors.email?.message}
+          leftIcon={Mail}
+        />
       </div>
 
       {/* Password */}
@@ -61,9 +75,11 @@ const SignUpForm = () => {
         <Label htmlFor="password">Password</Label>
         <Input
           id="password"
+          placeholder="Enter your password"
           type="password"
           {...register('password')}
           error={errors.password?.message}
+          leftIcon={Lock}
         />
       </div>
 
@@ -72,15 +88,18 @@ const SignUpForm = () => {
         <Label htmlFor="confirmPassword">Confirm Password</Label>
         <Input
           id="confirmPassword"
+          placeholder="Confirm your password"
           type="password"
           {...register('confirmPassword')}
           error={errors.confirmPassword?.message}
+          leftIcon={Lock}
         />
       </div>
 
       {/* User Type */}
       <div className="space-y-2">
         <Label htmlFor="user-type">User Type</Label>
+
         <Controller
           control={control}
           name="userType"
