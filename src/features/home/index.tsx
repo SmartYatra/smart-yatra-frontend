@@ -1,3 +1,5 @@
+import { BackgroundBeams } from '@/components/BackgroundBeams';
+
 import {
   AboutSection,
   CTASection,
@@ -10,8 +12,11 @@ import {
 const Home = () => {
   return (
     <div className="relative min-h-screen">
-      <Header />
-      <HeroSection />
+      <div className="relative">
+        <BackgroundBeams />
+        <Header />
+        <HeroSection />
+      </div>
       <FeaturesSection />
       <AboutSection />
       <CTASection />

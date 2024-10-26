@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Menu } from 'lucide-react';
 
 import Logo from '@/components/Logo';
 import { Button } from '@/components/ui';
 import { ROUTES } from '@/constants/routes';
+import { cn } from '@/lib/utils';
 
 import MobileMenu from './MobileMenu';
 import Overlay from './MobileMenuOverlay';
@@ -20,16 +21,40 @@ const NAV_LINKS = [
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen((prevState) => !prevState);
   };
+
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Check if the user has scrolled down a certain amount (e.g., 50px)
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    // Add event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Clean up event listener on unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/90 py-4 shadow-sm backdrop-blur-md">
+    <header
+      className={cn(
+        'fixed top-0 z-50 w-full bg-background/10 py-4 backdrop-blur-[1px] transition-all',
+        {
+          'bg-background/90 shadow-sm backdrop-blur-md': isScrolled,
+        }
+      )}
+    >
       <div className="max-container flex w-full items-center justify-between">
         {/* Logo */}
         <Logo />
@@ -56,4 +81,5 @@ const Header = () => {
     </header>
   );
 };
+
 export default Header;
