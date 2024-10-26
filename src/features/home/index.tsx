@@ -1,12 +1,12 @@
 import { BackgroundBeams } from '@/components/BackgroundBeams';
 
 import {
-  AboutSection,
   CTASection,
   FeaturesSection,
   Footer,
   Header,
   HeroSection,
+  HowItWorksSection,
 } from './components';
 
 const Home = () => {
@@ -17,8 +17,9 @@ const Home = () => {
         <Header />
         <HeroSection />
       </div>
+
       <FeaturesSection />
-      <AboutSection />
+      <HowItWorksSection />
       <CTASection />
       <Footer />
     </div>

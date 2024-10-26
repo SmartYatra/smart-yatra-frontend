@@ -6,19 +6,19 @@ import { ROUTES } from '@/constants/routes';
 
 const HeroSection = () => {
   return (
-    <div className="max-container h-[80vh]">
+    <div className="max-container h-[70vh]">
       <div className="flex size-full flex-col items-center justify-center">
-        <div className="z-0 mt-20 flex flex-col justify-center max-xl:items-center">
+        <div className="z-0 mt-48 flex flex-col justify-center max-xl:items-center">
           <HoverBorderGradient
             className="w-fit cursor-auto rounded-full px-4 py-1 text-xs"
             containerClassName="mb-2"
           >
             🌟 Experience the Next-Gen Transit
           </HoverBorderGradient>
-          <h1 className="mb-6 text-center text-5xl font-extrabold tracking-tight text-primary sm:text-6xl lg:text-7xl">
+          <h1 className="mb-6 text-center text-5xl font-extrabold tracking-tight text-secondary-foreground sm:text-6xl lg:text-7xl">
             The Future of Urban Transit is Here
           </h1>
-          <p className="mx-auto mb-10 max-w-3xl text-center text-xl text-secondary sm:text-xl">
+          <p className="mx-auto mb-10 max-w-3xl text-center text-xl text-muted-foreground sm:text-xl">
             SmartYatra revolutionizes public transportation with real-time tracking, route
             optimization, and seamless payments.
           </p>

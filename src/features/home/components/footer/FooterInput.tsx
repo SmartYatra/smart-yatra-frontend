@@ -26,7 +26,7 @@ const FooterInput = () => {
       onSubmit={handleSubmit}
     >
       <Input
-        className="h-14 rounded-2xl bg-muted/30 px-2 text-xl backdrop-blur-md md:p-5"
+        className="h-14 rounded-2xl bg-background/10 px-2 text-xl text-background/80 backdrop-blur-md md:p-5"
         name="email"
         placeholder="Your Email"
         type="email"
@@ -41,7 +41,7 @@ const FooterInput = () => {
         type="submit"
         variant={'ghost'}
       >
-        <ArrowRight className="h-7 w-7 cursor-pointer" />
+        <ArrowRight className="h-7 w-7 cursor-pointer text-background" />
       </Button>
     </form>
   );
