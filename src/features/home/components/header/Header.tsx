@@ -12,12 +12,10 @@ import NavLinks from './NavLinks';
 
 // Navigation links data
 const NAV_LINKS = [
-  { title: 'Home', to: ROUTES.HOME },
-  { title: 'Services', to: ROUTES.SERVICES },
+  { title: 'Features', to: ROUTES.FEATURES },
   { title: 'About', to: ROUTES.ABOUT },
   { title: 'Contact', to: ROUTES.CONTACT },
   { title: 'Sign In', to: ROUTES.SIGN_IN },
-  { title: 'Sign Up', to: ROUTES.SIGN_UP },
 ];
 
 const Header = () => {

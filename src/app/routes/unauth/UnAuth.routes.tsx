@@ -11,6 +11,7 @@ import { PassengerHome } from '@/features/passenger';
  */
 const UnAuthRoutes = () => (
   <>
+    {/* Unprotected Routes */}
     <Route element={<Home />} path={ROUTES.HOME} />
 
     {/* Passenger Routes */}

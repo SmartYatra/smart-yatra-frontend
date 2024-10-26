@@ -11,6 +11,11 @@ export const ROUTES = {
   SIGN_UP: '/auth/signup',
   FORGOT_PASSWORD: '/auth/forgot-password',
 
+  // Landing Page
+  FEATURES: '/#features',
+  ABOUT: '/#about',
+  CONTACT: '/#contact',
+
   // Passenger Routes
   PASSENGER_HOME: '/passenger',
   PASSENGER_TRIPS: '/passenger/trips',

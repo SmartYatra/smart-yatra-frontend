@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import AuthWrapper from '@/components/layout/auth/AuthWrapper';
+import { AuthWrapper } from '@/components/layout';
 import Logo from '@/components/Logo';
 import { CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui';
 import { ROUTES } from '@/constants/routes';

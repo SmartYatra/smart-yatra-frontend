@@ -1,4 +1,3 @@
-import Header from './header/Header';
-import Footer from './Footer';
+import AuthWrapper from './auth/AuthWrapper';
 
-export { Footer, Header };
+export { AuthWrapper };
