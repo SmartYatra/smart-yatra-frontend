@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-import { BadgeCheck, Bell, ChevronRight, CreditCard, LogOut, Sparkles } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
-import IconLogo from '@/assets/logo-icon.png';
 import {
   Sidebar,
   SidebarContent,
@@ -37,25 +36,41 @@ type NavItem = {
   items?: Array<NavItem>;
 };
 
-type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
+type FooterItem = {
+  label: string;
+  icon?: React.ElementType;
+  action: () => void;
+};
+
+type AppSidebarProps = {
   user: { name: string; email: string; avatar: string };
   navMain: Array<NavItem>;
   projects: Array<{ name: string; url: string; icon: React.ElementType }>;
+  footerItems: Array<FooterItem>;
+  appName: string;
+  logo: string;
 };
 
-export function AppSidebar({ user, navMain, projects, ...props }: AppSidebarProps) {
+export function AppSidebar({
+  user,
+  navMain,
+  projects,
+  footerItems,
+  appName,
+  logo,
+}: AppSidebarProps) {
   return (
-    <Sidebar variant="floating" {...props}>
+    <Sidebar variant="floating">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild size="lg">
               <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <img alt="SmartYatra" className="w-36" src={IconLogo} />
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                  <img alt={appName} className="w-36" src={logo} />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Smart Yatra</span>
+                  <span className="truncate font-semibold">{appName}</span>
                   <span className="truncate text-xs">Dashboard</span>
                 </div>
               </a>
@@ -63,6 +78,7 @@ export function AppSidebar({ user, navMain, projects, ...props }: AppSidebarProp
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Platform</SidebarGroupLabel>
@@ -103,14 +119,15 @@ export function AppSidebar({ user, navMain, projects, ...props }: AppSidebarProp
             ))}
           </SidebarMenu>
         </SidebarGroup>
-        <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+
+        <SidebarGroup>
           <SidebarGroupLabel>Projects</SidebarGroupLabel>
           <SidebarMenu>
             {projects.map((item) => (
               <SidebarMenuItem key={item.name}>
                 <SidebarMenuButton asChild>
                   <a href={item.url}>
-                    <item.icon />
+                    {item.icon && <item.icon />}
                     <span>{item.name}</span>
                   </a>
                 </SidebarMenuButton>
@@ -119,6 +136,7 @@ export function AppSidebar({ user, navMain, projects, ...props }: AppSidebarProp
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
+
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -136,22 +154,18 @@ export function AppSidebar({ user, navMain, projects, ...props }: AppSidebarProp
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuItem>
-                  <Sparkles /> Upgrade to Pro
-                </DropdownMenuItem>
+                {footerItems.map((item, index) => (
+                  <DropdownMenuItem key={index} onClick={item.action}>
+                    {item.icon && <item.icon />} {item.label}
+                  </DropdownMenuItem>
+                ))}
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <BadgeCheck /> Account
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <CreditCard /> Billing
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Bell /> Notifications
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <LogOut /> Log out
+                <DropdownMenuItem
+                  onClick={() => {
+                    console.log('Log out');
+                  }}
+                >
+                  Log out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -161,3 +175,5 @@ export function AppSidebar({ user, navMain, projects, ...props }: AppSidebarProp
     </Sidebar>
   );
 }
+
+export default AppSidebar;

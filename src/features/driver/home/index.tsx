@@ -1,5 +1,8 @@
+import * as React from 'react';
+
 import { CreditCard, History, Map, Settings2, User } from 'lucide-react';
 
+import IconLogo from '@/assets/logo-icon.png';
 import { AppSidebar } from '@/components/AppSidebar';
 import {
   Breadcrumb,
@@ -9,11 +12,15 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { Separator } from '@/components/ui/separator';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
-import { Separator } from '@radix-ui/react-select';
 
 const driverSidebarData = {
-  user: { name: 'Driver', email: 'driver@example.com', avatar: '/avatars/driver.jpg' },
+  user: {
+    name: 'Driver',
+    email: 'driver@example.com',
+    avatar: '/avatars/driver.jpg',
+  },
   navMain: [
     {
       title: 'Dashboard',
@@ -22,16 +29,16 @@ const driverSidebarData = {
       isActive: true,
       items: [
         { title: 'Overview', url: '#' },
-        { title: 'Notifications', url: '#' },
+        { title: 'Earnings', url: '#' },
       ],
     },
     {
-      title: 'Trip Management',
+      title: 'Trip History',
       url: '#',
       icon: History,
       items: [
-        { title: 'Current Trips', url: '#' },
         { title: 'Completed Trips', url: '#' },
+        { title: 'Pending Trips', url: '#' },
       ],
     },
     {
@@ -40,16 +47,16 @@ const driverSidebarData = {
       icon: Map,
       items: [
         { title: 'Live Map', url: '#' },
-        { title: 'Route History', url: '#' },
+        { title: 'My Routes', url: '#' },
       ],
     },
     {
-      title: 'Earnings',
+      title: 'Payments',
       url: '#',
       icon: CreditCard,
       items: [
-        { title: 'Earnings Overview', url: '#' },
-        { title: 'Payouts', url: '#' },
+        { title: 'Payment History', url: '#' },
+        { title: 'Withdraw Earnings', url: '#' },
       ],
     },
     {
@@ -64,35 +71,56 @@ const driverSidebarData = {
   ],
   projects: [
     { name: 'Upcoming Trips', url: '#', icon: Map },
-    { name: 'Driver Ratings', url: '#', icon: History },
+    { name: 'Driver Guidelines', url: '#', icon: History },
   ],
+  footerItems: [
+    {
+      label: 'Account',
+      icon: Settings2,
+      action: () => {
+        console.log('Open Account');
+      },
+    },
+    {
+      label: 'Earnings',
+      icon: CreditCard,
+      action: () => {
+        console.log('Open Earnings');
+      },
+    },
+    {
+      label: 'Notifications',
+      icon: History,
+      action: () => {
+        console.log('Open Notifications');
+      },
+    },
+  ],
+  appName: 'Smart Yatra',
+  logo: IconLogo,
 };
 
 const DriverHome = () => {
   return (
-    <SidebarProvider
-      style={
-        {
-          '--sidebar-width': '19rem',
-        } as React.CSSProperties
-      }
-    >
+    <SidebarProvider style={{ '--sidebar-width': '19rem' } as React.CSSProperties}>
       <AppSidebar {...driverSidebarData} />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator className="mr-2 h-4" />
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">Driver Dashboard</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator className="hidden md:block" />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Overview</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+        <header className="flex h-16 shrink-0 items-center gap-2">
+          <div className="flex items-center gap-2 px-4">
+            <SidebarTrigger className="-ml-1" />
+            <Separator className="mr-2 h-5" orientation="vertical" />
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem className="hidden md:block">
+                  <BreadcrumbLink href="#">Driver Dashboard</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="hidden md:block" />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Data Overview</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
