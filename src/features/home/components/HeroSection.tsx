@@ -18,7 +18,7 @@ const HeroSection = () => {
           <h1 className="mb-6 text-center text-5xl font-extrabold tracking-tight text-secondary-foreground sm:text-6xl lg:text-7xl">
             The Future of Urban Transit is Here
           </h1>
-          <p className="mx-auto mb-10 max-w-3xl text-center text-xl text-muted-foreground sm:text-xl">
+          <p className="mx-auto mb-10 max-w-3xl text-center text-sm text-muted-foreground sm:text-xl">
             SmartYatra revolutionizes public transportation with real-time tracking, route
             optimization, and seamless payments.
           </p>

@@ -19,7 +19,7 @@ const AuthWrapper = ({ children, meta }: IAuthWrapperProps) => {
         <meta content={meta?.description} name="description" />
       </Helmet>
       <div className="flex min-h-screen flex-col">
-        <main className="relative flex flex-1 flex-col items-center justify-center gap-8 py-10">
+        <main className="max-container relative flex flex-1 flex-col items-center justify-center gap-8 py-10">
           <div className="absolute top-0 -z-50 h-1/2 w-full bg-gray-50" />
           <div className="absolute bottom-0 -z-50 h-1/2 w-full bg-gray-100" />
 

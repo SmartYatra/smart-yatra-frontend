@@ -39,7 +39,7 @@ const NavLinks = ({ links, onClick, className }: INavLinksProps) => {
           <button
             key={link.to}
             className={cn(
-              'relative py-2 text-center font-medium text-secondary-foreground transition-colors duration-500 after:absolute after:bottom-1 after:left-1/2 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:text-secondary hover:after:left-0 md:mx-4 md:text-sm md:hover:after:w-full',
+              'relative py-2 text-center font-medium text-secondary-foreground transition-colors duration-500 after:absolute after:bottom-1 after:left-1/2 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:text-secondary-foreground hover:after:left-0 md:mx-4 md:text-sm md:hover:after:w-full',
               isActive(link.to) && 'text-primary',
               className
             )}
