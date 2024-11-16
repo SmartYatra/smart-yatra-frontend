@@ -32,6 +32,7 @@ interface SidebarData {
   }>;
   appName: string;
   appDescription?: string;
+  appUrl: string;
   logo: string;
 }
 
@@ -79,6 +80,7 @@ export const passengerSidebarData: SidebarData = {
   ],
   appName: 'Smart Yatra',
   appDescription: 'Passenger',
+  appUrl: ROUTES.PASSENGER.LIVE_MAP,
   logo: IconLogo,
 };
 
@@ -165,6 +167,7 @@ export const driverSidebarData = {
   ],
   appName: 'Smart Yatra',
   appDescription: 'Driver',
+  appUrl: ROUTES.DRIVER_HOME,
   logo: IconLogo,
 };
 
@@ -251,5 +254,6 @@ export const adminSidebarData = {
   ],
   appName: 'Smart Yatra',
   appDescription: 'Admin',
+  appUrl: ROUTES.ADMIN_HOME,
   logo: IconLogo,
 };

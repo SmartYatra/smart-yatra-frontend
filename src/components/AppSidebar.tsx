@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import { ChevronRight, LogOut } from 'lucide-react';
 
@@ -47,9 +48,10 @@ type AppSidebarProps = {
   navMain: Array<NavItem>;
   projects?: Array<{ name: string; url: string; icon: React.ElementType }>;
   footerItems: Array<FooterItem>;
-  appName: string;
   logo: string;
+  appName: string;
   appDescription?: string;
+  appUrl: string;
 };
 
 export function AppSidebar({
@@ -57,9 +59,10 @@ export function AppSidebar({
   navMain,
   projects,
   footerItems,
+  logo,
   appName,
   appDescription,
-  logo,
+  appUrl,
 }: AppSidebarProps) {
   return (
     <Sidebar variant="floating">
@@ -67,7 +70,7 @@ export function AppSidebar({
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild size="lg">
-              <a href="#">
+              <Link to={appUrl}>
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg">
                   <img alt={appName} className="w-36" src={logo} />
                 </div>
@@ -75,7 +78,7 @@ export function AppSidebar({
                   <span className="truncate font-semibold">{appName}</span>
                   <span className="truncate text-xs">{appDescription} Dashboard</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

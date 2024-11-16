@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import { AppSidebar } from '@/components/AppSidebar';
+import Logo from '@/components/Logo';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -43,10 +44,14 @@ const PassengerLayout = () => {
     >
       <AppSidebar {...passengerSidebarData} />
       <SidebarInset className="bg-transparent">
-        <header className="flex h-16 shrink-0 items-center gap-2">
+        <header className="my-4 flex shrink-0 flex-col items-start gap-2">
+          <div className="flex w-full items-center justify-between px-3 py-4 ">
+            <Logo className="sm:hidden" />
+            <SidebarTrigger className="sm:hidden" />
+          </div>
           <div className="flex items-center gap-2 px-4">
-            <SidebarTrigger className="-ml-1" />
-            <Separator className="mr-2 h-5" orientation="vertical" />
+            <SidebarTrigger className="-ml-1 hidden sm:block" />
+            <Separator className="mr-2 hidden h-5 sm:block" orientation="vertical" />
             {/* Breadcrumb */}
             <Breadcrumb>
               <BreadcrumbList>

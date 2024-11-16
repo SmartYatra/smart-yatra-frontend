@@ -68,7 +68,7 @@ const LiveMap = () => {
     <div className="size-full">
       <MapContainer
         center={userLocation || [27.7172, 85.324]}
-        className="size-full rounded-lg"
+        className="z-50 size-full rounded-lg"
         zoom={13}
       >
         <TileLayer
