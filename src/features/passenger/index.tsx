@@ -45,9 +45,9 @@ const PassengerLayout = () => {
       <AppSidebar {...passengerSidebarData} />
       <SidebarInset className="bg-transparent">
         <header className="my-4 flex shrink-0 flex-col items-start gap-2">
-          <div className="flex w-full items-center justify-between px-3 py-4 ">
-            <Logo className="sm:hidden" />
-            <SidebarTrigger className="sm:hidden" />
+          <div className="flex w-full items-center justify-between px-3 py-4 sm:hidden">
+            <Logo />
+            <SidebarTrigger />
           </div>
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1 hidden sm:block" />
