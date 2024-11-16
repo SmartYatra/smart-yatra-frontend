@@ -4,7 +4,14 @@ import { ROUTES } from '@/constants/routes';
 import { AdminHome } from '@/features/admin';
 import { DriverHome } from '@/features/driver';
 import Home from '@/features/home';
-import { PassengerHome } from '@/features/passenger';
+import PassengerLayout from '@/features/passenger';
+import {
+  AddFunds,
+  LiveMap,
+  PastTrips,
+  TransactionHistory,
+  UpcomingTrips,
+} from '@/features/passenger/pages';
 
 /**
  * UnAuth routes are used to define the unauth routes.
@@ -12,14 +19,17 @@ import { PassengerHome } from '@/features/passenger';
 const UnAuthRoutes = () => (
   <>
     {/* Unprotected Routes */}
-    <Route element={<Home />} path={ROUTES.HOME} />
+    <Route index element={<Home />} path={ROUTES.HOME} />
 
     {/* Passenger Routes */}
-    <Route element={<PassengerHome />} path={ROUTES.PASSENGER_HOME} />
-    {/* <Route element={<PassengerTrips />} path={ROUTES.PASSENGER_TRIPS} />
-    <Route element={<PassengerFavorites />} path={ROUTES.PASSENGER_FAVORITES} />
-    <Route element={<PassengerProfile />} path={ROUTES.PASSENGER_PROFILE} />
-    <Route element={<PassengerPayments />} path={ROUTES.PASSENGER_PAYMENTS} /> */}
+    <Route element={<PassengerLayout />}>
+      <Route element={<LiveMap />} path={ROUTES.PASSENGER.HOME} />
+      <Route element={<LiveMap />} path={ROUTES.PASSENGER.LIVE_MAP} />
+      <Route element={<PastTrips />} path={ROUTES.PASSENGER.PAST_TRIPS} />
+      <Route element={<UpcomingTrips />} path={ROUTES.PASSENGER.UPCOMING_TRIPS} />
+      <Route element={<TransactionHistory />} path={ROUTES.PASSENGER.TRANSACTION_HISTORY} />
+      <Route element={<AddFunds />} path={ROUTES.PASSENGER.ADD_FUNDS} />
+    </Route>
 
     {/* Driver Routes */}
     <Route element={<DriverHome />} path={ROUTES.DRIVER_HOME} />

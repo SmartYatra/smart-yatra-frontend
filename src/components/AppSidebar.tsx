@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, LogOut } from 'lucide-react';
 
 import {
   Sidebar,
@@ -45,7 +45,7 @@ type FooterItem = {
 type AppSidebarProps = {
   user: { name: string; email: string; avatar: string };
   navMain: Array<NavItem>;
-  projects: Array<{ name: string; url: string; icon: React.ElementType }>;
+  projects?: Array<{ name: string; url: string; icon: React.ElementType }>;
   footerItems: Array<FooterItem>;
   appName: string;
   logo: string;
@@ -66,7 +66,7 @@ export function AppSidebar({
           <SidebarMenuItem>
             <SidebarMenuButton asChild size="lg">
               <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg">
                   <img alt={appName} className="w-36" src={logo} />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -84,7 +84,7 @@ export function AppSidebar({
           <SidebarGroupLabel>Platform</SidebarGroupLabel>
           <SidebarMenu>
             {navMain.map((item) => (
-              <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
+              <Collapsible key={item.title} asChild defaultOpen>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild tooltip={item.title}>
                     <a href={item.url}>
@@ -120,21 +120,23 @@ export function AppSidebar({
           </SidebarMenu>
         </SidebarGroup>
 
-        <SidebarGroup>
-          <SidebarGroupLabel>Projects</SidebarGroupLabel>
-          <SidebarMenu>
-            {projects.map((item) => (
-              <SidebarMenuItem key={item.name}>
-                <SidebarMenuButton asChild>
-                  <a href={item.url}>
-                    {item.icon && <item.icon />}
-                    <span>{item.name}</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarGroup>
+        {projects && (
+          <SidebarGroup>
+            <SidebarGroupLabel>Projects</SidebarGroupLabel>
+            <SidebarMenu>
+              {projects.map((item) => (
+                <SidebarMenuItem key={item.name}>
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>
+                      {item.icon && <item.icon />}
+                      <span>{item.name}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroup>
+        )}
       </SidebarContent>
 
       <SidebarFooter>
@@ -165,6 +167,7 @@ export function AppSidebar({
                     console.log('Log out');
                   }}
                 >
+                  <LogOut />
                   Log out
                 </DropdownMenuItem>
               </DropdownMenuContent>

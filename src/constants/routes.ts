@@ -17,11 +17,17 @@ export const ROUTES = {
   CONTACT: '/#contact',
 
   // Passenger Routes
-  PASSENGER_HOME: '/passenger',
-  PASSENGER_TRIPS: '/passenger/trips',
-  PASSENGER_FAVORITES: '/passenger/favorites',
-  PASSENGER_PROFILE: '/passenger/profile',
-  PASSENGER_PAYMENTS: '/passenger/payments',
+  PASSENGER: {
+    HOME: '/passenger',
+    LIVE_MAP: '/passenger/live-map',
+    MY_TRIPS: '/passenger/my-trips',
+    PAST_TRIPS: '/passenger/my-trips/past',
+    UPCOMING_TRIPS: '/passenger/my-trips/upcoming',
+    TRANSACTION_HISTORY: '/passenger/payments',
+    ADD_FUNDS: '/passenger/payments/add-funds',
+    HELP_CENTER: '/passenger/support/help-center',
+    CONTACT_US: '/passenger/support/contact',
+  },
 
   // Driver Routes
   DRIVER_HOME: '/driver',
