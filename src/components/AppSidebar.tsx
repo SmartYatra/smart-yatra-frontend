@@ -49,6 +49,7 @@ type AppSidebarProps = {
   footerItems: Array<FooterItem>;
   appName: string;
   logo: string;
+  appDescription?: string;
 };
 
 export function AppSidebar({
@@ -57,6 +58,7 @@ export function AppSidebar({
   projects,
   footerItems,
   appName,
+  appDescription,
   logo,
 }: AppSidebarProps) {
   return (
@@ -71,7 +73,7 @@ export function AppSidebar({
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">{appName}</span>
-                  <span className="truncate text-xs">Dashboard</span>
+                  <span className="truncate text-xs">{appDescription} Dashboard</span>
                 </div>
               </a>
             </SidebarMenuButton>

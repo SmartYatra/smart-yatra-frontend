@@ -31,6 +31,7 @@ interface SidebarData {
     action: () => void;
   }>;
   appName: string;
+  appDescription?: string;
   logo: string;
 }
 
@@ -77,6 +78,7 @@ export const passengerSidebarData: SidebarData = {
     },
   ],
   appName: 'Smart Yatra',
+  appDescription: 'Passenger',
   logo: IconLogo,
 };
 
@@ -162,6 +164,7 @@ export const driverSidebarData = {
     },
   ],
   appName: 'Smart Yatra',
+  appDescription: 'Driver',
   logo: IconLogo,
 };
 
@@ -247,5 +250,6 @@ export const adminSidebarData = {
     },
   ],
   appName: 'Smart Yatra',
+  appDescription: 'Admin',
   logo: IconLogo,
 };

@@ -1,6 +1,8 @@
 import Axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
+import { ENV } from '@/config/env';
+
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
   if (config.headers) {
     // Set the Accept header
@@ -39,7 +41,7 @@ function handleErrorInterceptor(error: AxiosError) {
 
 // API instance
 export const api = Axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: ENV.VITE_API_URL,
 });
 
 // Apply the request and response interceptors
@@ -48,7 +50,7 @@ api.interceptors.response.use(handleResponseInterceptor, handleErrorInterceptor)
 
 // Mock API for testing
 export const mockApi = Axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: ENV.VITE_API_URL,
 });
 
 // This is the mock adapter that will be used to mock the API requests

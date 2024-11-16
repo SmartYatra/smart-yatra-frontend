@@ -1,17 +1,12 @@
-import { Route } from 'react-router-dom';
+import { Navigate, Route } from 'react-router-dom';
 
 import { ROUTES } from '@/constants/routes';
 import { AdminHome } from '@/features/admin';
 import { DriverHome } from '@/features/driver';
 import Home from '@/features/home';
 import PassengerLayout from '@/features/passenger';
-import {
-  AddFunds,
-  LiveMap,
-  PastTrips,
-  TransactionHistory,
-  UpcomingTrips,
-} from '@/features/passenger/pages';
+import LiveMap from '@/features/passenger/live-map';
+import { AddFunds, PastTrips, TransactionHistory, UpcomingTrips } from '@/features/passenger/pages';
 
 /**
  * UnAuth routes are used to define the unauth routes.
@@ -23,7 +18,7 @@ const UnAuthRoutes = () => (
 
     {/* Passenger Routes */}
     <Route element={<PassengerLayout />}>
-      <Route element={<LiveMap />} path={ROUTES.PASSENGER.HOME} />
+      <Route element={<Navigate to={ROUTES.PASSENGER.LIVE_MAP} />} path={ROUTES.PASSENGER.HOME} />
       <Route element={<LiveMap />} path={ROUTES.PASSENGER.LIVE_MAP} />
       <Route element={<PastTrips />} path={ROUTES.PASSENGER.PAST_TRIPS} />
       <Route element={<UpcomingTrips />} path={ROUTES.PASSENGER.UPCOMING_TRIPS} />
