@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useMap } from 'react-leaflet';
 
-type RecenterMapProps = {
+interface IRecenterMapProps {
   userLocation: { lat: number; lng: number };
-};
+}
 
-const RecenterMap = ({ userLocation }: RecenterMapProps) => {
+const RecenterMap = ({ userLocation }: IRecenterMapProps) => {
   const map = useMap();
 
   useEffect(() => {

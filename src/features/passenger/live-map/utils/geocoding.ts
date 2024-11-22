@@ -1,4 +1,3 @@
-// utils/geocoding.ts
 export const fetchLocationName = async (lat: number, lng: number): Promise<string> => {
   try {
     const response = await fetch(

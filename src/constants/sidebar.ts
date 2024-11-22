@@ -12,9 +12,8 @@ interface SidebarData {
   };
   navMain: Array<{
     title: string;
-    url: string;
+    url?: string;
     icon: React.ElementType;
-    isActive?: boolean;
     items?: Array<{
       title: string;
       url: string;
@@ -47,25 +46,26 @@ export const passengerSidebarData: SidebarData = {
       title: 'Live Map',
       url: ROUTES.PASSENGER.LIVE_MAP,
       icon: Map,
-      isActive: true,
     },
     {
-      title: 'My Trips',
-      url: ROUTES.PASSENGER.PAST_TRIPS,
+      title: 'Past Trips',
       icon: History,
-      items: [
-        { title: 'Past Trips', url: ROUTES.PASSENGER.PAST_TRIPS },
-        { title: 'Upcoming Trips', url: ROUTES.PASSENGER.UPCOMING_TRIPS },
-      ],
+      url: ROUTES.PASSENGER.PAST_TRIPS,
     },
     {
-      title: 'Payments',
-      url: ROUTES.PASSENGER.TRANSACTION_HISTORY,
+      title: 'Upcoming Trips',
       icon: CreditCard,
-      items: [
-        { title: 'Transaction History', url: ROUTES.PASSENGER.TRANSACTION_HISTORY },
-        { title: 'Add Funds', url: ROUTES.PASSENGER.ADD_FUNDS },
-      ],
+      url: ROUTES.PASSENGER.UPCOMING_TRIPS,
+    },
+    {
+      title: 'Transaction History',
+      icon: CreditCard,
+      url: ROUTES.PASSENGER.TRANSACTION_HISTORY,
+    },
+    {
+      title: 'Add Funds',
+      icon: CreditCard,
+      url: ROUTES.PASSENGER.ADD_FUNDS,
     },
   ],
 

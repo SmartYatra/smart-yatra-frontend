@@ -1,44 +1,56 @@
-// components/BusPopup.tsx
-type BusPopupProps = {
-  bus: {
-    id: string;
-    lat: number;
-    lng: number;
-    route: string;
-    type?: string;
-    speed?: number;
-    eta?: number;
-    occupancy?: string;
-    locationName?: string;
-  };
-};
+import React from 'react';
 
-const BusPopup = ({ bus }: BusPopupProps) => (
-  <div>
-    <h3 className="font-bold">Bus Details</h3>
-    <p>
-      <strong>Route:</strong> {bus.route}
-    </p>
-    <p>
-      <strong>Bus ID:</strong> {bus.id}
-    </p>
-    <p>
-      <strong>Type:</strong> {bus.type || 'Standard'}
-    </p>
-    <p>
-      <strong>Current Speed:</strong> {bus.speed ? `${bus.speed} km/h` : 'Unavailable'}
-    </p>
-    <p>
-      <strong>ETA:</strong> {bus.eta ? `${bus.eta} mins` : 'Not available'}
-    </p>
-    <p>
-      <strong>Occupancy:</strong> {bus.occupancy || 'Not specified'}
-    </p>
-    <p>
-      <strong>Location:</strong> {bus.locationName || 'Fetching location...'}
-    </p>
-    <p>{`Lat: ${bus.lat.toFixed(5)}, Lng: ${bus.lng.toFixed(5)}`}</p>
-  </div>
+interface IBus {
+  id: string;
+  route: string;
+  type?: string;
+  speed?: number;
+  eta?: number;
+  occupancy?: string;
+  locationName?: string;
+  lat: number;
+  lng: number;
+}
+
+interface IBusPopupProps {
+  bus: IBus;
+}
+
+const BusDetail: React.FC<{ label: string; value: string | number | undefined }> = ({
+  label,
+  value,
+}) => (
+  <p>
+    <strong>{label}:</strong> {value !== undefined ? value : 'Unavailable'}
+  </p>
 );
+
+const BusPopup: React.FC<IBusPopupProps> = ({ bus }) => {
+  const {
+    route,
+    id,
+    type = 'Standard',
+    speed,
+    eta,
+    occupancy = 'Not specified',
+    locationName = 'Fetching location...',
+    lat,
+    lng,
+  } = bus;
+
+  return (
+    <div>
+      <h3 className="font-bold">Bus Details</h3>
+      <BusDetail label="Route" value={route} />
+      <BusDetail label="Bus ID" value={id} />
+      <BusDetail label="Type" value={type} />
+      <BusDetail label="Current Speed" value={speed ? `${speed} km/h` : undefined} />
+      <BusDetail label="ETA" value={eta ? `${eta} mins` : undefined} />
+      <BusDetail label="Occupancy" value={occupancy} />
+      <BusDetail label="Location" value={locationName} />
+      <BusDetail label="Coordinates" value={`${lat.toFixed(5)}, ${lng.toFixed(5)}`} />
+    </div>
+  );
+};
 
 export default BusPopup;

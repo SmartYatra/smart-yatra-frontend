@@ -3,7 +3,7 @@ import { HelmetProvider } from 'react-helmet-async';
 
 import { Toaster } from '@/components/ui/sonner';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient();
 
@@ -15,7 +15,7 @@ const MainProvider = ({ children }: { children: ReactNode }) => {
           {children}
 
           <Toaster />
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </QueryClientProvider>
       </HelmetProvider>
     </>

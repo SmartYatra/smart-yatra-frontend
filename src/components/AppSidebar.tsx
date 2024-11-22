@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { ChevronRight, LogOut } from 'lucide-react';
 
@@ -18,6 +18,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
+import { cn } from '@/lib/utils';
 
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
@@ -31,9 +32,8 @@ import {
 
 type NavItem = {
   title: string;
-  url: string;
+  url?: string;
   icon?: React.ElementType;
-  isActive?: boolean;
   items?: Array<NavItem>;
 };
 
@@ -64,6 +64,8 @@ export function AppSidebar({
   appDescription,
   appUrl,
 }: AppSidebarProps) {
+  const { pathname } = useLocation();
+
   return (
     <Sidebar variant="floating">
       <SidebarHeader>
@@ -91,11 +93,25 @@ export function AppSidebar({
             {navMain.map((item) => (
               <Collapsible key={item.title} asChild defaultOpen>
                 <SidebarMenuItem>
-                  <SidebarMenuButton asChild tooltip={item.title}>
-                    <a href={item.url}>
-                      {item.icon && <item.icon />}
-                      <span>{item.title}</span>
-                    </a>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={item.url === pathname}
+                    tooltip={item.title}
+                    className={cn('border-l-4 border-transparent', {
+                      'rounded border-primary': item.url === pathname,
+                    })}
+                  >
+                    {item.url ? (
+                      <Link to={item.url}>
+                        {item.icon && <item.icon />}
+                        <span>{item.title}</span>
+                      </Link>
+                    ) : (
+                      <div>
+                        {item.icon && <item.icon />}
+                        <span>{item.title}</span>
+                      </div>
+                    )}
                   </SidebarMenuButton>
                   {item.items?.length ? (
                     <>
@@ -108,10 +124,12 @@ export function AppSidebar({
                         <SidebarMenuSub>
                           {item.items.map((subItem) => (
                             <SidebarMenuSubItem key={subItem.title}>
-                              <SidebarMenuSubButton asChild>
-                                <a href={subItem.url}>
-                                  <span>{subItem.title}</span>
-                                </a>
+                              <SidebarMenuSubButton asChild isActive={subItem.url === pathname}>
+                                {subItem.url ? (
+                                  <Link to={subItem.url}>{subItem.title}</Link>
+                                ) : (
+                                  subItem.title
+                                )}
                               </SidebarMenuSubButton>
                             </SidebarMenuSubItem>
                           ))}
@@ -132,10 +150,10 @@ export function AppSidebar({
               {projects.map((item) => (
                 <SidebarMenuItem key={item.name}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link to={item.url}>
                       {item.icon && <item.icon />}
                       <span>{item.name}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

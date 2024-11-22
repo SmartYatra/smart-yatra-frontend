@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer, Tooltip } from 'react-leaflet';
+import MarkerClusterGroup from 'react-leaflet-cluster';
 
 import { icon } from 'leaflet';
 
@@ -8,6 +9,7 @@ import UserMarker from '@/assets/passenger/user-marker.png';
 import Skeleton from '@/components/Skeleton';
 
 import BusPopup from './components/BusPopup';
+import RecenterButton from './components/RecenterButton';
 import RecenterMap from './components/RecenterMap';
 import { useBuses } from './hooks/useBuses';
 import { fetchLocationName } from './utils/geocoding';
@@ -17,6 +19,8 @@ import 'leaflet/dist/leaflet.css';
 const LiveMap = () => {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [busLocations, setBusLocations] = useState<{ [id: string]: string }>({});
+  const [userLocationName, setUserLocationName] = useState<string | null>(null);
+
   const { data: buses, isFetching, error } = useBuses();
 
   // Fetch user's location
@@ -54,6 +58,16 @@ const LiveMap = () => {
     fetchBusLocations();
   }, [buses]);
 
+  // Fetch location name for user
+  useEffect(() => {
+    const fetchUserLocationName = async () => {
+      if (userLocation) {
+        setUserLocationName(await fetchLocationName(userLocation.lat, userLocation.lng));
+      }
+    };
+    fetchUserLocationName();
+  }, [userLocation]);
+
   if (isFetching) {
     return (
       <div className="flex size-full items-center justify-center">
@@ -67,8 +81,9 @@ const LiveMap = () => {
   return (
     <div className="size-full">
       <MapContainer
+        scrollWheelZoom
         center={userLocation || [27.7172, 85.324]}
-        className="z-50 size-full rounded-lg"
+        className="relative z-50 size-full rounded-lg"
         zoom={13}
       >
         <TileLayer
@@ -76,30 +91,47 @@ const LiveMap = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {userLocation && <RecenterMap userLocation={userLocation} />}
-        {buses.map((bus) => (
-          <Marker
-            key={bus.id}
-            icon={icon({ iconUrl: BusMarker, iconSize: [35, 35] })}
-            position={[bus.lat, bus.lng]}
-          >
-            <Popup>
-              <BusPopup
-                bus={{
-                  ...bus,
-                  locationName: busLocations[bus.id],
-                }}
-              />
-            </Popup>
-          </Marker>
-        ))}
+        <MarkerClusterGroup>
+          {buses.map((bus) => (
+            <Marker
+              key={bus.id}
+              icon={icon({ iconUrl: BusMarker, iconSize: [35, 35] })}
+              position={[bus.lat, bus.lng]}
+            >
+              <Tooltip>
+                Route: {bus.route} | ETA: {bus.eta ? `${bus.eta} mins` : 'Unknown'}
+              </Tooltip>
+              <Popup>
+                <BusPopup
+                  bus={{
+                    ...bus,
+                    locationName: busLocations[bus.id],
+                  }}
+                />
+              </Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
+
         {userLocation && (
           <Marker
             icon={icon({ iconUrl: UserMarker, iconSize: [35, 35] })}
             position={[userLocation.lat, userLocation.lng]}
           >
-            <Popup>You are here</Popup>
+            <Popup>
+              <h3 className="font-bold">Your Location</h3>
+              <p>
+                <strong>Coordinates:</strong> {userLocation.lat}, {userLocation.lng}
+              </p>
+              <p>
+                <strong>Location</strong>:{' '}
+                {userLocationName ? userLocationName : 'Fetching location...'}
+              </p>
+            </Popup>
           </Marker>
         )}
+
+        {userLocation && <RecenterButton userLocation={userLocation} />}
       </MapContainer>
     </div>
   );
