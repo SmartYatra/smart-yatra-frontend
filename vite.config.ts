@@ -85,10 +85,10 @@ export default ({ mode }: { mode: string }) => {
     },
     //here we can define the port we wish our program to run
     server: {
-      port: Number(env.VITE_PORT) || 5132,
+      port: Number(env.VITE_PORT) || 5172,
     },
     preview: {
-      port: Number(env.VITE_PORT) || 5132,
+      port: Number(env.VITE_PORT) || 5172,
     },
   });
 };

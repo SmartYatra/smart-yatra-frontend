@@ -55,8 +55,8 @@ const mockBuses: Array<Bus> = [
   },
   {
     id: 'bus5',
-    lat: 27.7048,
-    lng: 85.3089,
+    lat: 27.7195,
+    lng: 85.3131,
     route: 'Gongabu to Jawalakhel',
     type: 'Standard Bus',
     speed: 35,

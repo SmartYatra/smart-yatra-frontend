@@ -15,6 +15,8 @@ import { Separator } from '@/components/ui/separator';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { passengerSidebarData } from '@/constants/sidebar';
 
+import QRScannerModal from './components/QRScannerModal';
+
 const PassengerLayout = () => {
   const location = useLocation();
 
@@ -37,6 +39,12 @@ const PassengerLayout = () => {
   // Generate breadcrumbs from the current location's pathname
   const breadcrumbs = generateBreadcrumbs(location.pathname);
 
+  // Handle successful QR scan
+  const handleScanSuccess = (data: string) => {
+    console.log('Scanned Data:', data);
+    // TODO: Add logic to handle scanned data
+  };
+
   return (
     <SidebarProvider
       className="bg-muted/10"
@@ -49,11 +57,11 @@ const PassengerLayout = () => {
             <Logo />
             <SidebarTrigger />
           </div>
-          <div className="flex items-center gap-2 px-4">
+          <div className="flex w-full items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1 hidden sm:block" />
             <Separator className="mr-2 hidden h-5 sm:block" orientation="vertical" />
             {/* Breadcrumb */}
-            <Breadcrumb>
+            <Breadcrumb className="w-full">
               <BreadcrumbList>
                 {breadcrumbs.map((breadcrumb, index) => (
                   <React.Fragment key={index}>
@@ -74,10 +82,12 @@ const PassengerLayout = () => {
                 ))}
               </BreadcrumbList>
             </Breadcrumb>
+
+            <QRScannerModal onScanSuccess={handleScanSuccess} />
           </div>
         </header>
 
-        <main className="size-full p-4">
+        <main className="size-full p-4 pt-0">
           <Outlet />
         </main>
       </SidebarInset>
