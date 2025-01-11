@@ -8,7 +8,7 @@ import {
   SectionSubtitle,
   SectionTitle,
   SectionWrapper,
-} from '@/components/PageWrapper';
+} from '@/components/page-wrapper';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Link } from '@/i18n/routing';

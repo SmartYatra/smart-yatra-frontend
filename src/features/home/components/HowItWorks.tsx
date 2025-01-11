@@ -7,7 +7,7 @@ import {
   SectionSubtitle,
   SectionTitle,
   SectionWrapper,
-} from '@/components/PageWrapper';
+} from '@/components/page-wrapper';
 import {
   Card,
   CardContent,

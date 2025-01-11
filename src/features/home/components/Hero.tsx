@@ -54,7 +54,7 @@ export const Hero = () => {
               </Button>
               <Button
                 aria-label={t('secondaryButtonAriaLabel')}
-                className='relative border border-primary bg-transparent px-6 text-base text-primary after:absolute after:inset-0 after:z-[-1] after:border-primary after:opacity-0 after:blur-sm after:transition-opacity hover:border-primary/90 hover:after:opacity-100 max-sm:w-full sm:h-12'
+                className='relative border border-primary bg-transparent px-6 text-base after:absolute after:inset-0 after:z-[-1] after:border-primary after:opacity-0 after:blur-sm after:transition-opacity hover:border-primary/90 hover:after:opacity-100 max-sm:w-full sm:h-12'
                 size='lg'
                 variant='outline'
               >

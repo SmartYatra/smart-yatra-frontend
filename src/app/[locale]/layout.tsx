@@ -6,7 +6,7 @@ import { getMessages } from 'next-intl/server';
 
 import { Toaster } from 'sonner';
 
-import { CookieConsent } from '@/components/CookieConsent';
+import { CookieConsent } from '@/components/cookie-consent';
 import TanstackQueryProvider from '@/components/providers/tanstack-provider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { siteConfig } from '@/configs';

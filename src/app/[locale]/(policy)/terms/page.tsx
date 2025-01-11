@@ -1,6 +1,3 @@
-import Back from '@/components/Back';
-import { PageWrapper } from '@/components/PageWrapper';
-
 interface ITermsSection {
   title: string;
   content: string | string[];
@@ -62,47 +59,39 @@ export default function TermsOfService() {
   };
 
   return (
-    <PageWrapper className='min-h-screen'>
-      <div className='container mx-auto px-4 py-16'>
-        <div className='mx-auto max-w-3xl'>
-          <Back />
+    <>
+      <h1 className='mb-8 text-4xl font-bold text-secondary-foreground'>
+        {TERMS_OF_SERVICE.title}
+      </h1>
 
-          <h1 className='mb-8 text-4xl font-bold text-secondary-foreground'>
-            {TERMS_OF_SERVICE.title}
-          </h1>
+      <div className='space-y-8'>
+        <p className='text-secondary-foreground'>{TERMS_OF_SERVICE.intro}</p>
 
-          <div className='space-y-8'>
-            <p className='text-secondary-foreground'>
-              {TERMS_OF_SERVICE.intro}
-            </p>
+        {TERMS_OF_SERVICE.sections.map(
+          (section: ITermsSection, index: number) => (
+            <section key={index}>
+              <h2 className='mb-4 text-xl font-semibold text-secondary-foreground'>
+                {section.title}
+              </h2>
+              {Array.isArray(section.content) ? (
+                <ul className='ml-8 list-disc space-y-2 text-muted-foreground'>
+                  {section.content.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className='text-muted-foreground'>{section.content}</p>
+              )}
+            </section>
+          )
+        )}
 
-            {TERMS_OF_SERVICE.sections.map(
-              (section: ITermsSection, index: number) => (
-                <section key={index}>
-                  <h2 className='mb-4 text-xl font-semibold text-secondary-foreground'>
-                    {section.title}
-                  </h2>
-                  {Array.isArray(section.content) ? (
-                    <ul className='ml-8 list-disc space-y-2 text-muted-foreground'>
-                      {section.content.map((item, idx) => (
-                        <li key={idx}>{item}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className='text-muted-foreground'>{section.content}</p>
-                  )}
-                </section>
-              )
-            )}
-
-            <div className='mt-8 rounded-lg bg-muted px-4 py-6'>
-              <p className='text-sm text-muted-foreground'>
-                Last updated: {TERMS_OF_SERVICE.lastUpdated}
-              </p>
-            </div>
-          </div>
+        <div className='mt-8 rounded-lg bg-muted px-4 py-6'>
+          <p className='text-sm text-muted-foreground'>
+            Last updated: {TERMS_OF_SERVICE.lastUpdated}
+          </p>
         </div>
       </div>
-    </PageWrapper>
+    </>
   );
 }

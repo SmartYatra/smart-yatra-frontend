@@ -2,13 +2,13 @@
 
 import { Star } from 'lucide-react';
 
-import BackgroundGlow from '@/components/BackgroundGlow';
+import BackgroundGlow from '@/components/background-glow';
 import {
   SectionDescription,
   SectionSubtitle,
   SectionTitle,
   SectionWrapper,
-} from '@/components/PageWrapper';
+} from '@/components/page-wrapper';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import {
   Card,

@@ -6,7 +6,7 @@ import {
   Icon,
   NotFoundLayout,
   ReturnHomeButton,
-} from '@/components/NotFound';
+} from '@/components/nout-found';
 
 /**
  * Component: NotFound

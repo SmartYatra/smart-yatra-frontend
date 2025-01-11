@@ -6,9 +6,9 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { ChevronDown, Github, Menu } from 'lucide-react';
 
-import { LocaleSwitcher } from '@/components/LocaleSwitcher';
-import Logo from '@/components/Logo';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { LocaleSwitcher } from '@/components/locale-switcher';
+import Logo from '@/components/logo';
+import { ThemeToggle } from '@/components/theme-toggle';
 import { Button, buttonVariants } from '@/components/ui/button';
 import {
   Sheet,

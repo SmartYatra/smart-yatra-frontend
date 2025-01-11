@@ -4,14 +4,15 @@ import React from 'react';
 import { useTranslations } from 'next-intl';
 
 import { Link } from '@/i18n/routing';
+import { cn } from '@/lib/utils';
 
-const Logo = () => {
+const Logo = ({ className }: { className?: string }) => {
   const t = useTranslations('logo');
 
   return (
     <Link
       aria-label={t('linkAriaLabel')}
-      className='flex items-center gap-2'
+      className={cn('flex items-center gap-2', className)}
       href='/'
     >
       <svg

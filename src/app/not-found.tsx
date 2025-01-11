@@ -8,7 +8,7 @@ import {
   Icon,
   NotFoundLayout,
   ReturnHomeButton,
-} from '@/components/NotFound';
+} from '@/components/nout-found';
 import { routing } from '@/i18n/routing';
 
 import '@/styles/globals.css';

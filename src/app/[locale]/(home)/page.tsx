@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import BackgroundGlow from '@/components/BackgroundGlow';
+import BackgroundGlow from '@/components/background-glow';
 import { FAQ } from '@/features/home/components/FAQ';
 import { Features } from '@/features/home/components/Features';
 import { Hero } from '@/features/home/components/Hero';

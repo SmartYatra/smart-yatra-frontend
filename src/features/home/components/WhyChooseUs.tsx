@@ -10,7 +10,7 @@ import {
   SectionSubtitle,
   SectionTitle,
   SectionWrapper,
-} from '@/components/PageWrapper';
+} from '@/components/page-wrapper';
 
 export function WhyChooseUs() {
   const benefits = [

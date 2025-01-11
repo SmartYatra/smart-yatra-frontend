@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { Check, Star } from 'lucide-react';
 
-import { SectionTitle } from '@/components/PageWrapper';
+import { SectionTitle } from '@/components/page-wrapper';
 import { Button } from '@/components/ui/button';
 import {
   Card,

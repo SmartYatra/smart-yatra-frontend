@@ -1,8 +1,5 @@
 import { Fragment } from 'react';
 
-import Back from '@/components/Back';
-import { PageWrapper } from '@/components/PageWrapper';
-
 interface IPrivacySection {
   title: string;
   content: string | string[] | IPrivacySection[];
@@ -117,35 +114,29 @@ export default function PrivacyPolicy() {
   };
 
   return (
-    <PageWrapper className='min-h-screen'>
-      <div className='container mx-auto px-4 py-16'>
-        <div className='mx-auto max-w-3xl'>
-          <Back />
+    <>
+      <h1 className='mb-8 text-4xl font-bold text-secondary-foreground'>
+        {PRIVACY_POLICY.title}
+      </h1>
 
-          <h1 className='mb-8 text-4xl font-bold text-secondary-foreground'>
-            {PRIVACY_POLICY.title}
-          </h1>
+      <div className='space-y-8'>
+        <p className='text-secondary-foreground'>{PRIVACY_POLICY.intro}</p>
 
-          <div className='space-y-8'>
-            <p className='text-secondary-foreground'>{PRIVACY_POLICY.intro}</p>
+        {PRIVACY_POLICY.sections.map((section, index) => (
+          <section key={index}>
+            <h2 className='mb-4 text-xl font-semibold text-secondary-foreground'>
+              {section.title}
+            </h2>
+            {renderContent(section.content)}
+          </section>
+        ))}
 
-            {PRIVACY_POLICY.sections.map((section, index) => (
-              <section key={index}>
-                <h2 className='mb-4 text-xl font-semibold text-secondary-foreground'>
-                  {section.title}
-                </h2>
-                {renderContent(section.content)}
-              </section>
-            ))}
-
-            <div className='mt-8 rounded-lg bg-muted px-4 py-6'>
-              <p className='text-sm text-muted-foreground'>
-                Last updated: {PRIVACY_POLICY.lastUpdated}
-              </p>
-            </div>
-          </div>
+        <div className='mt-8 rounded-lg bg-muted px-4 py-6'>
+          <p className='text-sm text-muted-foreground'>
+            Last updated: {PRIVACY_POLICY.lastUpdated}
+          </p>
         </div>
       </div>
-    </PageWrapper>
+    </>
   );
 }

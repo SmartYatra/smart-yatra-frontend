@@ -3,6 +3,7 @@ import Axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
   if (config.headers) {
@@ -51,3 +52,11 @@ api.interceptors.response.use(
   handleResponseInterceptor,
   handleErrorInterceptor
 );
+
+// Mock API for testing
+export const mockApi = Axios.create({
+  baseURL: process.env.API_URL,
+});
+
+// This is the mock adapter that will be used to mock the API requests
+export const adapter = new MockAdapter(mockApi, { delayResponse: 1000 });

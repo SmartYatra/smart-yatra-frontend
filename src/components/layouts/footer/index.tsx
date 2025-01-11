@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import LinkSection from './LinkSection';
 import SocialLinks from './SocialLinks';
 
-import Logo from '../../Logo';
+import Logo from '../../logo';
 
 export type ILink = {
   name: string;
