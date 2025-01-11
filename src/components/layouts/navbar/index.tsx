@@ -33,30 +33,25 @@ export function Navbar() {
   const routeList: IRouteList[] = [
     {
       name: t('NavMenuItem.driver'),
-      href: '#', // Link to driver registration page
+      href: '#',
     },
     {
       name: t('NavMenuItem.passenger'),
-      href: '#', // Link to passenger page
+      href: '#',
     },
     {
       name: t('NavMenuItem.pricing'),
-      href: '#', // Link to pricing page
+      href: '#',
     },
     {
       name: t('NavMenuItem.blog'),
-      href: '#', // Link to blog page
+      href: '#',
     },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('up');
-
-  // Toggle mobile menu
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
 
   // Handle scroll behavior for dynamic navbar
   useEffect(() => {
@@ -123,7 +118,29 @@ export function Navbar() {
             {/* Language Toggle */}
             <LocaleSwitcher className='hidden sm:flex' />
 
-            {/* Mobile Menu (hidden by default) */}
+            {/* Login and Sign Up buttons */}
+            <Link
+              aria-label='Login'
+              href='/login'
+              className={cn(
+                buttonVariants({ variant: 'outline' }),
+                'hidden 2xl:flex'
+              )}
+            >
+              Login
+            </Link>
+            <Link
+              aria-label='Sign Up'
+              href='/signup'
+              className={cn(
+                buttonVariants({ variant: 'default' }),
+                'hidden 2xl:flex'
+              )}
+            >
+              Sign Up
+            </Link>
+
+            {/* Mobile Menu */}
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild className='2xl:hidden'>
                 <Button
@@ -131,12 +148,12 @@ export function Navbar() {
                   size='icon'
                   variant='ghost'
                 >
-                  <Menu className='flex !size-5' onClick={toggleMobileMenu} />
+                  <Menu className='flex !size-5' />
                 </Button>
               </SheetTrigger>
 
               <SheetContent
-                className='flex h-[calc(100vh-10rem)] flex-col'
+                className='flex h-[calc(100vh-0rem)] flex-col'
                 side='top'
               >
                 <SheetHeader>
@@ -160,9 +177,31 @@ export function Navbar() {
                   ))}
                 </nav>
 
-                <SheetFooter className='gap-4 max-sm:flex-1 sm:justify-start'>
+                <SheetFooter className='gap-4 max-sm:flex-1'>
                   {/* Language Toggle */}
-                  <LocaleSwitcher className='w-full' />
+                  <LocaleSwitcher className='w-full md:w-fit' />
+
+                  {/* Login and Sign Up buttons */}
+                  <Link
+                    aria-label='Login'
+                    href='/login'
+                    className={cn(
+                      buttonVariants({ variant: 'outline' }),
+                      'h-9 w-full md:w-fit'
+                    )}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    aria-label='Sign Up'
+                    href='/signup'
+                    className={cn(
+                      buttonVariants({ variant: 'default' }),
+                      'h-9 w-full md:w-fit'
+                    )}
+                  >
+                    Sign Up
+                  </Link>
                 </SheetFooter>
               </SheetContent>
             </Sheet>
