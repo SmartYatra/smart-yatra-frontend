@@ -3,7 +3,11 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
-import { SectionTitle } from '@/components/PageWrapper';
+import {
+  SectionSubtitle,
+  SectionTitle,
+  SectionWrapper,
+} from '@/components/PageWrapper';
 import {
   Accordion,
   AccordionContent,
@@ -56,34 +60,32 @@ export function FAQ() {
   ];
 
   return (
-    <section className='py-16'>
-      <div className='container mx-auto px-4 text-center'>
-        <SectionTitle>{t('sectionTitle')}</SectionTitle>
-        <h2 className='mb-8 text-3xl font-bold'>{t('headline')}</h2>
-        <Accordion
-          className='mx-auto flex max-w-4xl flex-col gap-4'
-          type='multiple'
-          value={openItems}
-        >
-          {faqs.map((faq, index) => (
-            <AccordionItem
-              className='rounded-lg border hover:bg-muted/50'
-              key={index}
-              value={`item-${index}`}
+    <SectionWrapper id='faq'>
+      <SectionSubtitle>{t('sectionTitle')}</SectionSubtitle>
+      <SectionTitle>{t('headline')}</SectionTitle>
+      <Accordion
+        className='mx-auto flex max-w-4xl flex-col gap-4'
+        type='multiple'
+        value={openItems}
+      >
+        {faqs.map((faq, index) => (
+          <AccordionItem
+            className='rounded-lg border hover:bg-muted/50'
+            key={index}
+            value={`item-${index}`}
+          >
+            <AccordionTrigger
+              className='rounded-lg px-2 hover:no-underline'
+              onClick={() => toggleItem(`item-${index}`)}
             >
-              <AccordionTrigger
-                className='rounded-lg px-2 hover:no-underline'
-                onClick={() => toggleItem(`item-${index}`)}
-              >
-                {faq.question}
-              </AccordionTrigger>
-              <AccordionContent className='px-2 text-left text-muted-foreground'>
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-    </section>
+              {faq.question}
+            </AccordionTrigger>
+            <AccordionContent className='px-2 text-left text-muted-foreground'>
+              {faq.answer}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </SectionWrapper>
   );
 }

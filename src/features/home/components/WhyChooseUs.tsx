@@ -45,7 +45,7 @@ export function WhyChooseUs() {
         {/* Benefits Section */}
         <div className='flex-1 space-y-16'>
           <div>
-            <SectionSubtitle>Why Choose SmartYatra</SectionSubtitle>
+            <SectionSubtitle>Why Choose Us</SectionSubtitle>
             <SectionTitle>Why Choose SmartYatra?</SectionTitle>
             <SectionDescription>
               Discover the benefits of revolutionizing public transport.

@@ -3,7 +3,12 @@
 import { Star } from 'lucide-react';
 
 import BackgroundGlow from '@/components/BackgroundGlow';
-import { SectionTitle, SectionWrapper } from '@/components/PageWrapper';
+import {
+  SectionDescription,
+  SectionSubtitle,
+  SectionTitle,
+  SectionWrapper,
+} from '@/components/PageWrapper';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import {
   Card,
@@ -93,12 +98,9 @@ const testimonials: Testimonial[] = [
 export function Testimonials() {
   return (
     <SectionWrapper id='testimonials'>
-      <div className='mb-16 text-center'>
-        <SectionTitle>Testimonials</SectionTitle>
-        <h3 className='mb-8 text-4xl font-bold'>
-          See what our users have to say
-        </h3>
-      </div>
+      <SectionSubtitle>Testimonials</SectionSubtitle>
+      <SectionTitle>What Our Users Are Saying</SectionTitle>
+      <SectionDescription>See what our users have to say</SectionDescription>
 
       <BackgroundGlow className='from-tertiary/30 bottom-auto left-1/2 top-1/2 size-[800px] -translate-x-1/2 -translate-y-[40%] bg-gradient-to-bl to-transparent' />
 
