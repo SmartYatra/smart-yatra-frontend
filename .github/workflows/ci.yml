@@ -1,0 +1,190 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [main, dev, feat/*]
+  pull_request:
+    branches: [main, dev, feat/*]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repo
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      # Setup Node.js
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Setup pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 'latest'
+
+      # Cache pnpm store
+      - name: 📦 Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-
+
+      # Install dependencies
+      - name: 📥 Install dependencies
+        run: pnpm install
+
+      # Lint
+      - name: 🔬 Lint
+        run: pnpm run lint
+
+  type-check:
+    name: Type Check
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repo
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      # Setup Node.js
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Setup pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 'latest'
+
+      # Cache pnpm store
+      - name: 📦 Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-
+
+      # Install dependencies
+      - name: 📥 Install dependencies
+        run: pnpm install
+
+      # Type check
+      - name: 🔎 Type check
+        run: pnpm run type-check
+
+  commitlint:
+    name: Commitlint
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
+    steps:
+      # Checkout repo
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # Setup pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 'latest'
+
+      # Commitlint
+      - name: ⚙️ commitlint
+        uses: wagoid/commitlint-github-action@v6
+
+  vitest:
+    name: Vitest
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repo
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      # Setup Node.js
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Setup pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 'latest'
+
+      # Cache pnpm store
+      - name: 📦 Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-
+
+      # Install dependencies
+      - name: 📥 Install dependencies
+        run: pnpm install
+
+      # Run Vitest tests
+      - name: ⚡ Run vitest
+        run: pnpm run test -- --coverage
+
+  playwright:
+    name: Playwright
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repo
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      # Setup Node.js
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Setup pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 'latest'
+
+      # Cache pnpm store
+      - name: 📦 Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-
+
+      # Install dependencies
+      - name: 📥 Install dependencies
+        run: pnpm install
+
+      # Install Playwright Browsers
+      - name: 🌐 Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      # Run Playwright tests
+      - name: 🎭 Playwright Run
+        run: npx playwright test
+
+      # Upload Playwright Screenshots in case of failure
+      - name: 📸 Playwright Screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

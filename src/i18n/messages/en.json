@@ -1,0 +1,155 @@
+{
+  "NotFoundPage": {
+    "heading": "404 - Page Not Found",
+    "description": "Sorry, we couldn’t find the page you were looking for. Please check the URL and try again.",
+    "buttonText": "Return to Home"
+  },
+  "HomePage": {
+    "Hero": {
+      "changelogLinkAriaLabel": "Navigate to changelog",
+      "changelogBadge": "New",
+      "changelogText": "Introducing SmartYatra - Revolutionizing Public Transport",
+      "headline": "Welcome to SmartYatra",
+      "subHeadline": "Modernizing Bus Transit Services",
+      "description": "SmartYatra is an innovative Public Transport Digitization System. Track your journey with QR codes, automatic fare deduction, and seamless bus management.",
+      "primaryButtonAriaLabel": "Get Started as a Driver",
+      "primaryButtonText": "Get Started",
+      "secondaryButtonAriaLabel": "Learn More as a Passenger",
+      "secondaryButtonText": "Learn More"
+    },
+    "trustedBy": {
+      "heading": "Trusted by developers from the world's leading organizations",
+      "logos": {
+        "apple": "Apple",
+        "oracle": "Oracle",
+        "tiktok": "TikTok",
+        "intel": "Intel",
+        "ibm": "IBM",
+        "americanAirlines": "American Airlines",
+        "deloitte": "Deloitte",
+        "gm": "GM",
+        "ey": "EY",
+        "nestle": "Nestle",
+        "bosch": "Bosch",
+        "decathlon": "Decathlon"
+      }
+    },
+    "HeroBanner": {
+      "superchargeText": "Supercharge Your Travel Experience with SmartYatra!",
+      "exploreToolkitText": "Explore How it Works",
+      "ariaExploreToolkit": "Explore How it Works",
+      "closeBannerAriaLabel": "Close banner"
+    },
+    "Newsletter": {
+      "sectionTitle": "Newsletter",
+      "headline": "Sign up for our newsletter",
+      "description": "Want to get notified about new updates, features, and tools? Sign up for our newsletter and be among the first to know about new features, components, versions, and tools of the Smart Yatra project.",
+      "emailPlaceholder": "Enter your email here",
+      "subscribeButton": "Subscribe",
+      "agreement": "By subscribing, you agree to Smart Yatra's",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "and": "and"
+    },
+    "FAQ": {
+      "sectionTitle": "FAQ",
+      "headline": "Frequently Asked Questions",
+      "whatIsSmartYatraQuestion": "What is SmartYatra?",
+      "whatIsSmartYatraAnswer": "SmartYatra is an innovative Public Transport Digitization System that enhances the passenger and driver experience by utilizing QR codes for bus tracking, automatic fare deduction, and streamlined bus management.",
+      "howToGetStartedQuestion": "How do I get started with SmartYatra?",
+      "howToGetStartedAnswer": "To get started with SmartYatra, simply register as a bus driver to automatically generate your bus’s QR code. Passengers can then scan the code to track their journey and make automatic fare payments as they enter and exit the bus.",
+      "compatibilityQuestion": "Is SmartYatra compatible with my existing public transport system?",
+      "compatibilityAnswer": "Yes, SmartYatra is designed to seamlessly integrate into your existing public transport system. Whether you operate a small fleet or a large network, SmartYatra can help modernize your operations with minimal disruption.",
+      "languageSupportQuestion": "Does SmartYatra support multiple languages?",
+      "languageSupportAnswer": "Yes, SmartYatra supports multiple languages to cater to a wide range of users. Currently, it supports both English and Nepali, with more languages coming soon.",
+      "updatesQuestion": "How often is SmartYatra updated?",
+      "updatesAnswer": "SmartYatra is regularly updated to add new features, improve existing ones, and ensure the system remains in line with the latest public transport trends. Major updates are released quarterly, while smaller updates and improvements are rolled out as needed.",
+      "pricingQuestion": "Is SmartYatra free to use?",
+      "pricingAnswer": "SmartYatra offers a freemium model. The basic features, such as QR code generation for drivers and passenger journey tracking, are free. Advanced features like detailed reporting, analytics, and priority support are available through our paid plans. Check our pricing page for more details."
+    }
+  },
+  "Navbar": {
+    "githubStar": "GitHub",
+    "goToToolkit": "Go to Toolkit",
+    "openMobileMenu": "Open mobile menu",
+    "NavMenuItem": {
+      "driver": "Driver Dashboard",
+      "passenger": "Passenger Journey",
+      "pricing": "Pricing",
+      "blog": "Blog"
+    },
+    "locale": {
+      "label": "Language",
+      "options": {
+        "en": "English",
+        "ne": "Nepali"
+      }
+    }
+  },
+  "logo": {
+    "linkAriaLabel": "Go to homepage"
+  },
+  "themeToggle": {
+    "toggleButtonLabel": "Toggle theme",
+    "options": {
+      "red": "Red",
+      "darkRed": "Dark Red",
+      "green": "Green",
+      "darkGreen": "Dark Green",
+      "orange": "Orange",
+      "darkOrange": "Dark Orange",
+      "blue": "Blue",
+      "darkBlue": "Dark Blue"
+    }
+  },
+  "footer": {
+    "quickStarts": {
+      "label": "Quick Starts",
+      "items": {
+        "driver": "Driver Guide",
+        "passenger": "Passenger Guide"
+      }
+    },
+    "products": {
+      "label": "Products",
+      "items": {
+        "journeyTracking": "Journey Tracking",
+        "fareDeduction": "Automatic Fare Deduction"
+      }
+    },
+    "learn": {
+      "label": "Learn",
+      "items": {
+        "docs": "Docs",
+        "integrations": "Integrations",
+        "community": "Community",
+        "blog": "Blog",
+        "changelog": "Changelog",
+        "roadmap": "Roadmap",
+        "sourceCode": "Source Code"
+      }
+    },
+    "programs": {
+      "label": "Programs",
+      "items": {
+        "openSourceContributions": "Open Source Contributions",
+        "startups": "Startups",
+        "education": "Education"
+      }
+    },
+    "about": {
+      "label": "About",
+      "items": {
+        "aboutUs": "About Us",
+        "pricing": "Pricing",
+        "careers": "Careers",
+        "contactUs": "Contact Us"
+      }
+    },
+    "copyright": "Copyright ©",
+    "online": "All services are online",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "cookies": "Cookies"
+  }
+}
