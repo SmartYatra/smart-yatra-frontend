@@ -2,7 +2,6 @@
 
 import { useTranslations } from 'next-intl';
 
-import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -55,7 +54,7 @@ export const Hero = () => {
               </Button>
               <Button
                 aria-label={t('secondaryButtonAriaLabel')}
-                className='group relative gap-2 border-0 bg-gradient-to-r from-transparent to-transparent px-6 text-base before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-primary before:to-tertiary before:p-[1px] after:absolute after:inset-[1px] after:rounded-[7px] after:bg-background hover:from-primary/5 hover:to-tertiary/5 hover:after:bg-gradient-to-r hover:after:from-background hover:after:to-background max-sm:w-full sm:h-12'
+                className='relative border border-primary bg-transparent px-6 text-base text-primary after:absolute after:inset-0 after:z-[-1] after:border-primary after:opacity-0 after:blur-sm after:transition-opacity hover:border-primary/90 hover:after:opacity-100 max-sm:w-full sm:h-12'
                 size='lg'
                 variant='outline'
               >
@@ -77,31 +76,6 @@ const HeroImage = () => {
   return (
     <div className='mt-20 w-full'>
       <div className='relative size-full rounded-lg'>
-        <motion.svg
-          className='absolute left-0 top-0 h-full w-full rounded-lg text-primary'
-          preserveAspectRatio='none'
-          viewBox='0 0 659 522'
-          xmlns='http://www.w3.org/2000/svg'
-          xmlnsXlink='http://www.w3.org/1999/xlink'
-        >
-          {/* Define the path */}
-          <motion.path
-            animate={{ pathLength: 1 }}
-            className='rounded-lg'
-            d='M0,0 H659 V522 H0 Z'
-            fill='none'
-            initial={{ pathLength: 0 }}
-            stroke='currentColor'
-            strokeWidth='3'
-            transition={{
-              duration: 6, // Speed of the path drawing
-              repeat: Infinity, // Infinite repeat
-              repeatType: 'loop', // Loop the animation
-              ease: 'easeInOut', // Smooth transition
-            }}
-          />
-        </motion.svg>
-
         <div className='z-0 rounded-lg border border-primary/5 bg-foreground/5 p-2 shadow-2xl backdrop-blur-md'>
           <div className='rounded-lg border border-primary/5 bg-muted shadow-2xl backdrop-blur-md'>
             <div className='flex h-full max-h-[800px] min-h-[700px] w-full'>

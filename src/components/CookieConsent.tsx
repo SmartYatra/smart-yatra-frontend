@@ -32,7 +32,7 @@ export function CookieConsent() {
   if (!isVisible) return null;
 
   return (
-    <Card className='fixed bottom-0 left-0 z-50 m-4 flex max-w-md flex-col justify-between gap-4 p-4 py-6 shadow-lg sm:m-0 md:bottom-5 md:right-5'>
+    <Card className='fixed bottom-0 left-0 z-50 m-4 flex max-w-md flex-col justify-between gap-4 p-4 py-6 shadow-lg sm:m-0 md:bottom-5 md:left-auto md:right-5'>
       <CardContent className='flex flex-col gap-4 p-0'>
         <CardDescription className='mr-4 text-foreground'>
           We use cookies to enhance your experience. By continuing to visit this

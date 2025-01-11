@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import BackgroundGlow from '@/components/BackgroundGlow';
 import { FAQ } from '@/features/home/components/FAQ';
 import { Features } from '@/features/home/components/Features';
 import { Hero } from '@/features/home/components/Hero';
@@ -16,9 +17,12 @@ const HomePage: FC = () => {
   return (
     <div aria-labelledby='home-page' className='relative overflow-hidden'>
       <Hero />
-      <Features />
-      <HowItWorks />
-      <WhyChooseUs />
+      <div className='relative'>
+        <BackgroundGlow className='-right-80 bottom-[32rem] left-auto' />
+        <Features />
+        <HowItWorks />
+        <WhyChooseUs />
+      </div>
       <Testimonials />
       <FAQ />
       <Newsletter />
