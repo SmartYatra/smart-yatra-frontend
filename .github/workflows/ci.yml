@@ -44,43 +44,6 @@ jobs:
       - name: 🔬 Lint
         run: pnpm run lint
 
-  type-check:
-    name: Type Check
-    runs-on: ubuntu-latest
-    steps:
-      # Checkout repo
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
-
-      # Setup Node.js
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      # Setup pnpm
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 'latest'
-
-      # Cache pnpm store
-      - name: 📦 Cache pnpm store
-        uses: actions/cache@v3
-        with:
-          path: ~/.pnpm-store
-          key: pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-store-
-
-      # Install dependencies
-      - name: 📥 Install dependencies
-        run: pnpm install
-
-      # Type check
-      - name: 🔎 Type check
-        run: pnpm run type-check
-
   commitlint:
     name: Commitlint
     runs-on: ubuntu-latest

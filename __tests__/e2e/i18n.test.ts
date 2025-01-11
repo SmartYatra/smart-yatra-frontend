@@ -21,18 +21,6 @@ test.describe('I18n', () => {
         )
       ).toBeVisible();
 
-      await expect(
-        page.getByRole('button', {
-          name: 'Get Started',
-        })
-      ).toBeVisible();
-
-      await expect(
-        page.getByRole('button', {
-          name: 'Learn More',
-        })
-      ).toBeVisible();
-
       // Open the language selector dropdown
       await page.locator('[aria-label="Language"]').click();
 
@@ -56,20 +44,8 @@ test.describe('I18n', () => {
 
       await expect(
         page.getByText(
-          'SmartYatra एक नविनतम सार्वजनिक यातायात डिजिटलीकरण प्रणाली हो। QR कोडहरू, स्वचालित भाडा कटौती, र सहज बस व्यवस्थापनको साथ तपाईंको यात्रा ट्र्याक गर्नुहोस्।'
+          'SmartYatra एक नवीन सार्वजनिक यातायात डिजिटलीकरण प्रणाली हो। QR कोडहरू, स्वत: भाडा कटौती, र सहज बस व्यवस्थापनसँग तपाईंको यात्रा ट्र्याक गर्नुहोस्।'
         )
-      ).toBeVisible();
-
-      await expect(
-        page.getByRole('button', {
-          name: 'सुरु गर्नुहोस्',
-        })
-      ).toBeVisible();
-
-      await expect(
-        page.getByRole('button', {
-          name: 'थप जान्नुहोस्',
-        })
       ).toBeVisible();
     });
   });

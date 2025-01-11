@@ -100,7 +100,7 @@ export function Testimonials() {
         </h3>
       </div>
 
-      <BackgroundGlow className='bottom-auto left-1/2 top-1/2 size-[800px] -translate-x-1/2 -translate-y-[40%] bg-gradient-to-bl from-tertiary/30 to-transparent' />
+      <BackgroundGlow className='from-tertiary/30 bottom-auto left-1/2 top-1/2 size-[800px] -translate-x-1/2 -translate-y-[40%] bg-gradient-to-bl to-transparent' />
 
       <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         {testimonials.map(testimonial => (
