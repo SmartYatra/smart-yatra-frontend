@@ -7,8 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { SignupForm } from '@/features/auth/components/signup-form';
 import { Link } from '@/i18n/routing';
+
+import { SignupForm } from '../_components/signup-form';
 
 const SignupPage = () => {
   return (

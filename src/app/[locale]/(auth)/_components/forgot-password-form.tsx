@@ -10,8 +10,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import useForgotPassword from '../hooks/useForgotPassword';
-import { ForgotPasswordFormSchema, ForgotPasswordFormValues } from '../schema';
+import useForgotPassword from '../_hooks/useForgotPassword';
+import { ForgotPasswordFormSchema, ForgotPasswordFormValues } from '../_schema';
 
 const ForgotPasswordForm = () => {
   const { mutate: forgotPassword, isPending } = useForgotPassword();

@@ -2,7 +2,7 @@
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { Lock, Mail, UserPlus } from 'lucide-react';
+import { Lock, LogIn, Mail } from 'lucide-react';
 
 import LoadingSpinner from '@/components/loading-spinner';
 import { Button } from '@/components/ui/button';
@@ -10,30 +10,27 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import useSignup from '../hooks/useSignup';
-import { SignupFormSchema, SignupFormValues } from '../schema';
+import useSignin from '../_hooks/useSignin';
+import { SigninFormSchema, SigninFormValues } from '../_schema';
 
-const SignupForm = () => {
-  const { mutate: signup, isPending } = useSignup();
-
-  const defaultValues: SignupFormValues = {
-    email: '',
-    password: '',
-    confirmPassword: '',
-  };
+const SigninForm = () => {
+  const { mutate: signIn, isPending } = useSignin();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(SignupFormSchema),
-    defaultValues,
+    resolver: zodResolver(SigninFormSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
     mode: 'all',
   });
 
-  const onSubmit: SubmitHandler<SignupFormValues> = values => {
-    signup(values);
+  const onSubmit: SubmitHandler<SigninFormValues> = values => {
+    signIn(values);
   };
 
   return (
@@ -64,26 +61,13 @@ const SignupForm = () => {
         />
       </div>
 
-      {/* Confirm Password */}
-      <div className='space-y-2'>
-        <Label htmlFor='confirmPassword'>Confirm Password</Label>
-        <Input
-          id='confirmPassword'
-          placeholder='Confirm your password'
-          type='password'
-          {...register('confirmPassword')}
-          error={errors.confirmPassword?.message}
-          leftIcon={Lock}
-        />
-      </div>
-
       {/* Submit */}
       <Button className='w-full'>
-        {isPending ? <LoadingSpinner /> : <UserPlus className='mr-2 h-4 w-4' />}
-        Sign up
+        {isPending ? <LoadingSpinner /> : <LogIn className='mr-2 size-5' />}
+        Login
       </Button>
     </form>
   );
 };
 
-export { SignupForm };
+export { SigninForm };

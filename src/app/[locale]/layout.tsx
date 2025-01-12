@@ -76,7 +76,7 @@ export default async function LocaleLayout({
 
               <CookieConsent />
 
-              <NextTopLoader color='#ff0033' />
+              <NextTopLoader color='#ff0033' showSpinner={false} />
 
               {/* Toast notifications */}
               <Toaster richColors position='bottom-right' />

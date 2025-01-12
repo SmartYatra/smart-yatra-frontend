@@ -33,7 +33,7 @@ export function Navbar() {
   const routeList: IRouteList[] = [
     {
       name: t('NavMenuItem.driver'),
-      href: '#',
+      href: '/driver/dashboard',
     },
     {
       name: t('NavMenuItem.passenger'),

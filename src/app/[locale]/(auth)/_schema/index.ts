@@ -19,6 +19,9 @@ export const SigninFormSchema = z.object({
 
 export const SignupFormSchema = z
   .object({
+    name: z
+      .string()
+      .min(2, { message: 'Name must be at least 2 characters long' }),
     email: z.string().email('Invalid email address'),
     password: z
       .string()
@@ -34,6 +37,7 @@ export const SignupFormSchema = z
         message: 'Password must contain at least one special character',
       }),
     confirmPassword: z.string(),
+    role: z.enum(['passenger', 'driver', 'admin']),
   })
   .refine(data => data.password === data.confirmPassword, {
     message: 'Passwords do not match',

@@ -4,7 +4,7 @@ import {
   ForgotPasswordFormValues,
   SigninFormValues,
   SignupFormValues,
-} from '../schema';
+} from '../_schema';
 
 adapter
   .onPost('/signin')

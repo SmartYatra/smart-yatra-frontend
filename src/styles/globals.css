@@ -11,7 +11,7 @@
     --card-foreground: 0 0% 7%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 7%;
-    --primary: 348 100% 50%;
+    --primary: 351 100% 50%;
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
@@ -39,7 +39,7 @@
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 348 100% 50%;
+    --primary: 351 100% 50%;
     --primary-foreground: 0 85.7% 97.3%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
@@ -71,25 +71,6 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-}
-
-/* Custom scrollbar */
-@layer utilities {
-  ::-webkit-scrollbar {
-    width: 12px;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-muted;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply rounded-sm bg-gradient-to-b from-primary/70 via-primary/90 to-primary/70;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary;
   }
 }
 
