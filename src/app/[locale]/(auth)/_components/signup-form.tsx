@@ -1,6 +1,6 @@
 'use client';
 
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import { Lock, Mail, UserPlus } from 'lucide-react';
 
@@ -8,6 +8,13 @@ import LoadingSpinner from '@/components/loading-spinner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import useSignup from '../_hooks/useSignup';
@@ -25,6 +32,7 @@ const SignupForm = () => {
   };
 
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -90,6 +98,32 @@ const SignupForm = () => {
           error={errors.confirmPassword?.message}
           leftIcon={Lock}
         />
+      </div>
+
+      {/* User Type */}
+      <div className='space-y-2'>
+        <Label htmlFor='user-type'>User Type</Label>
+
+        <Controller
+          control={control}
+          name='role'
+          render={({ field }) => (
+            <Select defaultValue={field.value} onValueChange={field.onChange}>
+              <SelectTrigger>
+                <SelectValue placeholder='Select user type' />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value='passenger'>Passenger</SelectItem>
+                <SelectItem value='driver'>Driver</SelectItem>
+                <SelectItem value='administrator'>Admin</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+        />
+
+        {errors.role && (
+          <div className='text-sm text-destructive'>{errors.role.message}</div>
+        )}
       </div>
 
       {/* Submit */}
