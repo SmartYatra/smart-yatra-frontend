@@ -19,10 +19,10 @@ export default function AuthLayout({
       <main className='flex-1'>{children}</main>
 
       {/* Top-left - Background circles */}
-      <BackgroundGlow />
+      <BackgroundGlow className='-left-40 -top-40' position={'top-left'} />
 
       {/* Bottom-right - Background circles */}
-      <BackgroundGlow className='-bottom-80 -right-80 left-auto' />
+      <BackgroundGlow position={'bottom-right'} />
     </div>
   );
 }

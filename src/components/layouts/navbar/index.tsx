@@ -120,14 +120,14 @@ export function Navbar() {
 
             {/* Login and Sign Up buttons */}
             <Link
-              aria-label='Login'
-              href='/login'
+              aria-label='Signin'
+              href='/signin'
               className={cn(
                 buttonVariants({ variant: 'outline' }),
                 'hidden 2xl:flex'
               )}
             >
-              Login
+              Signin
             </Link>
             <Link
               aria-label='Sign Up'
@@ -183,14 +183,14 @@ export function Navbar() {
 
                   {/* Login and Sign Up buttons */}
                   <Link
-                    aria-label='Login'
-                    href='/login'
+                    aria-label='Signin'
+                    href='/signin'
                     className={cn(
                       buttonVariants({ variant: 'outline' }),
                       'h-9 w-full md:w-fit'
                     )}
                   >
-                    Login
+                    Signin
                   </Link>
                   <Link
                     aria-label='Sign Up'

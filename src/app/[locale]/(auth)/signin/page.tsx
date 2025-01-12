@@ -7,10 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { LoginForm } from '@/features/auth/components/login-form';
+import { SigninForm } from '@/features/auth/components/signin-form';
 import { Link } from '@/i18n/routing';
 
-const LoginPage = () => {
+const SigninPage = () => {
   return (
     <div className='flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10'>
       <Card className='w-full max-w-[30rem] py-4'>
@@ -30,7 +30,7 @@ const LoginPage = () => {
         </CardHeader>
 
         <CardContent className='space-y-4'>
-          <LoginForm />
+          <SigninForm />
         </CardContent>
 
         <CardFooter className='flex flex-col space-y-2.5'>
@@ -77,4 +77,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SigninPage;

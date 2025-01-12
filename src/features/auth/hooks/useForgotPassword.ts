@@ -2,11 +2,11 @@ import { toast } from 'sonner';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { signIn } from '../api';
+import { forgotPassword } from '../api';
 
-const useSignIn = () => {
+const useForgotPassword = () => {
   return useMutation({
-    mutationFn: signIn,
+    mutationFn: forgotPassword,
     onSuccess: (data: { message: string }) => {
       console.log(data);
       toast.success(data.message);
@@ -18,4 +18,4 @@ const useSignIn = () => {
   });
 };
 
-export default useSignIn;
+export default useForgotPassword;
