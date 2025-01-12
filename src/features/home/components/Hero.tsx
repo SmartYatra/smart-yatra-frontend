@@ -4,8 +4,9 @@ import { useTranslations } from 'next-intl';
 
 import { ArrowRight } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Link } from '@/i18n/routing';
+import { cn } from '@/lib/utils';
 
 /**
  * Component: Hero
@@ -47,23 +48,28 @@ export const Hero = () => {
               {t('description')}
             </p>
             <div className='mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row'>
-              <Button
+              <Link
                 aria-label={t('primaryButtonAriaLabel')}
-                className='relative bg-primary px-6 text-base after:absolute after:inset-0 after:z-[-1] after:bg-primary after:opacity-0 after:blur-sm after:transition-opacity hover:bg-primary/90 hover:after:opacity-100 max-sm:w-full sm:h-12'
-                size='lg'
+                href='/signup'
+                className={cn(
+                  buttonVariants({ variant: 'default' }),
+                  'relative bg-primary px-6 text-base after:absolute after:inset-0 after:z-[-1] after:bg-primary after:opacity-0 after:blur-sm after:transition-opacity hover:bg-primary/90 hover:after:opacity-100 max-sm:w-full sm:h-12'
+                )}
               >
                 {t('primaryButtonText')}
-              </Button>
-              <Button
+              </Link>
+              <Link
                 aria-label={t('secondaryButtonAriaLabel')}
-                className='relative border border-primary bg-transparent px-6 text-base after:absolute after:inset-0 after:z-[-1] after:border-primary after:opacity-0 after:blur-sm after:transition-opacity hover:border-primary/90 hover:after:opacity-100 max-sm:w-full sm:h-12'
-                size='lg'
-                variant='outline'
+                href='/signin'
+                className={cn(
+                  buttonVariants({ variant: 'outline' }),
+                  'relative border border-primary bg-transparent px-6 text-base after:absolute after:inset-0 after:z-[-1] after:border-primary after:opacity-0 after:blur-sm after:transition-opacity hover:border-primary/90 hover:after:opacity-100 max-sm:w-full sm:h-12'
+                )}
               >
                 <span className='relative z-10 flex items-center gap-2 transition-colors group-hover:text-primary'>
                   {t('secondaryButtonText')}
                 </span>
-              </Button>
+              </Link>
             </div>
           </div>
         </div>

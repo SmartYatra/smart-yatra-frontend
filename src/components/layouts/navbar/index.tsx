@@ -82,7 +82,7 @@ export function Navbar() {
       )}
     >
       <HeroBanner />
-      <div className='container mx-auto w-full max-w-[1920px]'>
+      <div className='container mx-auto w-full max-w-[1800px]'>
         <div className='flex h-16 items-center justify-between'>
           {/* Left section (Logo and Navigation links) */}
           <div className='flex items-center gap-4 sm:gap-6'>

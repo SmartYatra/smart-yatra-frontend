@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import NextTopLoader from 'nextjs-toploader';
 
 import { Toaster } from 'sonner';
 
@@ -74,6 +75,8 @@ export default async function LocaleLayout({
               {children}
 
               <CookieConsent />
+
+              <NextTopLoader color='#ff0033' />
 
               {/* Toast notifications */}
               <Toaster richColors position='bottom-right' />
