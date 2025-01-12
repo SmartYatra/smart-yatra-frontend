@@ -41,7 +41,7 @@ export function WhyChooseUs() {
 
   return (
     <SectionWrapper className='text-left' id='why-choose-us'>
-      <div className='flex flex-col gap-8 lg:flex-row'>
+      <div className='flex flex-col items-center gap-8 lg:flex-row'>
         {/* Benefits Section */}
         <div className='flex-1 space-y-16'>
           <div>

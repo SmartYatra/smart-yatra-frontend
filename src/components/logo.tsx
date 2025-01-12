@@ -16,7 +16,7 @@ const Logo = ({ className }: { className?: string }) => {
       href='/'
     >
       <svg
-        className='w-48 text-foreground'
+        className='w-36 text-foreground sm:w-48'
         viewBox='0 0 405.3259911894273 96.875'
         width='321.1'
       >

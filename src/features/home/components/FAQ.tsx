@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import {
+  SectionDescription,
   SectionSubtitle,
   SectionTitle,
   SectionWrapper,
@@ -63,6 +64,7 @@ export function FAQ() {
     <SectionWrapper id='faq'>
       <SectionSubtitle>{t('sectionTitle')}</SectionSubtitle>
       <SectionTitle>{t('headline')}</SectionTitle>
+      <SectionDescription>{t('description')}</SectionDescription>
       <Accordion
         className='mx-auto flex max-w-4xl flex-col gap-4'
         type='multiple'

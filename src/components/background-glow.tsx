@@ -9,16 +9,15 @@ const backgroundGlowVariants = cva(
   {
     variants: {
       position: {
-        left: '-left-40 !bg-gradient-to-r',
-        right: '-right-40 -left-auto !bg-gradient-to-l',
-        top: '-top-40 !bottom-auto !bg-gradient-to-b',
-        bottom: '-bottom-40 !bg-gradient-to-t',
-        'top-left':
-          '-top-40 -left-40 !bottom-auto !right-auto !bg-gradient-to-r',
-        'top-right': '-top-40 -right-40 -left-auto !bg-gradient-to-l',
-        'bottom-left':
-          '-bottom-40 -left-40 !top-auto !right-auto !bg-gradient-to-r',
-        'bottom-right': '!-bottom-40 -right-40 !left-auto !bg-gradient-to-l',
+        left: '-left-40 bg-gradient-to-r',
+        right: '-right-40 bg-gradient-to-l',
+        top: '-top-40 bg-gradient-to-b',
+        bottom: '-bottom-40 bg-gradient-to-t',
+        'top-left': 'top-80 -left-80 bg-gradient-to-r',
+        'top-right': '-top-40 -right-40 bg-gradient-to-l',
+        'top-center': 'left-1/2 -translate-x-1/2 -top-80 bg-gradient-to-b',
+        'bottom-left': '-bottom-40 -left-80 bg-gradient-to-r',
+        'bottom-right': '-bottom-40 -right-40 bg-gradient-to-l',
       },
       size: {
         sm: 'size-[400px]',
@@ -31,6 +30,23 @@ const backgroundGlowVariants = cva(
       position: 'left',
       size: 'md',
     },
+    compoundVariants: [
+      {
+        position: 'bottom-left',
+        size: 'lg',
+        className: '-bottom-80 -left-[30rem]',
+      },
+      {
+        position: 'top-left',
+        size: 'lg',
+        className: '-left-[30rem]',
+      },
+      {
+        position: 'right',
+        size: 'lg',
+        className: '-right-[30rem] bottom-[32rem]',
+      },
+    ],
   }
 );
 
@@ -45,7 +61,6 @@ const BackgroundGlow = React.forwardRef<HTMLDivElement, BackgroundGlowVariants>(
         ref={ref}
         className={cn(
           backgroundGlowVariants({ position, size, className }),
-          'absolute -left-80 bottom-96 -z-10 size-[800px] bg-gradient-to-r from-primary/10 to-primary/5 blur-3xl dark:from-primary/30',
           className
         )}
         {...props}

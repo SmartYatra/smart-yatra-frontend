@@ -6,15 +6,15 @@
   },
   "HomePage": {
     "Hero": {
-      "changelogLinkAriaLabel": "Navigate to changelog",
-      "changelogBadge": "New",
-      "changelogText": "Introducing SmartYatra - Revolutionizing Public Transport",
-      "headline": "Welcome to SmartYatra",
-      "subHeadline": "Modernizing Bus Transit Services",
-      "description": "SmartYatra is an innovative Public Transport Digitization System. Track your journey with QR codes, automatic fare deduction, and seamless bus management.",
-      "primaryButtonAriaLabel": "Get Started as a Driver",
+      "featureHighlightAriaLabel": "Learn more about the latest feature",
+      "featureHighlightBadge": "New Feature",
+      "featureHighlightText": "SmartYatra now supports real-time bus tracking with enhanced analytics.",
+      "headline": "Revolutionizing Public",
+      "subHeadline": "Transportation with SmartYatra",
+      "description": "SmartYatra offers an all-in-one solution for modernizing bus transit systems. Track journeys, calculate fares, and enhance travel experiences effortlessly.",
+      "primaryButtonAriaLabel": "Explore Driver Features",
       "primaryButtonText": "Get Started",
-      "secondaryButtonAriaLabel": "Learn More as a Passenger",
+      "secondaryButtonAriaLabel": "Discover Passenger Benefits",
       "secondaryButtonText": "Learn More"
     },
     "trustedBy": {
@@ -54,6 +54,7 @@
     "FAQ": {
       "sectionTitle": "FAQ",
       "headline": "Frequently Asked Questions",
+      "description": "Have a question about SmartYatra? Check out our FAQs to find answers to common queries.",
       "whatIsSmartYatraQuestion": "What is SmartYatra?",
       "whatIsSmartYatraAnswer": "SmartYatra is an innovative Public Transport Digitization System that enhances the passenger and driver experience by utilizing QR codes for bus tracking, automatic fare deduction, and streamlined bus management.",
       "howToGetStartedQuestion": "How do I get started with SmartYatra?",

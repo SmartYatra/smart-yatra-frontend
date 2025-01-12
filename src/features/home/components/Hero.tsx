@@ -17,29 +17,31 @@ import { Link } from '@/i18n/routing';
 export const Hero = () => {
   const t = useTranslations('HomePage.Hero');
   return (
-    <section className='bg-hero-pattern pt-28 md:pt-44'>
+    <section className='pt-28 max-xl:bg-hero-pattern md:pt-44'>
       <div className='container flex flex-col items-center'>
         <div className='relative z-10 flex flex-col items-center'>
           <Link
-            aria-label={t('changelogLinkAriaLabel')}
+            aria-label={t('featureHighlightAriaLabel')}
             className='flex flex-col gap-2 rounded-md bg-muted/50 px-4 py-2 pr-6 transition-colors hover:bg-muted/80 sm:flex-row sm:items-center sm:rounded-full'
-            href='/changelog'
+            href='/features'
           >
             <div className='flex items-center gap-2'>
               <span className='flex size-1.5 rounded-full bg-primary' />
-              <span className='text-xs sm:text-sm'>{t('changelogBadge')}</span>
+              <span className='text-xs sm:text-sm'>
+                {t('featureHighlightBadge')}
+              </span>
             </div>
             <div className='group flex items-center gap-1 text-xs text-muted-foreground sm:text-sm'>
-              <p>{t('changelogText')}</p>
+              <p>{t('featureHighlightText')}</p>
               <ArrowRight className='size-4 -rotate-45 transition-transform group-hover:translate-x-1' />
             </div>
           </Link>
           <div className='mt-6 max-w-[800px] text-center'>
-            <h1 className='text-5xl font-bold leading-[1.1] tracking-tight sm:text-[64px]'>
+            <h1 className='text-4xl font-bold leading-[1.1] tracking-tight sm:text-[64px]'>
               {t('headline')}
               <br />
               {t('subHeadline')}
-              <span className='ml-2 inline-block h-1.5 w-16 bg-primary' />
+              <span className='ml-2 inline-block h-1.5 w-20 bg-primary' />
             </h1>
             <p className='mt-8 leading-relaxed text-muted-foreground sm:text-lg'>
               {t('description')}

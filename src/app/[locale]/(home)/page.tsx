@@ -15,10 +15,11 @@ import { WhyChooseUs } from '@/features/home/components/WhyChooseUs';
  */
 const HomePage: FC = () => {
   return (
-    <div aria-labelledby='home-page' className='relative overflow-hidden'>
+    <div aria-labelledby='home-page' className='relative'>
       <Hero />
       <div className='relative'>
-        <BackgroundGlow className='-right-80 bottom-[32rem] left-auto' />
+        {/* <BackgroundGlow className='-right-80 bottom-[32rem] left-auto' /> */}
+        <BackgroundGlow position={'right'} size={'lg'} />
         <Features />
         <HowItWorks />
         <WhyChooseUs />

@@ -22,10 +22,7 @@ const SectionWrapper = ({
   id?: string;
 }) => {
   return (
-    <section
-      className={cn('container relative mx-auto py-16 text-center', className)}
-      id={id}
-    >
+    <section className={cn('relative py-16 text-center', className)} id={id}>
       {children}
     </section>
   );
