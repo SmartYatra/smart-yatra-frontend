@@ -55,11 +55,7 @@ const MultiStepForm = () => {
   const onSubmit = (data: IOnBoardingFormData) => {
     console.log(data);
 
-    if (currentStep === 3) {
-      // Call an API to submit the form data
-    } else {
-      nextStep();
-    }
+    // Submit the data to the server
   };
 
   const steps = [
@@ -97,13 +93,13 @@ const MultiStepForm = () => {
     <FormProvider {...methods}>
       <div className='w-full max-w-4xl'>
         <SectionSubtitle>{steps[currentStep].title}</SectionSubtitle>
-        <SectionTitle className='mb-16'>
+        <SectionTitle className='mb-8 max-sm:text-xl md:mb-16'>
           {steps[currentStep].description}
         </SectionTitle>
 
         <div className='space-y-8'>{steps[currentStep].content}</div>
 
-        <div className='mt-16 flex justify-between'>
+        <div className='mt-16 flex justify-between gap-4 max-md:mb-10'>
           <Button
             className='w-40'
             disabled={currentStep === 0}

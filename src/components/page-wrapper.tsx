@@ -35,7 +35,11 @@ const SectionTitle = ({
   children: ReactNode;
   className?: string;
 }) => {
-  return <p className={cn('mb-2 text-4xl font-bold', className)}>{children}</p>;
+  return (
+    <p className={cn('mb-2 text-2xl font-bold md:text-4xl', className)}>
+      {children}
+    </p>
+  );
 };
 
 const SectionSubtitle = ({
@@ -48,7 +52,7 @@ const SectionSubtitle = ({
   return (
     <h2
       className={cn(
-        'mb-2 text-sm font-semibold uppercase tracking-wider text-tertiary',
+        'mb-2 text-xs font-semibold uppercase tracking-wider text-tertiary md:text-sm',
         className
       )}
     >
@@ -65,7 +69,14 @@ const SectionDescription = ({
   className?: string;
 }) => {
   return (
-    <p className={cn('mb-10 text-muted-foreground', className)}>{children}</p>
+    <p
+      className={cn(
+        'mb-10 text-sm text-muted-foreground md:text-base',
+        className
+      )}
+    >
+      {children}
+    </p>
   );
 };
 

@@ -51,7 +51,7 @@ const UploadDocuments = () => {
     <div className='space-y-4'>
       <Label>Upload Documents</Label>
       <Label
-        className={`relative flex h-40 w-full cursor-pointer items-center justify-center rounded-md border-2 border-dashed transition-all ${
+        className={`relative flex h-40 w-full cursor-pointer items-center justify-center rounded-md border-2 border-dashed border-muted-foreground/50 transition-all ${
           isDragOver ? 'bg-muted/30' : 'bg-muted/10'
         }`}
         onDragLeave={handleDragLeave}
@@ -65,7 +65,7 @@ const UploadDocuments = () => {
           onChange={handleFileChange}
         />
         <div className='flex items-center space-x-2'>
-          <Upload className='text-gray-500' />
+          <Upload className='text-muted-foreground' />
           <p className='text-center text-muted-foreground'>
             Drag & Drop or Browse
           </p>
@@ -91,7 +91,7 @@ const UploadDocuments = () => {
                 ) : (
                   <File className='h-6 w-6 text-muted-foreground' />
                 )}
-                <p>
+                <p className='max-w-md'>
                   <strong>{document.name}</strong>
                 </p>
               </div>
