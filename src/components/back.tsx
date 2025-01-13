@@ -1,22 +1,26 @@
+'use client';
+
 import React from 'react';
+import { useRouter } from 'nextjs-toploader/app';
 
-import { ChevronRight } from 'lucide-react';
-
-import { Link } from '@/i18n/routing';
+import { ChevronLeft } from 'lucide-react';
 
 const Back = () => {
+  const router = useRouter();
+  const handleBack = () => router.back();
+
   return (
     <nav>
-      <Link
-        className='group flex w-fit items-center gap-2 text-sm text-muted-foreground hover:text-foreground'
-        href='/'
+      <div
+        className='group flex w-fit cursor-pointer items-center gap-2 text-sm text-muted-foreground hover:text-foreground'
+        onClick={handleBack}
       >
-        Back to home
-        <ChevronRight
-          className='mt-0.5 transition-transform group-hover:translate-x-1'
+        <ChevronLeft
+          className='mt-0.5 transition-transform group-hover:-translate-x-1'
           size={17}
-        />{' '}
-      </Link>
+        />
+        Back
+      </div>
     </nav>
   );
 };

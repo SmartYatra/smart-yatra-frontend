@@ -115,7 +115,7 @@ const SignupForm = () => {
               <SelectContent>
                 <SelectItem value='passenger'>Passenger</SelectItem>
                 <SelectItem value='driver'>Driver</SelectItem>
-                <SelectItem value='administrator'>Admin</SelectItem>
+                <SelectItem value='admin'>Admin</SelectItem>
               </SelectContent>
             </Select>
           )}

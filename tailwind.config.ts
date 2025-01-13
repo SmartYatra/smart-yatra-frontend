@@ -17,9 +17,13 @@ export default {
         lg: '1024px',
         xl: '1280px',
         '2xl': '1536px',
-      }
+      },
     },
     extend: {
+      screens: {
+        '3xl': '1920px',
+        '4xl': '2560px',
+      },
       backgroundImage: {
         'hero-pattern': 'url("../assets/noise.svg")',
       },
@@ -42,6 +46,9 @@ export default {
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
+        },
+        tertiary: {
+          DEFAULT: 'hsl(var(--tertiary))',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',

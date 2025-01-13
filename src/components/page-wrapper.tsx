@@ -48,7 +48,7 @@ const SectionSubtitle = ({
   return (
     <h2
       className={cn(
-        'mb-2 text-sm font-semibold uppercase tracking-wider text-primary',
+        'mb-2 text-sm font-semibold uppercase tracking-wider text-tertiary',
         className
       )}
     >
