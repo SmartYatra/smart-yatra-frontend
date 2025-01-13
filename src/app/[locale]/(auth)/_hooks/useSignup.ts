@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { signUp } from '../api';
+import { signUp } from '../_api';
 
 const useSignUp = () => {
   const router = useRouter();

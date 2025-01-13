@@ -2,7 +2,7 @@ import { toast } from 'sonner';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { forgotPassword } from '../api';
+import { forgotPassword } from '../_api';
 
 const useForgotPassword = () => {
   return useMutation({

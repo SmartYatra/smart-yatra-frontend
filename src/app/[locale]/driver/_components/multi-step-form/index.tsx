@@ -3,6 +3,8 @@
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
+import { Rocket } from 'lucide-react';
+
 import { SectionSubtitle, SectionTitle } from '@/components/page-wrapper';
 import { Button } from '@/components/ui/button';
 import { useStepStore } from '@/store/useStepStore';
@@ -13,6 +15,7 @@ import FinishStep from './FinishStep';
 import RouteDetails from './RouteDetails';
 import UploadDocuments from './UploadDocuments';
 
+import { useDriverOnboarding } from '../../_hooks/useDriverOnboarding';
 import {
   busDetailsSchema,
   finishStepSchema,
@@ -23,6 +26,7 @@ import { IOnBoardingFormData } from '../../_types';
 
 const MultiStepForm = () => {
   const { currentStep, nextStep, prevStep } = useStepStore();
+  const { mutate: onBoardDriver, isPending } = useDriverOnboarding();
 
   const defaultValues: IOnBoardingFormData = {
     busName: '',
@@ -53,9 +57,8 @@ const MultiStepForm = () => {
   } = methods;
 
   const onSubmit = (data: IOnBoardingFormData) => {
-    console.log(data);
-
     // Submit the data to the server
+    onBoardDriver(data);
   };
 
   const steps = [
@@ -119,6 +122,8 @@ const MultiStepForm = () => {
           ) : (
             <Button
               className='w-40 bg-emerald-700 hover:bg-emerald-800'
+              isLoading={isPending}
+              leftIcon={<Rocket className='size-5' />}
               type='submit'
               onClick={handleSubmit(onSubmit)}
             >
