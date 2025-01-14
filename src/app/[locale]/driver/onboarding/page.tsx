@@ -6,8 +6,8 @@ import BackgroundGlow from '@/components/background-glow';
 import Logo from '@/components/logo';
 import { Link } from '@/i18n/routing';
 
-import MultiStepForm from '../_components/multi-step-form';
-import StepperView from '../_components/StepperView';
+import MultiStepForm from './_components/multi-step-form';
+import StepperView from './_components/StepperView';
 
 const DriverOnboardingPage = () => {
   return (

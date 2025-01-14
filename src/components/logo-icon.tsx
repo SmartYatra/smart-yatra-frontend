@@ -1,12 +1,20 @@
 'use client';
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
-const LogoIcon = ({ className }: { className?: string }) => {
+const LogoIcon = ({
+  className,
+  children,
+  childrenClassName,
+}: {
+  className?: string;
+  children?: ReactNode;
+  childrenClassName?: string;
+}) => {
   const t = useTranslations('logo');
 
   return (
@@ -71,6 +79,8 @@ const LogoIcon = ({ className }: { className?: string }) => {
           ></path>
         </g>
       </svg>
+
+      {children && <span className={childrenClassName}>{children}</span>}
     </Link>
   );
 };
