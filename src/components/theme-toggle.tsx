@@ -7,8 +7,15 @@ import { useTheme } from 'next-themes';
 import { Moon, Sun } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
-export function ThemeToggle({ className }: { className?: string }) {
+export function ThemeToggle({
+  className,
+  showText,
+}: {
+  className?: string;
+  showText?: boolean;
+}) {
   const { setTheme, theme } = useTheme();
   const t = useTranslations('themeToggle');
 
@@ -22,9 +29,14 @@ export function ThemeToggle({ className }: { className?: string }) {
   return (
     <Button
       aria-label={t('toggleButtonLabel')}
-      className={className}
       size='icon'
       variant='ghost'
+      className={cn(
+        {
+          'justify-start': showText,
+        },
+        className
+      )}
       onClick={() => handleThemeChange(theme === 'dark' ? 'light' : 'dark')}
     >
       <Sun
@@ -35,6 +47,12 @@ export function ThemeToggle({ className }: { className?: string }) {
         aria-hidden='true'
         className='absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100'
       />
+
+      {showText && (
+        <span className='capitalize'>
+          {theme === 'dark' ? 'dark mode' : 'light mode'}
+        </span>
+      )}
       <span className='sr-only'>{t('toggleButtonLabel')}</span>
     </Button>
   );

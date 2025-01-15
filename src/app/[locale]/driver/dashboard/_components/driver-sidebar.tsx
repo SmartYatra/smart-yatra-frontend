@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 
 import LogoIcon from '@/components/logo-icon';
+import { ThemeToggle } from '@/components/theme-toggle';
 import {
   Collapsible,
   CollapsibleContent,
@@ -64,7 +65,7 @@ const DriverSidebar = () => {
   const isActive = (url: string) => pathname === url;
 
   return (
-    <Sidebar collapsible='icon' side='left' variant='floating'>
+    <Sidebar collapsible='icon' side='left' variant='sidebar'>
       {/* Sidebar Header */}
       <SidebarHeader>
         <SidebarMenu>
@@ -154,6 +155,14 @@ const DriverSidebar = () => {
       {/* Sidebar Footer */}
       <SidebarFooter>
         <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild>
+              <ThemeToggle showText />
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+
+          <SidebarSeparator />
+
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <Link href='/logout'>

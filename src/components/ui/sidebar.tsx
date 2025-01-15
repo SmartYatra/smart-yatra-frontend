@@ -3,7 +3,7 @@
 import * as React from 'react';
 
 import { cva, VariantProps } from 'class-variance-authority';
-import { PanelLeft } from 'lucide-react';
+import { PanelRightOpen } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -277,7 +277,7 @@ const SidebarTrigger = React.forwardRef<
       }}
       {...props}
     >
-      <PanelLeft />
+      <PanelRightOpen />
       <span className='sr-only'>Toggle Sidebar</span>
     </Button>
   );
