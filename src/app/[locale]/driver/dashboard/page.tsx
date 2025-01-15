@@ -41,7 +41,7 @@ const statsData = [
 
 const DriverDashboardPage = () => {
   return (
-    <div className='size-full'>
+    <div>
       <div className='mb-8 flex flex-col items-start'>
         <DashboardTitle>
           Welcome Back!{' '}
@@ -74,9 +74,9 @@ const DriverDashboardPage = () => {
 
         {/* QR code for bus with download/extract option */}
         <div>
-          <DashboardTitle>Recent Trips</DashboardTitle>
+          <DashboardTitle>QR Code for Bus</DashboardTitle>
           <DashboardSubtitle>
-            Here&apos;s a list of your recent trips and their details.
+            Download or extract the QR code for your bus
           </DashboardSubtitle>
 
           <DriverQrCode />

@@ -7,18 +7,13 @@ import {
   CardContent,
   CardDescription,
   CardFooter,
-  CardHeader,
-  CardTitle,
 } from '@/components/ui/card';
 
 const DriverQrCode = () => {
   return (
     <section className='mt-8 md:w-fit'>
       <Card>
-        <CardHeader>
-          <CardTitle className='text-center'>QR Code for Bus</CardTitle>
-        </CardHeader>
-        <CardContent className='flex items-center justify-center'>
+        <CardContent className='flex items-center justify-center pt-10'>
           <Image
             alt='QR Code'
             className='size-56'
