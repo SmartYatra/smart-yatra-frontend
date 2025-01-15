@@ -75,7 +75,7 @@ export function DataTable<TData, TValue>({
       <div className='flex items-center pt-4'>
         <Input
           className='max-w-sm'
-          placeholder='Filter routes...'
+          placeholder='Search by route'
           value={(table.getColumn('route')?.getFilterValue() as string) ?? ''}
           onChange={event =>
             table.getColumn('route')?.setFilterValue(event.target.value)

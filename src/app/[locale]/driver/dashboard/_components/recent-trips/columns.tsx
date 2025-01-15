@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
 
 // Define the shape of the data
@@ -60,7 +61,7 @@ export const columns: ColumnDef<Trip>[] = [
     cell: ({ row }) => {
       const earnings = row.getValue('earnings');
       return (
-        <span className='font-medium text-green-600'>
+        <span className='font-medium'>
           NPR {(earnings as number).toLocaleString()}
         </span>
       );
@@ -71,19 +72,23 @@ export const columns: ColumnDef<Trip>[] = [
     header: 'Status',
     cell: ({ row }) => {
       const status = row.getValue('status');
-      const statusColor =
-        status === 'Completed'
-          ? 'text-green-500'
-          : status === 'Ongoing'
-            ? 'text-yellow-500'
-            : 'text-gray-500';
+
       return (
-        <span className={`font-medium ${statusColor}`}>{status as string}</span>
+        <span
+          className={cn('rounded-full px-4 py-1 font-medium text-gray-950', {
+            'bg-green-400': status === 'Completed',
+            'bg-amber-400': status === 'Ongoing',
+            'bg-blue-400': status === 'Scheduled',
+          })}
+        >
+          {status as string}
+        </span>
       );
     },
   },
   {
     id: 'actions',
+    header: 'Actions',
     cell: ({ row }) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const trip = row.original;
