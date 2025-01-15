@@ -4,10 +4,12 @@ import React from 'react';
 
 import { BarChart, Calendar, ClipboardList } from 'lucide-react';
 
+import DriverQrCode from './_components/driver-qr-code';
 import {
   DashboardSubtitle,
   DashboardTitle,
 } from './_components/page-components';
+import RecentTrips from './_components/recent-trips';
 import StatsCard from './_components/stats-card';
 
 const statsData = [
@@ -57,6 +59,28 @@ const DriverDashboardPage = () => {
         {statsData.map(({ id, title, value, icon: Icon }) => (
           <StatsCard Icon={Icon} id={id} key={id} title={title} value={value} />
         ))}
+      </section>
+
+      {/* Recent Trips */}
+      <section className='mt-8 flex gap-4'>
+        <div className='flex-1'>
+          <DashboardTitle>Recent Trips</DashboardTitle>
+          <DashboardSubtitle>
+            Here&apos;s a list of your recent trips and their details.
+          </DashboardSubtitle>
+
+          <RecentTrips />
+        </div>
+
+        {/* QR code for bus with download/extract option */}
+        <div>
+          <DashboardTitle>Recent Trips</DashboardTitle>
+          <DashboardSubtitle>
+            Here&apos;s a list of your recent trips and their details.
+          </DashboardSubtitle>
+
+          <DriverQrCode />
+        </div>
       </section>
     </div>
   );
