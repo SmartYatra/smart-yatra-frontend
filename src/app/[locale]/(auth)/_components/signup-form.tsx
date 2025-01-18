@@ -113,7 +113,7 @@ const SignupForm = () => {
                 <SelectValue placeholder='Select user type' />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value='passenger'>Passenger</SelectItem>
+                <SelectItem value='user'>Passenger</SelectItem>
                 <SelectItem value='driver'>Driver</SelectItem>
                 <SelectItem value='admin'>Admin</SelectItem>
               </SelectContent>

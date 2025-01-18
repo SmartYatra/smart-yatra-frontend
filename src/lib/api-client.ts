@@ -43,7 +43,7 @@ function handleErrorInterceptor(error: AxiosError) {
 
 // API instance
 export const api = Axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 // Apply the request and response interceptors
@@ -55,7 +55,7 @@ api.interceptors.response.use(
 
 // Mock API for testing
 export const mockApi = Axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
 // This is the mock adapter that will be used to mock the API requests

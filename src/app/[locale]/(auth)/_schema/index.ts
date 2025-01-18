@@ -37,7 +37,9 @@ export const SignupFormSchema = z
         message: 'Password must contain at least one special character',
       }),
     confirmPassword: z.string(),
-    role: z.enum(['passenger', 'driver', 'admin']),
+    role: z.enum(['user', 'driver', 'admin'], {
+      message: 'Invalid user type. Must be either user, driver, or admin',
+    }),
   })
   .refine(data => data.password === data.confirmPassword, {
     message: 'Passwords do not match',
