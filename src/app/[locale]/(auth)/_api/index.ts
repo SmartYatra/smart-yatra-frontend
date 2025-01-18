@@ -1,15 +1,6 @@
-import { adapter, mockApi } from '@/lib/api-client';
+import { mockApi } from '@/lib/api-client';
 
-import { ForgotPasswordFormValues, SigninFormValues } from '../_schema';
-
-adapter
-  .onPost('/signin')
-  .reply(200, { message: 'User signed in successfully' });
-
-export const signIn = async (values: SigninFormValues) => {
-  const response = await mockApi.post('/signin', values);
-  return response.data;
-};
+import { ForgotPasswordFormValues } from '../_schema';
 
 export const forgotPassword = async (values: ForgotPasswordFormValues) => {
   const response = await mockApi.post('/forgot-password', values);

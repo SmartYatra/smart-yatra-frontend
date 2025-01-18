@@ -10,6 +10,7 @@ import { signup, TSignupResponseData } from '../_api/signup';
 
 const useSignUp = () => {
   const router = useRouter();
+
   return useMutation({
     mutationFn: signup,
     onSuccess: (
@@ -43,7 +44,7 @@ const useSignUp = () => {
       if (isAxiosError(error)) {
         toast.error(error.response?.data.message);
       } else {
-        toast.error('An error occurred. Please try again.');
+        toast.error('An unexpected error occurred. Please try again.');
       }
     },
   });

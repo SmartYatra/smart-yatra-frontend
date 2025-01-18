@@ -1,8 +1,4 @@
-import Axios, {
-  AxiosError,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from 'axios';
+import Axios, { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
 function authRequestInterceptor(config: InternalAxiosRequestConfig) {
@@ -28,19 +24,6 @@ function handleResponseInterceptor(response: AxiosResponse) {
   return response;
 }
 
-// Response interceptor for handling errors globally
-function handleErrorInterceptor(error: AxiosError) {
-  if (error.response?.status === 401) {
-    // Handle unauthorized errors (e.g., redirect to login)
-    console.error('Unauthorized! Redirecting to login.');
-  } else if (error.response?.status === 500) {
-    // Handle server errors
-    console.error('Server error! Please try again later.');
-  }
-
-  return Promise.reject(error);
-}
-
 // API instance
 export const api = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -48,10 +31,7 @@ export const api = Axios.create({
 
 // Apply the request and response interceptors
 api.interceptors.request.use(authRequestInterceptor);
-api.interceptors.response.use(
-  handleResponseInterceptor,
-  handleErrorInterceptor
-);
+api.interceptors.response.use(handleResponseInterceptor);
 
 // Mock API for testing
 export const mockApi = Axios.create({
