@@ -92,7 +92,6 @@ const DriverSidebar = () => {
           <SidebarGroupContent>
             <SidebarMenu>
               {sidebarItems.map(item => {
-                console.log(pathname, item.url);
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton
@@ -100,10 +99,10 @@ const DriverSidebar = () => {
                       isActive={isActive(item.url)}
                       tooltip={item.title}
                     >
-                      <a href={item.url}>
+                      <Link href={item.url}>
                         <item.icon />
                         <span>{item.title}</span>
-                      </a>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );

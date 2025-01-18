@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
 
 // Define the shape of the data
-export type Trip = {
+export type Earnings = {
   id: string;
   route: string;
   passengers: number;
@@ -21,8 +21,8 @@ export type Trip = {
   status: 'Completed' | 'Ongoing' | 'Scheduled';
 };
 
-// Columns definition for the data table
-export const columns: ColumnDef<Trip>[] = [
+// Columns definition for the earnings data table
+export const columns: ColumnDef<Earnings>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -99,7 +99,7 @@ export const columns: ColumnDef<Trip>[] = [
     header: 'Actions',
     cell: ({ row }) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const trip = row.original;
+      const earnings = row.original;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -109,8 +109,8 @@ export const columns: ColumnDef<Trip>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
-            <DropdownMenuItem>View Trip Details</DropdownMenuItem>
-            <DropdownMenuItem>Download Trip Report</DropdownMenuItem>
+            <DropdownMenuItem>View Earnings Details</DropdownMenuItem>
+            <DropdownMenuItem>Download Earnings Report</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

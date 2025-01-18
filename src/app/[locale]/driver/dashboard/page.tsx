@@ -10,7 +10,51 @@ import {
   DashboardTitle,
 } from './_components/page-components';
 import RecentTrips from './_components/recent-trips';
+import { Trip } from './_components/recent-trips/columns';
 import StatsCard from './_components/stats-card';
+
+const trips: Trip[] = [
+  {
+    id: '1',
+    route: 'Kathmandu to Bhaktapur',
+    passengers: 30,
+    earnings: 3000,
+    date: '2025-01-20',
+    status: 'Completed',
+  },
+  {
+    id: '2',
+    route: 'Patan to Kathmandu',
+    passengers: 25,
+    earnings: 2500,
+    date: '2025-01-20',
+    status: 'Ongoing',
+  },
+  {
+    id: '3',
+    route: 'Bhaktapur to Lalitpur',
+    passengers: 40,
+    earnings: 4000,
+    date: '2025-01-20',
+    status: 'Completed',
+  },
+  {
+    id: '4',
+    route: 'Kathmandu to Pokhara',
+    passengers: 20,
+    earnings: 2000,
+    date: '2025-01-20',
+    status: 'Scheduled',
+  },
+  {
+    id: '5',
+    route: 'Kathmandu to Bhaktapur',
+    passengers: 30,
+    earnings: 3000,
+    date: '2025-01-20',
+    status: 'Completed',
+  },
+];
 
 const statsData = [
   {
@@ -69,7 +113,7 @@ const DriverDashboardPage = () => {
             Here&apos;s a list of your recent trips and their details.
           </DashboardSubtitle>
 
-          <RecentTrips />
+          <RecentTrips trips={trips} />
         </div>
 
         {/* QR code for bus with download/extract option */}

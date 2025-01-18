@@ -13,6 +13,7 @@ test.describe('I18n', () => {
         page.getByRole('heading', {
           name: 'Welcome to SmartYatra',
         })
+        
       ).toBeVisible();
 
       await expect(
