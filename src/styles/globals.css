@@ -107,3 +107,10 @@
     @apply bg-primary text-primary-foreground;
   }
 }
+
+/* Disable arrow on number input */
+@layer utilities {
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}

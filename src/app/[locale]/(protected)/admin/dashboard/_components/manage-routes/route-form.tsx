@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,20 +22,27 @@ export function RouteForm({ onSubmit, initialData }: IRouteFormProps) {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
-    defaultValues: initialData,
+    defaultValues: initialData || {
+      stops: [{ name: '', location_lat: '', location_lng: '', order: 0 }],
+    }, // Initialize with one empty stop
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'stops', // Control the "stops" array field dynamically
   });
 
   const onFormSubmit = (data: ManageRoutesValues) => {
     console.log(data);
-
     onSubmit(data);
   };
 
   return (
     <form className='space-y-4' onSubmit={handleSubmit(onFormSubmit)}>
-      <div>
+      <div className='space-y-2'>
         <Label htmlFor='name'>Route Name</Label>
         <Input
           required
@@ -44,38 +51,118 @@ export function RouteForm({ onSubmit, initialData }: IRouteFormProps) {
           error={errors.name?.message}
         />
       </div>
-      <div>
-        <Label htmlFor='type'>Type</Label>
-        <Select {...register('type')}>
+
+      <div className='space-y-2'>
+        <Label htmlFor='description'>Description</Label>
+        <Input
+          id='description'
+          {...register('description')}
+          error={errors.description?.message}
+        />
+      </div>
+
+      <div className='space-y-2'>
+        <Label htmlFor='status'>Status</Label>
+        <Select {...register('status')}>
           <SelectTrigger>
-            <SelectValue placeholder='Select type' />
+            <SelectValue placeholder='Select status' />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value='Bus'>Bus</SelectItem>
-            <SelectItem value='Micro'>Micro</SelectItem>
-            <SelectItem value='Tempo'>Tempo</SelectItem>
+            <SelectItem value='active'>Active</SelectItem>
+            <SelectItem value='inactive'>Inactive</SelectItem>
           </SelectContent>
         </Select>
       </div>
-      <div>
-        <Label htmlFor='stops'>Number of Stops</Label>
+
+      <div className='space-y-2'>
+        <Label htmlFor='distance'>Distance (km)</Label>
         <Input
           required
-          id='stops'
+          id='distance'
           type='number'
-          {...register('stops')}
-          error={errors.stops?.message}
+          {...register('distance')}
+          error={errors.distance?.message}
         />
       </div>
-      <div>
-        <Label htmlFor='frequency'>Frequency</Label>
+
+      <div className='space-y-2'>
+        <Label htmlFor='duration'>Duration (minutes)</Label>
         <Input
           required
-          id='frequency'
-          {...register('frequency')}
-          error={errors.frequency?.message}
+          id='duration'
+          type='number'
+          {...register('duration')}
+          error={errors.duration?.message}
         />
       </div>
+
+      <div className='space-y-2'>
+        <Label htmlFor='stops'>Stops</Label>
+        {fields.map((stop, index) => (
+          <div className='flex items-center gap-2' key={stop.id}>
+            <div className='space-y-1'>
+              <Label htmlFor={`stops.${index}.name`}>Stop Name</Label>
+              <Input
+                placeholder='Stop Name'
+                {...register(`stops.${index}.name`)}
+                defaultValue={stop.name}
+              />
+            </div>
+            <div className='space-y-1'>
+              <Label htmlFor={`stops.${index}.location_lat`}>Latitude</Label>
+              <Input
+                placeholder='Latitude'
+                type='number'
+                {...register(`stops.${index}.location_lat`)}
+                defaultValue={stop.location_lat}
+              />
+            </div>
+            <div className='space-y-1'>
+              <Label htmlFor={`stops.${index}.location_lng`}>Longitude</Label>
+              <Input
+                placeholder='Longitude'
+                type='number'
+                {...register(`stops.${index}.location_lng`)}
+                defaultValue={stop.location_lng}
+              />
+            </div>
+            <div className='space-y-1'>
+              <Label htmlFor={`stops.${index}.order`}>Order</Label>
+              <Input
+                placeholder='Order'
+                type='number'
+                {...register(`stops.${index}.order`)}
+                defaultValue={stop.order}
+              />
+            </div>
+            <Button
+              className='mt-6'
+              type='button'
+              variant='destructive'
+              onClick={() => remove(index)}
+            >
+              Remove Stop
+            </Button>
+          </div>
+        ))}
+
+        {/* Button to add new stop */}
+        <Button
+          type='button'
+          variant='outline'
+          onClick={() =>
+            append({
+              name: '',
+              location_lat: '',
+              location_lng: '',
+              order: 0,
+            })
+          }
+        >
+          Add Stop
+        </Button>
+      </div>
+
       <Button className='w-full' type='submit'>
         {initialData?.id ? 'Update Route' : 'Add Route'}
       </Button>
