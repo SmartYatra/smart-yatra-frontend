@@ -4,7 +4,9 @@ import React from 'react';
 import Link from 'next/link';
 
 import {
+  Car,
   ChevronDown,
+  DollarSign,
   Grid,
   HelpCircle,
   LogOut,
@@ -15,7 +17,6 @@ import {
 
 import LogoIcon from '@/components/logo-icon';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { Button } from '@/components/ui/button';
 import {
   Collapsible,
   CollapsibleContent,
@@ -36,29 +37,42 @@ import {
 } from '@/components/ui/sidebar';
 import { useAuth } from '@/hooks/use-auth';
 import { usePathname } from '@/i18n/routing';
+import { TUserType } from '@/types/user.type';
 
-const AdminSidebar = () => {
-  const sidebarItems = [
-    {
-      title: 'Dashboard',
-      url: '/admin/dashboard',
-      icon: Grid,
-    },
+interface SidebarProps {
+  role: TUserType;
+}
+
+const sidebarConfig = {
+  admin: [
+    { title: 'Dashboard', url: '/admin/dashboard', icon: Grid },
     {
       title: 'Manage Routes',
       url: '/admin/dashboard/manage-routes',
       icon: Map,
     },
+    { title: 'Settings', url: '/admin/dashboard/settings', icon: Settings },
+  ],
+  driver: [
+    { title: 'Dashboard', url: '/driver/dashboard', icon: Grid },
+    { title: 'Trips', url: '/driver/dashboard/trips', icon: Car },
+    { title: 'Earnings', url: '/driver/dashboard/earnings', icon: DollarSign },
+    { title: 'Settings', url: '/driver/dashboard/settings', icon: Settings },
+  ],
+  user: [
+    { title: 'Dashboard', url: '/passenger/dashboard', icon: Grid },
+    { title: 'My Trips', url: '/passenger/dashboard/my-trips', icon: Car },
     {
-      title: 'Settings',
-      url: '/admin/dashboard/settings',
-      icon: Settings,
+      title: 'Payments',
+      url: '/passenger/dashboard/payments',
+      icon: DollarSign,
     },
-  ];
+    { title: 'Settings', url: '/passenger/dashboard/settings', icon: Settings },
+  ],
+};
 
+const DashboardSidebar: React.FC<SidebarProps> = ({ role }) => {
   const pathname = usePathname();
-  const isActive = (url: string) => pathname === url;
-
   const { logout } = useAuth();
 
   const handleLogout = async () => {
@@ -76,7 +90,7 @@ const AdminSidebar = () => {
                 <LogoIcon className='size-8' />
                 <div className='flex flex-col'>
                   <span className='truncate font-semibold'>Smart Yatra</span>
-                  <span className='text-xs'>Admin Dashboard</span>
+                  <span className='text-xs capitalize'>{role} Dashboard</span>
                 </div>
               </div>
             </SidebarMenuButton>
@@ -86,17 +100,17 @@ const AdminSidebar = () => {
 
       <SidebarSeparator />
 
-      {/* Sidebar Main Content */}
+      {/* Sidebar Navigation */}
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {sidebarItems.map(item => (
+              {sidebarConfig[role].map(item => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
-                    isActive={isActive(item.url)}
+                    isActive={pathname === item.url}
                     tooltip={item.title}
                   >
                     <Link href={item.url}>
@@ -112,7 +126,7 @@ const AdminSidebar = () => {
 
         <SidebarSeparator />
 
-        {/* Help Section */}
+        {/* Help & Support */}
         <Collapsible defaultOpen className='group/collapsible'>
           <SidebarGroup>
             <SidebarGroupLabel asChild>
@@ -163,14 +177,13 @@ const AdminSidebar = () => {
 
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <Button
-                className='justify-start'
-                variant={'ghost'}
+              <button
+                className='flex w-full items-center gap-2'
                 onClick={handleLogout}
               >
                 <LogOut />
                 <span>Logout</span>
-              </Button>
+              </button>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -179,4 +192,4 @@ const AdminSidebar = () => {
   );
 };
 
-export default AdminSidebar;
+export default DashboardSidebar;

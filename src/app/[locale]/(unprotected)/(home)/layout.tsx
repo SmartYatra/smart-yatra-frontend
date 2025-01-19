@@ -3,7 +3,6 @@ import React from 'react';
 import BackgroundGlow from '@/components/background-glow';
 import { Footer } from '@/components/layouts/footer';
 import { Navbar } from '@/components/layouts/navbar';
-import RedirectAuthenticatedUser from '@/components/redirect-authenticated-user';
 
 /**
  * HomeLayout Component
@@ -17,23 +16,21 @@ export default function HomeLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <RedirectAuthenticatedUser>
-      <div className='flex min-h-screen flex-col overflow-hidden'>
-        {/* Sticky Navbar with Discord Banner */}
-        <Navbar />
+    <div className='flex min-h-screen flex-col overflow-hidden'>
+      {/* Sticky Navbar with Discord Banner */}
+      <Navbar />
 
-        {/* Main content */}
-        <main className='container relative flex-1'>
-          {children}
+      {/* Main content */}
+      <main className='container relative flex-1'>
+        {children}
 
-          <BackgroundGlow position={'top-center'} />
-          <BackgroundGlow position={'top-left'} size={'lg'} />
-          <BackgroundGlow position={'bottom-left'} size={'lg'} />
-        </main>
+        <BackgroundGlow position={'top-center'} />
+        <BackgroundGlow position={'top-left'} size={'lg'} />
+        <BackgroundGlow position={'bottom-left'} size={'lg'} />
+      </main>
 
-        {/* Footer */}
-        <Footer />
-      </div>
-    </RedirectAuthenticatedUser>
+      {/* Footer */}
+      <Footer />
+    </div>
   );
 }

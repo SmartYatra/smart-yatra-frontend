@@ -29,6 +29,11 @@ export const api = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
+// Next.js API routes instance
+export const nextApi = Axios.create({
+  baseURL: process.env.NEXT_PUBLIC_APP_URL,
+});
+
 // Apply the request and response interceptors
 api.interceptors.request.use(authRequestInterceptor);
 api.interceptors.response.use(handleResponseInterceptor);

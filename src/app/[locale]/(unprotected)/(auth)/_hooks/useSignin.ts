@@ -1,8 +1,8 @@
 import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 
-import { useAuth } from '@/context/auth.context';
 import { useRouter } from '@/i18n/routing';
+import { nextApi } from '@/lib/api-client';
 import { ISuccessResponse } from '@/types/response';
 import { useMutation } from '@tanstack/react-query';
 
@@ -10,14 +10,15 @@ import { signIn, TSigninResponseData } from '../_api/signin';
 
 const useSignin = () => {
   const router = useRouter();
-  const { login } = useAuth();
 
   return useMutation({
     mutationFn: signIn,
-    onSuccess: (data: ISuccessResponse<TSigninResponseData>) => {
+    onSuccess: async (data: ISuccessResponse<TSigninResponseData>) => {
       if (data.success) {
-        // Login the user by saving te token and user type in the local storage
-        login(data.data.token, data.data.type);
+        await nextApi.post('/api/session', {
+          token: data.data.token,
+          role: data.data.type,
+        });
 
         // Redirect based on user role
         switch (data.data.type) {

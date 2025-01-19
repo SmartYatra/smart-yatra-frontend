@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { useRouter } from 'nextjs-toploader/app';
 
 import { Bell, LogOut, LucideIcon, Search, Settings, User } from 'lucide-react';
 
@@ -20,7 +19,9 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { useAuth } from '@/context/auth.context';
+import { useAuth } from '@/hooks/use-auth';
+import { useRouter } from '@/i18n/routing';
+import { TUserType } from '@/types/user.type';
 import { AvatarImage } from '@radix-ui/react-avatar';
 
 interface IMenuItems {
@@ -30,31 +31,41 @@ interface IMenuItems {
   onClick: () => void;
 }
 
-const AdminNavbar = () => {
-  const { logout } = useAuth();
-  const router = useRouter();
+interface DashboardNavbarProps {
+  role: TUserType;
+}
 
-  const handleLogout = () => {
-    logout();
-    router.refresh();
+const DashboardNavbar = ({ role }: DashboardNavbarProps) => {
+  const router = useRouter();
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
   };
 
-  // Dropdown Menu Items
+  // Define navbar title based on role
+  const navbarTitle = {
+    admin: 'Admin Panel',
+    driver: 'Driver Dashboard',
+    user: 'Passenger Dashboard',
+  }[role];
+
+  // Define menu items dynamically based on role
   const menuItems: IMenuItems[] = [
     {
       label: 'Profile',
       icon: User,
-      onClick: () => router.push('/admin/profile'),
+      onClick: () => router.push(`/${role}/profile`),
     },
     {
       label: 'Settings',
       icon: Settings,
-      onClick: () => router.push('/admin/settings'),
+      onClick: () => router.push(`/${role}/settings`),
     },
     {
       label: 'Notifications',
       icon: Bell,
-      onClick: () => router.push('/admin/notifications'),
+      onClick: () => router.push(`/${role}/notifications`),
     },
   ];
 
@@ -63,12 +74,13 @@ const AdminNavbar = () => {
       <div className='flex items-center gap-16'>
         <div className='flex items-center gap-4'>
           <SidebarTrigger className='hidden text-muted-foreground md:block [&_svg]:size-6' />
-
           <CustomTrigger className='p-0 md:hidden [&_svg]:size-6' />
           <Logo className='md:hidden' />
 
-          {/* Admin Branding */}
-          <h2 className='hidden text-lg font-semibold md:block'>Admin Panel</h2>
+          {/* Dynamic Navbar Title */}
+          <h2 className='hidden text-lg font-semibold md:block'>
+            {navbarTitle}
+          </h2>
         </div>
 
         {/* Search Bar */}
@@ -122,4 +134,4 @@ const AdminNavbar = () => {
   );
 };
 
-export default AdminNavbar;
+export default DashboardNavbar;

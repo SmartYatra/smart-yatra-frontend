@@ -1,46 +1,79 @@
-// import { cookies } from 'next/headers';
-
-// import 'server-only';
-
-// export async function setAuthToken(token: string) {
-//   const cookieStore = await cookies();
-
-//   cookieStore.set('authToken', token, {
-//     httpOnly: true, // Prevents JavaScript access
-//     secure: process.env.NODE_ENV === 'production', // Set to true in production
-//     expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
-//     sameSite: 'lax', // Protects against CSRF attacks
-//     path: '/', // Allow all pages to access the cookie
-//   });
-// }
-
 import { cookies } from 'next/headers';
+
+import { jwtVerify, SignJWT } from 'jose';
 
 import 'server-only';
 
-export async function setAuthToken(token: string, role: string) {
+const secretKey = process.env.SESSION_SECRET;
+const encodedKey = new TextEncoder().encode(secretKey);
+
+export async function createSession({
+  token,
+  role,
+}: {
+  token: string;
+  role: string;
+}) {
+  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
+
+  const session = await encrypt({ token, role, expiresAt });
   const cookieStore = await cookies();
 
-  cookieStore.set('authToken', token, {
+  cookieStore.set('session', session, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-    sameSite: 'lax',
-    path: '/',
-  });
-
-  cookieStore.set('authRole', role, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    secure: true,
+    expires: expiresAt,
     sameSite: 'lax',
     path: '/',
   });
 }
 
-export async function removeAuthToken() {
-  const cookieStore = await cookies();
+export async function updateSession() {
+  const session = (await cookies()).get('session')?.value;
+  const payload = await decrypt(session);
 
-  cookieStore.delete('authToken');
-  cookieStore.delete('authRole');
+  if (!session || !payload) {
+    return null;
+  }
+
+  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+  const cookieStore = await cookies();
+  cookieStore.set('session', session, {
+    httpOnly: true,
+    secure: true,
+    expires: expires,
+    sameSite: 'lax',
+    path: '/',
+  });
+}
+
+export async function deleteSession() {
+  const cookieStore = await cookies();
+  cookieStore.delete('session');
+}
+
+type SessionPayload = {
+  token: string;
+  role: string;
+  expiresAt: Date;
+};
+
+export function encrypt(payload: SessionPayload) {
+  return new SignJWT(payload)
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime('7d')
+    .sign(encodedKey);
+}
+
+export async function decrypt(session: string | undefined = '') {
+  try {
+    const { payload } = await jwtVerify(session, encodedKey, {
+      algorithms: ['HS256'],
+    });
+    return payload;
+  } catch (error) {
+    console.log('Failed to verify session', error);
+  }
 }

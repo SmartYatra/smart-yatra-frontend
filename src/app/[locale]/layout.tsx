@@ -10,7 +10,6 @@ import { Toaster } from 'sonner';
 import TanstackQueryProvider from '@/components/providers/tanstack-provider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { siteConfig } from '@/configs';
-import { AuthProvider } from '@/context/auth.context';
 import { routing, TLocales } from '@/i18n/routing';
 
 import '@/styles/globals.css';
@@ -72,7 +71,7 @@ export default async function LocaleLayout({
           <NextIntlClientProvider messages={messages}>
             {/* Query provider for efficient server state management */}
             <TanstackQueryProvider>
-              <AuthProvider>{children}</AuthProvider>
+              {children}
 
               {/* <CookieConsent /> */}
 
