@@ -7,10 +7,10 @@ import NextTopLoader from 'nextjs-toploader';
 
 import { Toaster } from 'sonner';
 
-import { CookieConsent } from '@/components/cookie-consent';
 import TanstackQueryProvider from '@/components/providers/tanstack-provider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { siteConfig } from '@/configs';
+import { AuthProvider } from '@/context/auth.context';
 import { routing, TLocales } from '@/i18n/routing';
 
 import '@/styles/globals.css';
@@ -72,9 +72,9 @@ export default async function LocaleLayout({
           <NextIntlClientProvider messages={messages}>
             {/* Query provider for efficient server state management */}
             <TanstackQueryProvider>
-              {children}
+              <AuthProvider>{children}</AuthProvider>
 
-              <CookieConsent />
+              {/* <CookieConsent /> */}
 
               <NextTopLoader color='#ff0033' showSpinner={false} />
 

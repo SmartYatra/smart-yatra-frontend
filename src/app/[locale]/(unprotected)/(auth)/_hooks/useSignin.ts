@@ -1,8 +1,8 @@
-import { useRouter } from 'next/navigation';
-
 import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 
+import { useAuth } from '@/context/auth.context';
+import { useRouter } from '@/i18n/routing';
 import { ISuccessResponse } from '@/types/response';
 import { useMutation } from '@tanstack/react-query';
 
@@ -10,13 +10,14 @@ import { signIn, TSigninResponseData } from '../_api/signin';
 
 const useSignin = () => {
   const router = useRouter();
+  const { login } = useAuth();
 
   return useMutation({
     mutationFn: signIn,
     onSuccess: (data: ISuccessResponse<TSigninResponseData>) => {
       if (data.success) {
-        // Save token in localStorage
-        localStorage.setItem('authToken', data.data.token);
+        // Login the user by saving te token and user type in the local storage
+        login(data.data.token, data.data.type);
 
         // Redirect based on user role
         switch (data.data.type) {
