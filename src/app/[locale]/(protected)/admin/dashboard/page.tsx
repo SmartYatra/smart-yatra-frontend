@@ -7,7 +7,8 @@ import { BarChart, ClipboardList, Truck, Users } from 'lucide-react';
 import {
   DashboardSubtitle,
   DashboardTitle,
-} from './_components/page-components';
+} from '@/components/dashboard-components';
+
 import RecentActivities from './_components/recent-activities';
 import StatsCard from './_components/stats-card';
 

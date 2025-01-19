@@ -4,11 +4,12 @@ import React from 'react';
 
 import { BarChart, Calendar, ClipboardList } from 'lucide-react';
 
-import DriverQrCode from './_components/driver-qr-code';
 import {
   DashboardSubtitle,
   DashboardTitle,
-} from './_components/page-components';
+} from '@/components/dashboard-components';
+
+import DriverQrCode from './_components/driver-qr-code';
 import RecentTrips from './_components/recent-trips';
 import { Trip } from './_components/recent-trips/columns';
 import StatsCard from './_components/stats-card';
