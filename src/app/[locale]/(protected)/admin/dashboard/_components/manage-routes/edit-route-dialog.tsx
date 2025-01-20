@@ -19,7 +19,7 @@ const EditRouteDialog = ({
   onEdit: (updatedRoute: ManageRoutesValues) => void;
 }) => (
   <Dialog open={!!route} onOpenChange={onClose}>
-    <DialogContent className='max-h-[calc(100vh-96px)] max-w-3xl overflow-y-auto'>
+    <DialogContent className='max-w-3xl'>
       <DialogHeader>
         <DialogTitle>Edit Route</DialogTitle>
       </DialogHeader>

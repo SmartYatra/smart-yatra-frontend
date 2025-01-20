@@ -1,5 +1,7 @@
 import { useFieldArray, useForm } from 'react-hook-form';
 
+import { Trash2 } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -41,7 +43,10 @@ export function RouteForm({ onSubmit, initialData }: IRouteFormProps) {
   };
 
   return (
-    <form className='space-y-4' onSubmit={handleSubmit(onFormSubmit)}>
+    <form
+      className='relative max-h-[calc(100vh-96px)] space-y-4 overflow-y-auto px-1'
+      onSubmit={handleSubmit(onFormSubmit)}
+    >
       <div className='space-y-2'>
         <Label htmlFor='name'>Route Name</Label>
         <Input
@@ -136,12 +141,12 @@ export function RouteForm({ onSubmit, initialData }: IRouteFormProps) {
               />
             </div>
             <Button
-              className='mt-6'
+              className='mt-6 p-3'
               type='button'
               variant='destructive'
               onClick={() => remove(index)}
             >
-              Remove Stop
+              <Trash2 className='h-6 w-6' />
             </Button>
           </div>
         ))}
@@ -163,9 +168,11 @@ export function RouteForm({ onSubmit, initialData }: IRouteFormProps) {
         </Button>
       </div>
 
-      <Button className='w-full' type='submit'>
-        {initialData?.id ? 'Update Route' : 'Add Route'}
-      </Button>
+      <div className='sticky bottom-0 mt-4 bg-background pt-4'>
+        <Button className='w-full' type='submit'>
+          {initialData?.id ? 'Update Route' : 'Add Route'}
+        </Button>
+      </div>
     </form>
   );
 }
