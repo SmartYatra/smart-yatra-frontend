@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 import { Edit, Trash2 } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
@@ -16,7 +18,9 @@ import { ManageRoutesValues } from '../../_schema/manage-routes.schema';
 interface RoutesTableProps {
   routes: ManageRoutesValues[];
   onEdit: (route: ManageRoutesValues) => void;
-  onDelete: (routeId: string | number) => void;
+  onDelete: Dispatch<
+    SetStateAction<{ id: string | number; name: string } | null>
+  >;
 }
 
 const RoutesTable: React.FC<RoutesTableProps> = ({
@@ -41,7 +45,10 @@ const RoutesTable: React.FC<RoutesTableProps> = ({
           <TableRow key={route.id}>
             <TableCell className='font-medium'>{route.name}</TableCell>
             <TableCell>
-              <Badge className='min-w-16' variant='outline'>
+              <Badge
+                className='min-w-16 capitalize'
+                variant={route.status === 'active' ? 'success' : 'destructive'}
+              >
                 {route.status}
               </Badge>
             </TableCell>
@@ -65,7 +72,7 @@ const RoutesTable: React.FC<RoutesTableProps> = ({
                   aria-label={`Delete route: ${route.name}`}
                   size='icon'
                   variant='ghost'
-                  onClick={() => onDelete(route.id as string)}
+                  onClick={() => onDelete({ id: route.id, name: route.name })}
                 >
                   <Trash2 className='h-4 w-4' />
                 </Button>

@@ -11,8 +11,8 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
     config.headers['Accept-Language'] = language;
 
     // Set the Authorization header
-    const token = localStorage.getItem('authToken');
-    config.headers['Authorization'] = token ? `Token ${token}` : '';
+    const token = localStorage.getItem('token');
+    if (token) config.headers['Authorization'] = `Bearer ${token}`;
   }
 
   config.withCredentials = true;

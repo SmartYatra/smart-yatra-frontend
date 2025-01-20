@@ -43,8 +43,8 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean; // Allows button to be rendered as a child of another component
-  isLoading?: boolean; // Shows a loading spinner inside the button
-  leftIcon?: React.ReactNode; // Icon to be displayed on the left side of the button
+  isLoading?: boolean;
+  leftIcon?: React.ReactNode;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(

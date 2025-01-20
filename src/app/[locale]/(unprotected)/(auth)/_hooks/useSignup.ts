@@ -1,6 +1,7 @@
 import { isAxiosError } from 'axios';
 import { toast } from 'sonner';
 
+import { useToken } from '@/hooks/use-token';
 import { useRouter } from '@/i18n/routing';
 import { nextApi } from '@/lib/api-client';
 import { IBadRequestResponse, ISuccessResponse } from '@/types/response';
@@ -10,6 +11,7 @@ import { signup, TSignupResponseData } from '../_api/signup';
 
 const useSignUp = () => {
   const router = useRouter();
+  const { addTokenToLocalStorage } = useToken();
 
   return useMutation({
     mutationFn: signup,
@@ -21,6 +23,8 @@ const useSignUp = () => {
           token: data.data.token,
           role: data.data.user_type,
         });
+
+        addTokenToLocalStorage(data.data.token);
 
         // Redirect based on user role
         switch (data.data.user_type) {
