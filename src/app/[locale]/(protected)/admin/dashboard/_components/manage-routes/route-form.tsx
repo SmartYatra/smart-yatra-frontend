@@ -34,7 +34,7 @@ export function RouteForm({ onSubmit, initialData }: IRouteFormProps) {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'stops', // Control the "stops" array field dynamically
+    name: 'stops',
   });
 
   const onFormSubmit = (data: ManageRoutesValues) => {

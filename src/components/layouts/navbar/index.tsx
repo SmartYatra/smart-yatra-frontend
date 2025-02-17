@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { ChevronDown, Github, Menu } from 'lucide-react';
 
-import { LocaleSwitcher } from '@/components/locale-switcher';
+// import { LocaleSwitcher } from '@/components/locale-switcher';
 import Logo from '@/components/logo';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -116,7 +116,7 @@ export function Navbar() {
             <ThemeToggle />
 
             {/* Language Toggle */}
-            <LocaleSwitcher className='hidden sm:flex' />
+            {/* <LocaleSwitcher className='hidden sm:flex' /> */}
 
             {/* Login and Sign Up buttons */}
             <Link
@@ -179,7 +179,7 @@ export function Navbar() {
 
                 <SheetFooter className='gap-4 max-sm:flex-1'>
                   {/* Language Toggle */}
-                  <LocaleSwitcher className='w-full md:w-fit' />
+                  {/* <LocaleSwitcher className='w-full md:w-fit' /> */}
 
                   {/* Login and Sign Up buttons */}
                   <Link

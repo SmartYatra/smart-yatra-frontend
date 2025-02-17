@@ -1,7 +1,7 @@
 import * as z from 'zod';
 
 export const manageRoutesSchema = z.object({
-  id: z.number(),
+  id: z.number().optional(),
   name: z
     .string()
     .min(3, { message: 'Name must be at least 3 characters long' }),

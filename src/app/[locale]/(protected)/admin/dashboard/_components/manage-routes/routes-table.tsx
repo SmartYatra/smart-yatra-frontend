@@ -72,7 +72,9 @@ const RoutesTable: React.FC<RoutesTableProps> = ({
                   aria-label={`Delete route: ${route.name}`}
                   size='icon'
                   variant='ghost'
-                  onClick={() => onDelete({ id: route.id, name: route.name })}
+                  onClick={() =>
+                    onDelete({ id: route.id as number, name: route.name })
+                  }
                 >
                   <Trash2 className='h-4 w-4' />
                 </Button>

@@ -6,6 +6,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ManageRoutesValues } from '../_schema/manage-routes.schema';
 
 const addRoute = async (newRoute: ManageRoutesValues) => {
+  delete newRoute.id;
+
   const res = await api.post('/routes', newRoute);
   return res.data;
 };

@@ -1,9 +1,11 @@
 'use client';
 
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import { ArrowRight } from 'lucide-react';
 
+import DashboardImg from '@/assets/dashboard.png';
 import { buttonVariants } from '@/components/ui/button';
 import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
@@ -84,48 +86,14 @@ const HeroImage = () => {
   return (
     <div className='mt-20 w-full'>
       <div className='relative size-full rounded-lg'>
-        <div className='z-0 rounded-lg border border-primary/5 bg-foreground/5 p-2 shadow-2xl backdrop-blur-md'>
-          <div className='rounded-lg border border-primary/5 bg-muted shadow-2xl backdrop-blur-md'>
-            <div className='flex h-full max-h-[800px] min-h-[700px] w-full'>
-              <aside className='hidden w-48 space-y-3 border-r border-foreground/5 p-4 sm:block'>
-                <div className='flex items-center gap-3 rounded bg-foreground/5 px-3 py-2'>
-                  <div className='h-4 w-4 rounded bg-foreground/10' />
-                  <div className='h-4 w-20 rounded bg-foreground/10' />
-                </div>
-                {Array(5)
-                  .fill(null)
-                  .map((_, i) => (
-                    <div className='flex items-center gap-3 px-3 py-2' key={i}>
-                      <div className='h-4 w-4 rounded bg-foreground/10' />
-                      <div className='h-4 w-20 rounded bg-foreground/10' />
-                    </div>
-                  ))}
-              </aside>
-
-              <div className='flex-1 p-6'>
-                <div className='mb-8 flex items-center justify-between'>
-                  <div className='hidden space-y-1 sm:block'>
-                    <div className='h-6 w-48 rounded bg-foreground/10' />
-                    <div className='h-4 w-32 rounded bg-foreground/5' />
-                  </div>
-                  <div className='flex gap-3'>
-                    <div className='h-8 w-20 rounded bg-foreground/5' />
-                    <div className='h-8 w-20 rounded bg-foreground/5' />
-                  </div>
-                </div>
-                <div className='grid gap-6 sm:grid-cols-2'>
-                  <div className='space-y-4'>
-                    <div className='h-[240px] rounded bg-foreground/5' />
-                    <div className='h-4 w-32 rounded bg-foreground/10' />
-                  </div>
-                  <div className='hidden space-y-4 sm:block'>
-                    <div className='h-[240px] rounded bg-foreground/5' />
-                    <div className='h-4 w-32 rounded bg-foreground/10' />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className='z-0 size-full rounded-lg border border-primary/5 bg-foreground/5 p-2 shadow-2xl backdrop-blur-md'>
+          <Image
+            alt='Dashboard'
+            className='size-full rounded-lg'
+            height={4000}
+            src={DashboardImg}
+            width={4000}
+          />
         </div>
       </div>
     </div>
