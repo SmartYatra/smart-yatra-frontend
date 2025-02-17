@@ -61,13 +61,14 @@ const sidebarConfig = {
   ],
   user: [
     { title: 'Dashboard', url: '/passenger/dashboard', icon: Grid },
-    { title: 'My Trips', url: '/passenger/dashboard/my-trips', icon: Car },
+    { title: 'Live Map', url: '/passenger/live-map', icon: Map },
+    { title: 'My Trips', url: '/passenger/my-trips', icon: Car },
     {
       title: 'Payments',
-      url: '/passenger/dashboard/payments',
+      url: '/passenger/payments',
       icon: DollarSign,
     },
-    { title: 'Settings', url: '/passenger/dashboard/settings', icon: Settings },
+    { title: 'Settings', url: '/passenger/settings', icon: Settings },
   ],
 };
 
@@ -78,6 +79,11 @@ const DashboardSidebar: React.FC<SidebarProps> = ({ role }) => {
   const handleLogout = async () => {
     await logout();
   };
+
+  // remove /en, /ne, /fr, etc. from pathname
+  const path = pathname.split('/').slice(2).join('/');
+
+  console.log(path);
 
   return (
     <Sidebar collapsible='icon' side='left' variant='sidebar'>
@@ -110,7 +116,7 @@ const DashboardSidebar: React.FC<SidebarProps> = ({ role }) => {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
-                    isActive={pathname === item.url}
+                    isActive={`/${path}` === item.url}
                     tooltip={item.title}
                   >
                     <Link href={item.url}>
