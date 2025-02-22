@@ -2,10 +2,12 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { useTheme } from 'next-themes';
 
 import { ArrowRight } from 'lucide-react';
 
-import DashboardImg from '@/assets/dashboard.png';
+import DashboardDarkImg from '@/assets/dashboard/dashboard-dark.png';
+import DashboardLightImg from '@/assets/dashboard/dashboard-light.png';
 import { buttonVariants } from '@/components/ui/button';
 import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
@@ -19,6 +21,7 @@ import { cn } from '@/lib/utils';
  */
 export const Hero = () => {
   const t = useTranslations('HomePage.Hero');
+
   return (
     <section className='pt-28 max-xl:bg-hero-pattern md:pt-44'>
       <div className='container flex flex-col items-center'>
@@ -39,7 +42,7 @@ export const Hero = () => {
               <ArrowRight className='size-4 -rotate-45 transition-transform group-hover:translate-x-1' />
             </div>
           </Link>
-          <div className='mt-6 max-w-[800px] text-center'>
+          <div className='mt-6 max-w-[900px] text-center'>
             <h1 className='text-4xl font-bold leading-[1.1] tracking-tight sm:text-[64px]'>
               {t('headline')}
               <br />
@@ -83,8 +86,11 @@ export const Hero = () => {
 };
 
 const HeroImage = () => {
+  const { theme } = useTheme();
+  const DashboardImg = theme === 'dark' ? DashboardDarkImg : DashboardLightImg;
+
   return (
-    <div className='mt-20 w-full'>
+    <div className='mt-20 w-full max-w-[80rem]'>
       <div className='relative size-full rounded-lg'>
         <div className='z-0 size-full rounded-lg border border-primary/5 bg-foreground/5 p-2 shadow-2xl backdrop-blur-md'>
           <Image

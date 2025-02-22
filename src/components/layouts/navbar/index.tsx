@@ -21,7 +21,6 @@ import {
 import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
-import { CommandMenu } from './CommandMenu';
 import NavMenuItem, { IRouteList } from './NavMenuItem';
 
 import { HeroBanner } from '../HeroBanner';
@@ -32,20 +31,20 @@ export function Navbar() {
   // List of navigation items
   const routeList: IRouteList[] = [
     {
-      name: t('NavMenuItem.driver'),
-      href: '/driver/dashboard',
+      name: 'About Us',
+      href: '/about',
     },
     {
-      name: t('NavMenuItem.passenger'),
-      href: '#',
+      name: 'Services',
+      href: '/services',
     },
     {
-      name: t('NavMenuItem.pricing'),
-      href: '#',
+      name: 'Contact Us',
+      href: '/contact',
     },
     {
       name: t('NavMenuItem.blog'),
-      href: '#',
+      href: '/blogs',
     },
   ];
 
@@ -99,9 +98,6 @@ export function Navbar() {
 
           {/* Right section (GitHub link, theme toggle, and Language switch) */}
           <div className='flex items-center sm:gap-4'>
-            {/* SearchBar */}
-            <CommandMenu />
-
             {/* GitHub link */}
             <Link
               aria-label={t('githubStar')}
@@ -114,9 +110,6 @@ export function Navbar() {
 
             {/* Theme Toggle */}
             <ThemeToggle />
-
-            {/* Language Toggle */}
-            {/* <LocaleSwitcher className='hidden sm:flex' /> */}
 
             {/* Login and Sign Up buttons */}
             <Link
@@ -178,9 +171,6 @@ export function Navbar() {
                 </nav>
 
                 <SheetFooter className='gap-4 max-sm:flex-1'>
-                  {/* Language Toggle */}
-                  {/* <LocaleSwitcher className='w-full md:w-fit' /> */}
-
                   {/* Login and Sign Up buttons */}
                   <Link
                     aria-label='Signin'

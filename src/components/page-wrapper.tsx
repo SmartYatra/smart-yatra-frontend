@@ -1,15 +1,18 @@
-import React, { ReactNode } from 'react';
+import React, { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 import { cn } from '@/lib/utils';
 
-const PageWrapper = ({
-  children,
-  className,
-}: {
+interface IPageWrapper extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;
   className?: string;
-}) => {
-  return <div className={cn('pt-16', className)}>{children}</div>;
+}
+
+const PageWrapper = ({ children, className, ...props }: IPageWrapper) => {
+  return (
+    <div className={cn('pt-16', className)} {...props}>
+      {children}
+    </div>
+  );
 };
 
 const SectionWrapper = ({
