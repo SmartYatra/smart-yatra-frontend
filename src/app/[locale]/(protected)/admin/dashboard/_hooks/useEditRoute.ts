@@ -13,18 +13,8 @@ export const useEditRoute = () => {
       const res = await api.put(`/routes/${updatedRoute.id}`, updatedRoute);
       return res.data;
     },
-    onSuccess: async (_, updatedRoute) => {
+    onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['routes'] });
-      queryClient.setQueryData(
-        ['routes'],
-        (oldData: ManageRoutesValues[] | undefined) => {
-          if (!oldData) return [];
-          return oldData.map(route =>
-            route.id === updatedRoute.id ? updatedRoute : route
-          );
-        }
-      );
-
       toast.success('Route updated successfully');
     },
     onError: error => {

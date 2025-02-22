@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import { Trash2 } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -9,40 +11,39 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog';
 
 import { useDeleteRoute } from '../../_hooks/useDeleteRoute';
 
 interface DeleteRouteDialogProps {
-  routeId: number | string | null;
-  routeName?: string;
-  onClose: () => void;
+  routeId: number | string;
+  routeName: string;
 }
 
 export default function DeleteRouteDialog({
   routeId,
   routeName,
-  onClose,
 }: DeleteRouteDialogProps) {
-  const [loading, setLoading] = useState(false);
-  const { mutate: deleteRoute } = useDeleteRoute();
+  const [isOpen, setIsOpen] = useState(false);
+  const { mutate: deleteRoute, isPending } = useDeleteRoute();
 
   const handleDelete = () => {
-    if (!routeId) return;
-    setLoading(true);
-    deleteRoute(routeId, {
-      onSuccess: () => {
-        setLoading(false);
-        onClose();
-      },
-      onError: () => {
-        setLoading(false);
-      },
-    });
+    deleteRoute(routeId, { onSuccess: () => setIsOpen(false) });
   };
 
   return (
-    <Dialog open={!!routeId} onOpenChange={onClose}>
+    <Dialog modal open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <Button
+          aria-label={`Delete route: ${routeName}`}
+          size='icon'
+          variant='ghost'
+          onClick={() => setIsOpen(true)}
+        >
+          <Trash2 className='h-4 w-4' />
+        </Button>
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Delete Route</DialogTitle>
@@ -52,16 +53,20 @@ export default function DeleteRouteDialog({
           <strong>{routeName}</strong>&quot;?
         </p>
         <DialogFooter>
-          <Button disabled={loading} variant='outline' onClick={onClose}>
+          <Button
+            disabled={isPending}
+            variant='outline'
+            onClick={() => setIsOpen(false)}
+          >
             Cancel
           </Button>
           <Button
-            disabled={loading}
-            isLoading={loading}
+            disabled={isPending}
+            isLoading={isPending}
             variant='destructive'
             onClick={handleDelete}
           >
-            {loading ? 'Deleting...' : 'Delete'}
+            {isPending ? 'Deleting...' : 'Delete'}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -32,7 +32,7 @@ const useSignUp = () => {
             router.push('/driver/onboarding');
             break;
           case 'user':
-            router.push('/passenger/onboarding');
+            router.push('/passenger/dashboard');
             break;
           case 'admin':
             router.push('/admin/dashboard');

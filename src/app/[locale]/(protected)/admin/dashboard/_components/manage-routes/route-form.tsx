@@ -1,4 +1,9 @@
-import { useFieldArray, useForm } from 'react-hook-form';
+import {
+  Controller,
+  useFieldArray,
+  useForm,
+  UseFormReset,
+} from 'react-hook-form';
 
 import { Trash2 } from 'lucide-react';
 
@@ -12,24 +17,38 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-import { ManageRoutesValues } from '../../_schema/manage-routes.schema';
+import {
+  manageRoutesSchema,
+  ManageRoutesValues,
+} from '../../_schema/manage-routes.schema';
 
 interface IRouteFormProps {
-  onSubmit: (data: ManageRoutesValues) => void;
   initialData?: ManageRoutesValues;
+  isLoading?: boolean;
+  onSubmit: (
+    data: ManageRoutesValues,
+    reset: UseFormReset<ManageRoutesValues>
+  ) => void;
 }
 
-export function RouteForm({ onSubmit, initialData }: IRouteFormProps) {
+export function RouteForm({
+  isLoading,
+  initialData,
+  onSubmit,
+}: IRouteFormProps) {
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: initialData || {
-      stops: [{ name: '', location_lat: '', location_lng: '', order: 0 }],
-    }, // Initialize with one empty stop
+      stops: [{ name: '', location_lat: '', location_lng: '', order: 0 }], // Initialize with one empty stop
+    },
+    resolver: zodResolver(manageRoutesSchema),
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -37,10 +56,7 @@ export function RouteForm({ onSubmit, initialData }: IRouteFormProps) {
     name: 'stops',
   });
 
-  const onFormSubmit = (data: ManageRoutesValues) => {
-    console.log(data);
-    onSubmit(data);
-  };
+  const onFormSubmit = (data: ManageRoutesValues) => onSubmit(data, reset);
 
   return (
     <form
@@ -68,15 +84,22 @@ export function RouteForm({ onSubmit, initialData }: IRouteFormProps) {
 
       <div className='space-y-2'>
         <Label htmlFor='status'>Status</Label>
-        <Select {...register('status')}>
-          <SelectTrigger>
-            <SelectValue placeholder='Select status' />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value='active'>Active</SelectItem>
-            <SelectItem value='inactive'>Inactive</SelectItem>
-          </SelectContent>
-        </Select>
+        <Controller
+          control={control}
+          defaultValue='active'
+          name='status'
+          render={({ field }) => (
+            <Select value={field.value} onValueChange={field.onChange}>
+              <SelectTrigger>
+                <SelectValue placeholder='Select status' />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value='active'>Active</SelectItem>
+                <SelectItem value='inactive'>Inactive</SelectItem>
+              </SelectContent>
+            </Select>
+          )}
+        />
       </div>
 
       <div className='space-y-2'>
@@ -169,7 +192,7 @@ export function RouteForm({ onSubmit, initialData }: IRouteFormProps) {
       </div>
 
       <div className='sticky bottom-0 mt-4 bg-background pt-4'>
-        <Button className='w-full' type='submit'>
+        <Button className='w-full' isLoading={isLoading} type='submit'>
           {initialData?.id ? 'Update Route' : 'Add Route'}
         </Button>
       </div>

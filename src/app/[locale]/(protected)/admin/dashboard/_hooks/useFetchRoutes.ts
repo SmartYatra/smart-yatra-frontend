@@ -5,9 +5,27 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 export interface IRoute {
   id: number;
   name: string;
-  location_lng: string;
-  location_lat: string;
-  order: number;
+  description: string;
+  distance: number;
+  duration: number;
+  status: 'active';
+  created_at: string;
+  updated_at: string;
+  stops: [
+    {
+      id: number;
+      name: string;
+      location_lat: string;
+      location_lng: string;
+      created_at: string;
+      updated_at: string;
+      pivot: {
+        route_id: number;
+        stop_id: number;
+        order: number;
+      };
+    },
+  ];
 }
 
 const fetchRoutes = async (): Promise<ISuccessResponse<IRoute[]>> => {

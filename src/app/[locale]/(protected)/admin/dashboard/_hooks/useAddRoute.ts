@@ -1,6 +1,7 @@
 import { toast } from 'sonner';
 
 import { api } from '@/lib/api-client';
+import { handleApiError } from '@/utils/helpers';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { ManageRoutesValues } from '../_schema/manage-routes.schema';
@@ -24,9 +25,6 @@ export const useAddRoute = () => {
 
       toast.success('Route added successfully');
     },
-    onError: error => {
-      console.error('Error adding route:', error);
-      toast.error('Failed to add route');
-    },
+    onError: handleApiError,
   });
 };
