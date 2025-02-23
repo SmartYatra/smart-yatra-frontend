@@ -4,6 +4,7 @@ import React from 'react';
 
 import { Bell, LogOut, LucideIcon, Search, Settings, User } from 'lucide-react';
 
+import AvatarImg from '@/assets/avatar.svg';
 import CustomTrigger from '@/components/custom-sidebar-trigger';
 import Logo from '@/components/logo';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -96,7 +97,7 @@ const DashboardNavbar = ({ role }: DashboardNavbarProps) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Avatar className='cursor-pointer'>
-            <AvatarImage alt='User Avatar' src='/images/avatar.jpg' />
+            <AvatarImage alt='User Avatar' src={AvatarImg} />
             <AvatarFallback>DB</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
