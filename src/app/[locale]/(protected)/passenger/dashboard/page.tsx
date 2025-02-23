@@ -1,7 +1,11 @@
+'use client';
+
 import React from 'react';
 
+import RouteFinder from './_components/RouteFinder';
+
 const PassengerDashboardPage = () => {
-  return <div>PassengerDashboardPage</div>;
+  return <RouteFinder />;
 };
 
 export default PassengerDashboardPage;

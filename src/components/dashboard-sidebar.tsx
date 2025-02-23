@@ -83,8 +83,6 @@ const DashboardSidebar: React.FC<SidebarProps> = ({ role }) => {
   // remove /en, /ne, /fr, etc. from pathname
   const path = pathname.split('/').slice(2).join('/');
 
-  console.log(path);
-
   return (
     <Sidebar collapsible='icon' side='left' variant='sidebar'>
       {/* Sidebar Header */}
