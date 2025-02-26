@@ -5,8 +5,6 @@ import { createSession, deleteSession, getSession } from '@/lib/session';
 export async function GET() {
   const session = await getSession();
 
-  console.log(session);
-
   if (!session) return NextResponse.json(null, { status: 200 });
 
   return NextResponse.json(session, { status: 200 });

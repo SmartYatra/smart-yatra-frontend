@@ -98,7 +98,7 @@ const ScanQRCode = () => {
   };
 
   return (
-    <Card className='mx-auto w-full max-w-md'>
+    <Card className='mx-auto w-full max-w-lg'>
       <CardHeader>
         <CardTitle className='flex items-center justify-between'>
           <span>QR Code Scanner</span>

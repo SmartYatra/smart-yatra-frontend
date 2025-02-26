@@ -66,7 +66,7 @@ export default function RouteFinder() {
   };
 
   return (
-    <Card className='mx-auto w-full max-w-md'>
+    <Card className='mx-auto w-full max-w-3xl'>
       <CardHeader>
         <CardTitle>Find Shortest Route</CardTitle>
         <CardDescription>

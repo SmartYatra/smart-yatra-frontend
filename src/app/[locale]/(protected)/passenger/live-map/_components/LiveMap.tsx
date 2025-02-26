@@ -1,8 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { MapContainer, Marker, Popup, TileLayer, Tooltip } from 'react-leaflet';
+import { Fragment, useEffect, useState } from 'react';
+import {
+  MapContainer,
+  Marker,
+  Polyline,
+  Popup,
+  TileLayer,
+  Tooltip,
+} from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
+import { useSearchParams } from 'next/navigation';
 
 import { icon } from 'leaflet';
 
@@ -18,9 +26,13 @@ import 'leaflet/dist/leaflet.css';
 
 import 'react-leaflet-markercluster/styles';
 import { useBuses } from '../_hooks/useBuses';
+import { useFetchRoutesFromMultipleIds } from '../_hooks/useFetchRoutesFromMultipleIds';
 import { fetchLocationName } from '../_utils/geocoding';
 
 export const LiveMap = () => {
+  const searchParams = useSearchParams();
+  const routeIds = searchParams.get('routes')?.split(',').map(Number) || [];
+
   const [userLocation, setUserLocation] = useState<{
     lat: number;
     lng: number;
@@ -30,15 +42,20 @@ export const LiveMap = () => {
 
   const { data: buses, isFetching, error } = useBuses();
 
+  // Fetch route data for all IDs
+  const { data: routes } = useFetchRoutesFromMultipleIds({ ids: routeIds });
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       async position => {
+        console.log('Geolocation position:', position); // Log the raw position data
         const { latitude, longitude } = position.coords;
         setUserLocation({ lat: latitude, lng: longitude });
         const locationName = await fetchLocationName(latitude, longitude);
         setUserLocationName(locationName);
       },
-      error => console.error('Error getting user location:', error)
+      error => console.error('Error getting user location:', error),
+      { enableHighAccuracy: true, timeout: 5000 } // Force high accuracy and set a timeout
     );
   }, []);
 
@@ -68,6 +85,34 @@ export const LiveMap = () => {
   }
 
   if (error) return <p>Error: {error.message}</p>;
+
+  // Function to extract route polyline coordinates from stops
+  interface Stop {
+    location_lat: string;
+    location_lng: string;
+  }
+
+  const getRoutePolyline = (stops: Stop[]) => {
+    return stops.map(stop => ({
+      lat: parseFloat(stop.location_lat),
+      lng: parseFloat(stop.location_lng),
+    }));
+  };
+
+  // Function to generate a unique color for each route
+  const getRouteColor = (index: number) => {
+    const colors = [
+      'blue',
+      'green',
+      'red',
+      'purple',
+      'orange',
+      'yellow',
+      'pink',
+      'brown',
+    ];
+    return colors[index % colors.length]; // Loop through colors if there are more routes
+  };
 
   return (
     <MapContainer
@@ -103,6 +148,54 @@ export const LiveMap = () => {
           </Marker>
         ))}
       </MarkerClusterGroup>
+
+      {routes?.map((route, index) => {
+        const routeColor = getRouteColor(index);
+
+        return (
+          <Fragment key={route.id}>
+            {/* Draw polyline for the entire route */}
+            <Polyline
+              color={routeColor} // Assign different color for each route
+              positions={getRoutePolyline(route.stops)}
+              weight={4}
+            />
+
+            {/* Draw a small marker at the start and end of the route */}
+            {route.stops.length > 0 && (
+              <>
+                {/* Start Marker */}
+                <Marker
+                  icon={icon({ iconUrl: UserMarker.src, iconSize: [20, 20] })}
+                  position={[
+                    parseFloat(route.stops[0].location_lat),
+                    parseFloat(route.stops[0].location_lng),
+                  ]}
+                >
+                  <Popup>Start: {route.stops[0].location_lat}</Popup>
+                </Marker>
+
+                {/* End Marker */}
+                <Marker
+                  icon={icon({ iconUrl: UserMarker.src, iconSize: [20, 20] })}
+                  position={[
+                    parseFloat(
+                      route.stops[route.stops.length - 1].location_lat
+                    ),
+                    parseFloat(
+                      route.stops[route.stops.length - 1].location_lng
+                    ),
+                  ]}
+                >
+                  <Popup>
+                    End: {route.stops[route.stops.length - 1].location_lat}
+                  </Popup>
+                </Marker>
+              </>
+            )}
+          </Fragment>
+        );
+      })}
 
       {userLocation && (
         <Marker
