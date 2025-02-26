@@ -1,6 +1,9 @@
-import { useState } from 'react';
+'use client';
 
-import { ChevronDown, ChevronUp, MapPin, Route } from 'lucide-react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { ChevronDown, ChevronUp, Map, MapPin, Route } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -25,6 +28,7 @@ export default function RouteFinder() {
   const [startStop, setStartStop] = useState<number>();
   const [endStop, setEndStop] = useState<number>();
   const [expandedRoute, setExpandedRoute] = useState<number | null>(null);
+  const router = useRouter();
 
   const {
     data: stopsData,
@@ -48,6 +52,17 @@ export default function RouteFinder() {
     if (startStop !== undefined && endStop !== undefined) {
       await fetchShortestRoute();
     }
+  };
+
+  const handleViewAllRoutesOnMap = () => {
+    // const routeIds = ROUTES.map(route => route.routeId).join(',');
+
+    const routeIds = [5, 6].join(',');
+    router.push(`/passenger/live-map?routes=${routeIds}`);
+  };
+
+  const handleViewSpecificRouteOnMap = (routeId: number) => {
+    router.push(`/passenger/live-map?routes=${routeId}`);
   };
 
   return (
@@ -124,6 +139,14 @@ export default function RouteFinder() {
         {ROUTES.length > 0 && (
           <div className='mt-6 space-y-6'>
             <h2 className='text-xl font-semibold'>Available Routes</h2>
+            <Button
+              className='w-full'
+              variant='outline'
+              onClick={handleViewAllRoutesOnMap}
+            >
+              <Map className='mr-2 h-4 w-4' />
+              View All Routes on Map
+            </Button>
             {ROUTES.map((route, index) => {
               const isExpanded = expandedRoute === index;
 
@@ -139,17 +162,34 @@ export default function RouteFinder() {
                         {route.route}
                       </CardTitle>
                     </div>
-                    <Button
-                      size='icon'
-                      variant='ghost'
-                      onClick={e => e.stopPropagation()}
-                    >
-                      {isExpanded ? (
-                        <ChevronUp className='h-5 w-5' />
-                      ) : (
-                        <ChevronDown className='h-5 w-5' />
-                      )}
-                    </Button>
+                    <div className='flex items-center space-x-2'>
+                      <Button
+                        size='sm'
+                        variant='ghost'
+                        onClick={e => {
+                          e.stopPropagation();
+                          // handleViewSpecificRouteOnMap(route.routeId);
+                          handleViewSpecificRouteOnMap(5);
+                        }}
+                      >
+                        <Map className='mr-2 h-4 w-4' />
+                        View on Map
+                      </Button>
+                      <Button
+                        size='icon'
+                        variant='ghost'
+                        onClick={e => {
+                          e.stopPropagation();
+                          setExpandedRoute(isExpanded ? null : index);
+                        }}
+                      >
+                        {isExpanded ? (
+                          <ChevronUp className='h-5 w-5' />
+                        ) : (
+                          <ChevronDown className='h-5 w-5' />
+                        )}
+                      </Button>
+                    </div>
                   </CardHeader>
 
                   {isExpanded && (

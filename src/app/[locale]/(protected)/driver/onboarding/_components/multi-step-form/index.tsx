@@ -13,14 +13,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import BusDetails from './BusDetails';
 import FinishStep from './FinishStep';
 import RouteDetails from './RouteDetails';
-import UploadDocuments from './UploadDocuments';
 
 import { useDriverOnboarding } from '../../_hooks/useDriverOnboarding';
 import {
   busDetailsSchema,
   finishStepSchema,
   routeDetailsSchema,
-  uploadDocumentsSchema,
 } from '../../_schema';
 import { IOnBoardingFormData } from '../../_types';
 
@@ -29,11 +27,13 @@ const MultiStepForm = () => {
   const { mutate: onBoardDriver, isPending } = useDriverOnboarding();
 
   const defaultValues: IOnBoardingFormData = {
-    busName: '',
     busNumber: '',
-    routeStart: '',
-    routeEnd: '',
-    documents: [],
+    routeId: null,
+    routeName: '',
+    status: 'active',
+    capacity: 0,
+    driverId: null,
+    model: '',
   };
 
   const methods = useForm({
@@ -44,19 +44,21 @@ const MultiStepForm = () => {
         ? busDetailsSchema
         : currentStep === 1
           ? routeDetailsSchema
-          : currentStep === 2
-            ? uploadDocumentsSchema
-            : finishStepSchema
+          : finishStepSchema
     ),
   });
   const {
+    setValue,
     register,
     handleSubmit,
     formState: { errors, isValid }, // Track the validity of the form
     trigger, // Used to trigger validation programmatically
   } = methods;
 
+  console.log(errors);
+
   const onSubmit = (data: IOnBoardingFormData) => {
+    console.log(data);
     // Submit the data to the server
     onBoardDriver(data);
   };
@@ -70,12 +72,7 @@ const MultiStepForm = () => {
     {
       title: 'Route Details',
       description: 'Specify your bus route for better tracking',
-      content: <RouteDetails errors={errors} register={register} />,
-    },
-    {
-      title: 'Upload Documents',
-      description: 'Verify your information with necessary documents',
-      content: <UploadDocuments />,
+      content: <RouteDetails errors={errors} setValue={setValue} />,
     },
     {
       title: 'Finish Setup',

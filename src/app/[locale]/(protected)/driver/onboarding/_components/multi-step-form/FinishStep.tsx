@@ -1,10 +1,6 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-import Image from 'next/image';
 
-import { File, X } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -16,26 +12,12 @@ import {
 import { IOnBoardingFormData } from '../../_types';
 
 const FinishStep = () => {
-  const { watch, setValue } = useFormContext<IOnBoardingFormData>();
+  const { watch } = useFormContext<IOnBoardingFormData>();
   const formData = watch();
 
   return (
     <div className='space-y-6'>
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
-        {/* Bus Name Card */}
-        <Card className='bg-muted/50 shadow-md'>
-          <CardHeader>
-            <CardTitle className='text-lg font-semibold text-muted-foreground'>
-              Bus Name
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <CardDescription className='text-base text-foreground'>
-              {formData.busName}
-            </CardDescription>
-          </CardContent>
-        </Card>
-
         {/* Bus Number Card */}
         <Card className='bg-muted/50 shadow-md'>
           <CardHeader>
@@ -50,81 +32,58 @@ const FinishStep = () => {
           </CardContent>
         </Card>
 
-        {/* Route Start Card */}
+        {/* Capacity Card */}
         <Card className='bg-muted/50 shadow-md'>
           <CardHeader>
             <CardTitle className='text-lg font-semibold text-muted-foreground'>
-              Route Start
+              Capacity
             </CardTitle>
           </CardHeader>
           <CardContent>
             <CardDescription className='text-base text-foreground'>
-              {formData.routeStart}
+              {formData.capacity}
             </CardDescription>
           </CardContent>
         </Card>
 
-        {/* Route End Card */}
+        {/* Bus Modal Card */}
         <Card className='bg-muted/50 shadow-md'>
           <CardHeader>
             <CardTitle className='text-lg font-semibold text-muted-foreground'>
-              Route End
+              Model
             </CardTitle>
           </CardHeader>
           <CardContent>
             <CardDescription className='text-base text-foreground'>
-              {formData.routeEnd}
+              {formData.model}
             </CardDescription>
           </CardContent>
         </Card>
 
-        {/* Documents Card */}
-        <Card className='col-span-2 bg-muted/50 shadow-md'>
+        {/* Bus Status Card */}
+        <Card className='bg-muted/50 shadow-md'>
           <CardHeader>
             <CardTitle className='text-lg font-semibold text-muted-foreground'>
-              Documents
+              Status
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <CardDescription>
-              {formData.documents && formData.documents.length > 0 ? (
-                <ul className='flex flex-wrap gap-6'>
-                  {formData.documents.map((doc, index) => (
-                    <li
-                      className='relative flex items-center space-x-2'
-                      key={index}
-                    >
-                      {doc.type.startsWith('image/') ? (
-                        <Image
-                          alt={doc.name}
-                          className='size-12 rounded object-cover'
-                          height={48}
-                          src={URL.createObjectURL(doc)}
-                          width={48}
-                        />
-                      ) : (
-                        <File className='size-6 text-muted-foreground' />
-                      )}
+            <CardDescription className='text-base text-foreground'>
+              {formData.status}
+            </CardDescription>
+          </CardContent>
+        </Card>
 
-                      <Button
-                        className='absolute -right-2 -top-2 h-auto rounded-full bg-primary/70 p-0.5 backdrop-blur-sm'
-                        onClick={() =>
-                          setValue(
-                            'documents',
-                            formData.documents.filter(
-                              file => file.name !== doc.name
-                            )
-                          )
-                        }
-                      >
-                        <X className='size-2' />
-                      </Button>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className='text-sm text-muted-foreground'>Not uploaded</p>
-              )}
+        {/* Route Card */}
+        <Card className='bg-muted/50 shadow-md'>
+          <CardHeader>
+            <CardTitle className='text-lg font-semibold text-muted-foreground'>
+              Route
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <CardDescription className='text-base text-foreground'>
+              {formData.routeName}
             </CardDescription>
           </CardContent>
         </Card>

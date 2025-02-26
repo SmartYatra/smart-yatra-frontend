@@ -9,7 +9,11 @@ import {
   CardFooter,
 } from '@/components/ui/card';
 
+import { useFetchQR } from '../_hooks/useFetchQR';
+
 const DriverQrCode = () => {
+  const { data } = useFetchQR({ id: 3 });
+
   return (
     <section className='mt-8 md:w-fit'>
       <Card>
@@ -18,7 +22,7 @@ const DriverQrCode = () => {
             alt='QR Code'
             className='size-56'
             height={150}
-            src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Driver%20Name%3A%20Diwash%20Bhattarai%0A%0ABus%20Number%3A%20BA%201%0A%0ADriver%20License%3A%20A1234567'
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${JSON.stringify(data?.data)}`}
             width={150}
           />
         </CardContent>

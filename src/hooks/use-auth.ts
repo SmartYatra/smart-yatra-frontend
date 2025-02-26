@@ -1,15 +1,42 @@
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+import { toast } from 'sonner';
 
 import { nextApi } from '@/lib/api-client';
+import { TUser } from '@/types/user.type';
+
+export type TSession = {
+  token: string;
+  user: TUser;
+  expiresAt: string;
+  iat: number;
+  exp: number;
+};
 
 export const useAuth = () => {
-  const router = useRouter();
+  const [user, setUser] = useState<TUser | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const getSession = async () => {
+      const session: TSession = await nextApi
+        .get('/api/session')
+        .then(res => res.data)
+        .catch(err => console.error(err))
+        .finally(() => setIsLoading(false));
+
+      setUser(session?.user);
+    };
+
+    void getSession();
+  }, []);
 
   const logout = async () => {
     await nextApi.delete('/api/session').then(() => {
-      router.refresh();
+      toast.success('Successfully logged out!');
+      window.location.reload();
     });
   };
 
-  return { logout };
+  return { logout, user, isLoading };
 };

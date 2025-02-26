@@ -1,32 +1,47 @@
 import React from 'react';
 
-import { Input } from '@/components/ui/input';
+import { useFetchRoutes } from '@/app/[locale]/(protected)/admin/dashboard/_hooks/useFetchRoutes';
 import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 import { IOnBoardingFormProps } from '../../_types';
 
-const RouteDetails = ({ errors, register }: IOnBoardingFormProps) => {
-  return (
-    <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-      <div className='space-y-1'>
-        <Label>Start Location</Label>
-        <Input
-          placeholder='Enter start location'
-          type='text'
-          {...register('routeStart')}
-          error={errors.routeStart?.message}
-        />
-      </div>
+const RouteDetails = ({ errors, setValue }: IOnBoardingFormProps) => {
+  const { data } = useFetchRoutes();
+  const routes = data?.data || [];
 
-      <div className='space-y-1'>
-        <Label>End Location</Label>
-        <Input
-          placeholder='Enter end location'
-          type='text'
-          {...register('routeEnd')}
-          error={errors.routeEnd?.message}
-        />
-      </div>
+  return (
+    <div className='space-y-1'>
+      <Label>Select Route</Label>
+      <Select
+        onValueChange={value => {
+          setValue('routeId', Number(value));
+          setValue(
+            'routeName',
+            routes.find(route => route.id === Number(value))?.name || ''
+          );
+        }}
+      >
+        <SelectTrigger>
+          <SelectValue placeholder='Choose a route' />
+        </SelectTrigger>
+        <SelectContent>
+          {routes.map(route => (
+            <SelectItem key={route.id} value={String(route.id)}>
+              {route.name} ({route.distance} km, {route.duration} min)
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      {errors.routeId && (
+        <p className='text-sm text-red-500'>{errors.routeId.message}</p>
+      )}
     </div>
   );
 };
