@@ -12,7 +12,9 @@ import {
 import { useFetchQR } from '../_hooks/useFetchQR';
 
 const DriverQrCode = () => {
-  const { data } = useFetchQR({ id: 3 });
+  const { data } = useFetchQR();
+
+  console.log(data);
 
   return (
     <section className='mt-8 md:w-fit'>

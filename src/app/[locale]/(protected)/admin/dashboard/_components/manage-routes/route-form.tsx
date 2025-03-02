@@ -1,8 +1,11 @@
+'use client';
+
+import { useState } from 'react';
 import {
   Controller,
   useFieldArray,
   useForm,
-  UseFormReset,
+  type UseFormReset,
 } from 'react-hook-form';
 
 import { Trash2 } from 'lucide-react';
@@ -19,9 +22,10 @@ import {
 } from '@/components/ui/select';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { useSuggestedStop } from '../../_hooks/useSuggestedStop';
 import {
   manageRoutesSchema,
-  ManageRoutesValues,
+  type ManageRoutesValues,
 } from '../../_schema/manage-routes.schema';
 
 interface IRouteFormProps {
@@ -43,10 +47,11 @@ export function RouteForm({
     handleSubmit,
     control,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: initialData || {
-      stops: [{ name: '', location_lat: '', location_lng: '', order: 0 }], // Initialize with one empty stop
+      stops: [{ name: '', location_lat: '', location_lng: '', order: 0 }],
     },
     resolver: zodResolver(manageRoutesSchema),
   });
@@ -56,7 +61,39 @@ export function RouteForm({
     name: 'stops',
   });
 
+  const [activeStopIndex, setActiveStopIndex] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const { data: suggestedStops, isLoading: isSuggestionsLoading } =
+    useSuggestedStop({
+      query: searchQuery,
+    });
+
   const onFormSubmit = (data: ManageRoutesValues) => onSubmit(data, reset);
+
+  const handleStopNameChange = (index: number, value: string) => {
+    setActiveStopIndex(index);
+    setSearchQuery(value);
+    // Only show suggestions if there's input
+    if (value.trim() === '') {
+      setActiveStopIndex(null);
+    }
+  };
+
+  interface Suggestion {
+    place_id: string;
+    display_name: string;
+    lat: string;
+    lon: string;
+  }
+
+  const handleSuggestionClick = (suggestion: Suggestion, index: number) => {
+    setValue(`stops.${index}.name`, suggestion.display_name);
+    setValue(`stops.${index}.location_lat`, suggestion.lat);
+    setValue(`stops.${index}.location_lng`, suggestion.lon);
+    setActiveStopIndex(null);
+    setSearchQuery('');
+  };
 
   return (
     <form
@@ -128,13 +165,44 @@ export function RouteForm({
         <Label htmlFor='stops'>Stops</Label>
         {fields.map((stop, index) => (
           <div className='flex items-center gap-2' key={stop.id}>
-            <div className='space-y-1'>
+            <div className='relative space-y-1'>
               <Label htmlFor={`stops.${index}.name`}>Stop Name</Label>
               <Input
                 placeholder='Stop Name'
                 {...register(`stops.${index}.name`)}
                 defaultValue={stop.name}
+                onChange={e => handleStopNameChange(index, e.target.value)}
               />
+              {activeStopIndex === index &&
+                suggestedStops &&
+                suggestedStops.length > 0 && (
+                  <div className='absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-200 bg-white shadow-lg'>
+                    {isSuggestionsLoading ? (
+                      <p className='p-2'>Loading suggestions...</p>
+                    ) : (
+                      <ul>
+                        {suggestedStops.map(
+                          (suggestion: {
+                            place_id: string;
+                            display_name: string;
+                            lat: string;
+                            lon: string;
+                          }) => (
+                            <li
+                              className='cursor-pointer p-2 hover:bg-gray-100'
+                              key={suggestion.place_id}
+                              onClick={() =>
+                                handleSuggestionClick(suggestion, index)
+                              }
+                            >
+                              {suggestion.display_name}
+                            </li>
+                          )
+                        )}
+                      </ul>
+                    )}
+                  </div>
+                )}
             </div>
             <div className='space-y-1'>
               <Label htmlFor={`stops.${index}.location_lat`}>Latitude</Label>
@@ -174,7 +242,6 @@ export function RouteForm({
           </div>
         ))}
 
-        {/* Button to add new stop */}
         <Button
           type='button'
           variant='outline'

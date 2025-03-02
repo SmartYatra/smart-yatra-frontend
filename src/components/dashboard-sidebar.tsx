@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import {
+  Bus,
   Car,
   ChevronDown,
   DollarSign,
@@ -55,6 +56,7 @@ const sidebarConfig = {
   ],
   driver: [
     { title: 'Dashboard', url: '/driver/dashboard', icon: Grid },
+    { title: 'Your Bus', url: '/driver/dashboard/your-bus', icon: Bus },
     { title: 'Trips', url: '/driver/dashboard/trips', icon: Car },
     { title: 'Earnings', url: '/driver/dashboard/earnings', icon: DollarSign },
     { title: 'Settings', url: '/driver/dashboard/settings', icon: Settings },

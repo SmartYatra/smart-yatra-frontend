@@ -2,6 +2,8 @@ import { api } from '@/lib/api-client';
 import { ISuccessResponse } from '@/types/response';
 import { useQuery } from '@tanstack/react-query';
 
+import { useGetYourBus } from './useGetYourBus';
+
 type IQRDataResponse = {
   route_id: null;
   bus_number: string;
@@ -10,7 +12,7 @@ type IQRDataResponse = {
 };
 
 const fetchQRData = async ({
-  id = 3,
+  id,
 }: {
   id: number;
 }): Promise<ISuccessResponse<IQRDataResponse>> => {
@@ -18,9 +20,11 @@ const fetchQRData = async ({
   return res.data;
 };
 
-export const useFetchQR = ({ id = 3 }: { id: number }) => {
+export const useFetchQR = () => {
+  const { data } = useGetYourBus();
   return useQuery({
     queryKey: ['qr'],
-    queryFn: () => fetchQRData({ id }),
+    queryFn: () => fetchQRData({ id: data?.driver_id as number }),
+    enabled: !!data,
   });
 };

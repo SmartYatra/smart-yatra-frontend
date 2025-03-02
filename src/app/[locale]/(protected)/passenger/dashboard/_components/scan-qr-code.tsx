@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { OnResultFunction, QrReader } from 'react-qr-reader';
 
 import { Scan } from 'lucide-react';
 
@@ -23,18 +22,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Scanner } from '@yudiel/react-qr-scanner';
 
 import { useScanQrCode } from '../_hooks/useScanQRCode';
 
 const ScanQRCode = () => {
   const [data, setData] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-
-  // const qrReaderRef = useRef<HTMLVideoElement | null>(null); // Reference to the video element
 
   const { mutate: scanQrCode, isPending: isScanning } = useScanQrCode();
 
@@ -52,49 +49,27 @@ const ScanQRCode = () => {
         }
       );
     } else {
-      // Reset location when the dialog is closed
       setLatitude(null);
       setLongitude(null);
     }
   }, [isDialogOpen]);
 
   // Handle QR code scanning result
-  const handleResult: OnResultFunction = (result, error) => {
-    if (result?.getText()) {
-      if (!loading) {
-        setLoading(true);
-        setData(result.getText());
+  const handleResult = (qrText: string) => {
+    if (!qrText) return;
+    setData(qrText);
 
-        // Example payload, update as per your QR code data
-        const payload = {
-          bus_id: 123, // example bus ID
-          passenger_id: 456, // example passenger ID
-          auth_token: 'some-auth-token', // replace with actual token
-          longitude: longitude || 0, // set user's longitude if available
-          latitude: latitude || 0, // set user's latitude if available
-        };
+    // Example payload, update as per your QR code data
+    const payload = {
+      bus_id: 123, // example bus ID
+      passenger_id: 456, // example passenger ID
+      auth_token: 'some-auth-token', // replace with actual token
+      longitude: longitude || 0,
+      latitude: latitude || 0,
+    };
 
-        // Send the QR code data to the server
-        scanQrCode(payload);
-      }
-    } else if (error) {
-      setError('Unable to scan QR code. Please try again.');
-      setLoading(false);
-    }
-  };
-
-  // Reset states and stop the camera when the dialog is closed
-  const resetStates = () => {
-    setData(null);
-    setError(null);
-    setLoading(false);
-    setIsDialogOpen(false);
-    const videoElement = document.querySelector('video');
-    if (videoElement) {
-      const stream = videoElement.srcObject as MediaStream;
-      const tracks = stream.getTracks();
-      tracks.forEach(track => track.stop()); // Stop all tracks to stop the camera
-    }
+    // Send the QR code data to the server
+    scanQrCode(payload);
   };
 
   return (
@@ -107,15 +82,7 @@ const ScanQRCode = () => {
         <CardDescription>Scan a QR code to get started</CardDescription>
       </CardHeader>
       <CardContent>
-        <Dialog
-          open={isDialogOpen}
-          onOpenChange={open => {
-            setIsDialogOpen(open);
-            if (!open) {
-              resetStates(); // Call resetStates when dialog is closed
-            }
-          }}
-        >
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button className='w-full'>Open QR Scanner</Button>
           </DialogTrigger>
@@ -129,16 +96,11 @@ const ScanQRCode = () => {
             </DialogHeader>
 
             <div className='mt-2'>
-              {/* Reset QR reader on each open */}
-              <QrReader
-                className='w-full'
-                constraints={{ facingMode: 'environment' }}
-                // ref={qrReaderRef} // Attach the reference to the QrReader
-                scanDelay={1000}
-                videoContainerStyle={{ width: '100%' }} // Style the video container
-                onResult={(result, error) => {
-                  setLoading(true);
-                  handleResult(result, error);
+              <Scanner
+                onScan={detectedCodes => {
+                  if (detectedCodes.length > 0) {
+                    handleResult(detectedCodes[0].rawValue);
+                  }
                 }}
               />
             </div>
