@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { Bell, LogOut, LucideIcon, Search, Settings, User } from 'lucide-react';
+import { Bell, LogOut, LucideIcon, Settings, User } from 'lucide-react';
 
 import AvatarImg from '@/assets/avatar.svg';
 import CustomTrigger from '@/components/custom-sidebar-trigger';
@@ -18,7 +18,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
+// import { Input } from '@/components/ui/input';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useAuth } from '@/hooks/use-auth';
 import { useRouter } from '@/i18n/routing';
@@ -85,12 +85,12 @@ const DashboardNavbar = ({ role }: DashboardNavbarProps) => {
         </div>
 
         {/* Search Bar */}
-        <div className='hidden w-72 md:block'>
+        {/* <div className='hidden w-72 md:block'>
           <Input
             leftIcon={Search}
             placeholder='Search for routes, users, etc.'
           />
-        </div>
+        </div> */}
       </div>
 
       {/* Profile Dropdown */}

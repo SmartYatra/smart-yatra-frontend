@@ -57,7 +57,8 @@ export default function RouteFinder() {
   const handleViewAllRoutesOnMap = () => {
     // const routeIds = ROUTES.map(route => route.routeId).join(',');
 
-    const routeIds = [5, 6].join(',');
+    const routeIds = [1, 2, 3].join(',');
+
     router.push(`/passenger/live-map?routes=${routeIds}`);
   };
 
@@ -169,7 +170,7 @@ export default function RouteFinder() {
                         onClick={e => {
                           e.stopPropagation();
                           // handleViewSpecificRouteOnMap(route.routeId);
-                          handleViewSpecificRouteOnMap(5);
+                          handleViewSpecificRouteOnMap(1);
                         }}
                       >
                         <Map className='mr-2 h-4 w-4' />

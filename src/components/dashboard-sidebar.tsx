@@ -12,7 +12,6 @@ import {
   HelpCircle,
   LogOut,
   Map,
-  Settings,
   User2,
 } from 'lucide-react';
 
@@ -52,25 +51,25 @@ const sidebarConfig = {
       url: '/admin/dashboard/manage-routes',
       icon: Map,
     },
-    { title: 'Settings', url: '/admin/dashboard/settings', icon: Settings },
+    // { title: 'Settings', url: '/admin/dashboard/settings', icon: Settings },
   ],
   driver: [
     { title: 'Dashboard', url: '/driver/dashboard', icon: Grid },
     { title: 'Your Bus', url: '/driver/dashboard/your-bus', icon: Bus },
     { title: 'Trips', url: '/driver/dashboard/trips', icon: Car },
     { title: 'Earnings', url: '/driver/dashboard/earnings', icon: DollarSign },
-    { title: 'Settings', url: '/driver/dashboard/settings', icon: Settings },
+    // { title: 'Settings', url: '/driver/dashboard/settings', icon: Settings },
   ],
   user: [
     { title: 'Dashboard', url: '/passenger/dashboard', icon: Grid },
     { title: 'Live Map', url: '/passenger/live-map', icon: Map },
-    { title: 'My Trips', url: '/passenger/my-trips', icon: Car },
-    {
-      title: 'Payments',
-      url: '/passenger/payments',
-      icon: DollarSign,
-    },
-    { title: 'Settings', url: '/passenger/settings', icon: Settings },
+    // { title: 'My Trips', url: '/passenger/my-trips', icon: Car },
+    // {
+    //   title: 'Payments',
+    //   url: '/passenger/payments',
+    //   icon: DollarSign,
+    // },
+    // { title: 'Settings', url: '/passenger/settings', icon: Settings },
   ],
 };
 

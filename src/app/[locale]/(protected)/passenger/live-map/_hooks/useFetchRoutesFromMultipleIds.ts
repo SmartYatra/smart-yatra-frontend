@@ -8,9 +8,11 @@ const fetchRoutesFromMultipleIds = async ({
 }: {
   ids: number[];
 }): Promise<IRoute[]> => {
+  console.log(ids);
   const res = await api.get(`route/get-multiple`, {
     params: { route_ids: ids },
   });
+  console.log(res.data.data);
   return res.data.data;
 };
 
