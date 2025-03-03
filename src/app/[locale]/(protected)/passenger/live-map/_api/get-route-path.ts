@@ -1,10 +1,5 @@
 import { nextApi } from '@/lib/api-client';
 
-type IStops = Array<{
-  location_lat: string;
-  location_lng: string;
-}>;
-
 interface IRouteResponse {
   features: Array<{
     geometry: {
@@ -18,24 +13,23 @@ interface ICoordinate {
   lng: number;
 }
 
-export const getRoadPath = async (stops: IStops): Promise<ICoordinate[]> => {
-  if (stops.length < 2) return [];
+export const getRoadPath = async (
+  coordinates: ICoordinate[]
+): Promise<ICoordinate[]> => {
+  if (coordinates.length < 2) return [];
 
-  const coordinates = stops
-    .map(
-      stop =>
-        `${parseFloat(stop.location_lng)},${parseFloat(stop.location_lat)}`
-    )
+  const coordsString = coordinates
+    .map(coord => `${coord.lng},${coord.lat}`)
     .join(';');
 
   try {
     const response = await nextApi.get(
-      `/api/route-path?coords=${encodeURIComponent(coordinates)}`
+      `/api/route-path?coords=${encodeURIComponent(coordsString)}`
     );
     const data: IRouteResponse = response.data;
 
     if (!data.features || data.features.length === 0) {
-      console.error('No route found for coordinates:', coordinates);
+      console.error('No route found for coordinates:', coordsString);
       return [];
     }
 

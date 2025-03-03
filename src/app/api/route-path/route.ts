@@ -19,6 +19,7 @@ export async function GET(request: Request) {
       url,
       {
         coordinates: coords.split(';').map(pair => pair.split(',').map(Number)),
+        options: { avoid_features: ['highways', 'tollways'] }, // Avoid unnecessary detours
       },
       {
         headers: {

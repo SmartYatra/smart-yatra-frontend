@@ -55,15 +55,22 @@ export default function RouteFinder() {
   };
 
   const handleViewAllRoutesOnMap = () => {
-    // const routeIds = ROUTES.map(route => route.routeId).join(',');
+    const coordinates = ROUTES.flatMap(route =>
+      route.segment.map(stop => `${stop.location_lng},${stop.location_lng}`)
+    ).join(';');
 
-    const routeIds = [1, 2, 3].join(',');
-
-    router.push(`/passenger/live-map?routes=${routeIds}`);
+    router.push(`/passenger/live-map?coords=${coordinates}`);
   };
 
   const handleViewSpecificRouteOnMap = (routeId: number) => {
-    router.push(`/passenger/live-map?routes=${routeId}`);
+    const selectedRoute = ROUTES.find(route => route.route.id === routeId);
+    if (!selectedRoute) return;
+
+    const coordinates = selectedRoute.segment
+      .map(stop => `${stop.location_lng},${stop.location_lat}`)
+      .join(';');
+
+    router.push(`/passenger/live-map?coords=${coordinates}`);
   };
 
   return (
@@ -137,17 +144,19 @@ export default function RouteFinder() {
         )}
 
         {/* Minimal Route Display */}
-        {ROUTES.length > 0 && (
+        {ROUTES.length > 0 ? (
           <div className='mt-6 space-y-6'>
             <h2 className='text-xl font-semibold'>Available Routes</h2>
-            <Button
-              className='w-full'
-              variant='outline'
-              onClick={handleViewAllRoutesOnMap}
-            >
-              <Map className='mr-2 h-4 w-4' />
-              View All Routes on Map
-            </Button>
+            {ROUTES.length > 1 && (
+              <Button
+                className='w-full'
+                variant='outline'
+                onClick={handleViewAllRoutesOnMap}
+              >
+                <Map className='mr-2 h-4 w-4' />
+                View All Routes on Map
+              </Button>
+            )}
             {ROUTES.map((route, index) => {
               const isExpanded = expandedRoute === index;
 
@@ -157,11 +166,21 @@ export default function RouteFinder() {
                     className='flex cursor-pointer flex-row items-center justify-between bg-muted px-4 py-3 hover:bg-muted/70'
                     onClick={() => setExpandedRoute(isExpanded ? null : index)}
                   >
-                    <div className='flex items-center space-x-2'>
-                      <Route className='h-5 w-5 text-blue-500' />
-                      <CardTitle className='text-muted-foreground'>
-                        {route.route}
-                      </CardTitle>
+                    <div className='flex flex-col gap-2'>
+                      <div className='flex items-center space-x-2'>
+                        <Route className='h-5 w-5 text-blue-500' />
+                        <CardTitle className='text-muted-foreground'>
+                          {route.route.name}
+                        </CardTitle>
+                      </div>
+                      <CardDescription>
+                        <span className='text-secondary-foreground'>
+                          Distance:
+                        </span>{' '}
+                        {route.distance.toFixed(3)} km |{' '}
+                        <span className='text-secondary-foreground'>Fare:</span>{' '}
+                        Rs. {route.fare}
+                      </CardDescription>
                     </div>
                     <div className='flex items-center space-x-2'>
                       <Button
@@ -169,8 +188,7 @@ export default function RouteFinder() {
                         variant='ghost'
                         onClick={e => {
                           e.stopPropagation();
-                          // handleViewSpecificRouteOnMap(route.routeId);
-                          handleViewSpecificRouteOnMap(1);
+                          handleViewSpecificRouteOnMap(route.route.id);
                         }}
                       >
                         <Map className='mr-2 h-4 w-4' />
@@ -213,6 +231,8 @@ export default function RouteFinder() {
               );
             })}
           </div>
+        ) : (
+          <p className='text-center text-sm text-gray-500'>No routes found.</p>
         )}
       </CardContent>
     </Card>

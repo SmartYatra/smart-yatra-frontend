@@ -3,7 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 
 export interface IShortestRoute {
   shortest_route: Array<{
-    route: string;
+    route: {
+      id: number;
+      name: string;
+    };
     segment: Array<{
       id: number;
       name: string;
@@ -13,6 +16,8 @@ export interface IShortestRoute {
       updated_at: string;
       geohash: string | null;
     }>;
+    distance: number;
+    fare: number;
   }>;
 }
 
