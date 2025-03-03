@@ -6,8 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 
 type TScanQrCodePayload = {
   bus_id: number;
-  longitude: number;
-  latitude: number;
+  stop_id: number | null;
 };
 
 export const useScanQrCode = () => {
@@ -16,8 +15,8 @@ export const useScanQrCode = () => {
       const res = await api.post('/trips/scan', payload);
       return res.data;
     },
-    onSuccess: () => {
-      toast.success('Successfully scanned QR code');
+    onSuccess: data => {
+      toast.success(data.message || 'Successfully scanned QR code');
     },
     onError: error => {
       handleApiError(error);

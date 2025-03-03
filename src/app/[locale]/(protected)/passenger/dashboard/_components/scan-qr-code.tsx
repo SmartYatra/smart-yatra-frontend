@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Scan } from 'lucide-react';
 
@@ -22,54 +22,55 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Scanner } from '@yudiel/react-qr-scanner';
 
+import { useFetchStops } from '../_hooks/useFetchStops';
 import { useScanQrCode } from '../_hooks/useScanQRCode';
 
-const ScanQRCode = () => {
-  const [data, setData] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [latitude, setLatitude] = useState<number | null>(null);
-  const [longitude, setLongitude] = useState<number | null>(null);
+const ScanQRCode = ({ mode }: { mode: 'onboard' | 'exit' }) => {
+  // const [error, setError] = useState<string | null>(null);
+  // const [latitude, setLatitude] = useState<number | null>(null);
+  // const [longitude, setLongitude] = useState<number | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [stopId, setStopId] = useState<number | null>(null); // Single stopId instead of start/end
 
   const { mutate: scanQrCode, isPending: isScanning } = useScanQrCode();
+  const { data: stopsData } = useFetchStops();
 
-  // Get user's current location
-  useEffect(() => {
-    if (isDialogOpen) {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          setLatitude(position.coords.latitude);
-          setLongitude(position.coords.longitude);
-        },
-        error => {
-          console.error(error);
-          setError('Failed to get your location');
-        }
-      );
-    } else {
-      setLatitude(null);
-      setLongitude(null);
-    }
-  }, [isDialogOpen]);
+  // useEffect(() => {
+  //   if (isDialogOpen) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       position => {
+  //         setLatitude(position.coords.latitude);
+  //         setLongitude(position.coords.longitude);
+  //       },
+  //       error => {
+  //         console.error(error);
+  //         setError('Failed to get your location');
+  //       }
+  //     );
+  //   } else {
+  //     setLatitude(null);
+  //     setLongitude(null);
+  //   }
+  // }, [isDialogOpen]);
 
-  // Handle QR code scanning result
   const handleResult = (qrText: string) => {
     if (!qrText) return;
-    setData(qrText);
-    console.log(qrText);
-
     const qrData = JSON.parse(qrText);
 
-    // Example payload, update as per your QR code data
     const payload = {
       bus_id: qrData.bus_id,
-      longitude: longitude || 0,
-      latitude: latitude || 0,
+      stop_id: stopId, // Single stop_id for both onboard & exit
     };
 
-    // Send the QR code data to the server
     scanQrCode(payload);
   };
 
@@ -77,15 +78,35 @@ const ScanQRCode = () => {
     <Card className='mx-auto w-full max-w-lg'>
       <CardHeader>
         <CardTitle className='flex items-center justify-between'>
-          <span>QR Code Scanner</span>
+          <span>{mode === 'onboard' ? 'Onboard' : 'Exit'} QR Scanner</span>
           <Scan className='h-6 w-6 text-primary' />
         </CardTitle>
-        <CardDescription>Scan a QR code to get started</CardDescription>
+        <CardDescription>
+          Select a stop and scan the QR code to{' '}
+          {mode === 'onboard' ? 'onboard' : 'exit'}.
+        </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className='space-y-4'>
+        <Select onValueChange={value => setStopId(Number(value))}>
+          <SelectTrigger>
+            <SelectValue
+              placeholder={`Select ${mode === 'onboard' ? 'start' : 'end'} stop`}
+            />
+          </SelectTrigger>
+          <SelectContent>
+            {stopsData?.stops.map(stop => (
+              <SelectItem key={stop.id} value={stop.id.toString()}>
+                {stop.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button className='w-full'>Open QR Scanner</Button>
+            <Button className='w-full' disabled={!stopId}>
+              Open QR Scanner
+            </Button>
           </DialogTrigger>
 
           <DialogContent className='max-h-[80vh] overflow-y-auto'>
@@ -110,13 +131,7 @@ const ScanQRCode = () => {
               <p className='mt-2 text-sm text-blue-600'>Scanning QR code...</p>
             )}
 
-            {data && (
-              <div className='mt-4 rounded-md bg-secondary p-4'>
-                <p className='font-medium'>QR Code Scanned:</p>
-                <p className='mt-2 break-all'>{data}</p>
-              </div>
-            )}
-            {error && <p className='mt-2 text-sm text-red-600'>{error}</p>}
+            {/* {error && <p className='mt-2 text-sm text-red-600'>{error}</p>} */}
 
             <DialogFooter>
               <DialogClose asChild>
