@@ -17,11 +17,17 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Install pnpm
+      run: npm install -g pnpm
+
     - name: Install Vercel CLI
       run: npm install -g vercel
 
     - name: Pull Vercel Project Settings and Environment Variables
       run: vercel pull --yes --environment=production --token ${{ secrets.VERCEL_TOKEN }}
+
+    - name: Install dependencies
+      run: pnpm install
 
     - name: Build Project Artifacts
       run: vercel build --prod --token ${{ secrets.VERCEL_TOKEN }}
