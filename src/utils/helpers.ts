@@ -12,12 +12,18 @@ export const getBaseUrl = () => {
 export const handleApiError = (error: unknown) => {
   if (isAxiosError(error)) {
     const errorData = error.response?.data;
-    const errorMessages = errorData?.data
-      ? Object.values(errorData.data).flat() // Flatten nested error messages
-      : [];
+    let errorMessages: string[] = [];
+
+    if (errorData?.data) {
+      // Handle nested error messages
+      errorMessages = Object.values(errorData.data).flat() as string[];
+    } else if (errorData?.errors) {
+      // Handle errors in the format {"success":false,"errors":{"route_id":["The route id field is required."]}}
+      errorMessages = Object.values(errorData.errors).flat() as string[];
+    }
 
     if (errorMessages.length > 0) {
-      (errorMessages as string[]).forEach(message => {
+      errorMessages.forEach(message => {
         toast.error(message);
       });
     } else {

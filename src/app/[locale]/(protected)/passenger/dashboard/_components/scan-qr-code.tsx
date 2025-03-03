@@ -58,12 +58,13 @@ const ScanQRCode = () => {
   const handleResult = (qrText: string) => {
     if (!qrText) return;
     setData(qrText);
+    console.log(qrText);
+
+    const qrData = JSON.parse(qrText);
 
     // Example payload, update as per your QR code data
     const payload = {
-      bus_id: 123, // example bus ID
-      passenger_id: 456, // example passenger ID
-      auth_token: 'some-auth-token', // replace with actual token
+      bus_id: qrData.bus_id,
       longitude: longitude || 0,
       latitude: latitude || 0,
     };
@@ -87,7 +88,7 @@ const ScanQRCode = () => {
             <Button className='w-full'>Open QR Scanner</Button>
           </DialogTrigger>
 
-          <DialogContent>
+          <DialogContent className='max-h-[80vh] overflow-y-auto'>
             <DialogHeader>
               <DialogTitle>Scan QR Code</DialogTitle>
               <DialogDescription>

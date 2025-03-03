@@ -1,27 +1,17 @@
 import { api } from '@/lib/api-client';
-import { ISuccessResponse } from '@/types/response';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-export interface IRoute {
-  id: number;
-  name: string;
-  location_lng: string;
-  location_lat: string;
-  order: number;
-}
+import { IRoute } from './useFetchRoutes';
 
-const fetchRouteById = async ({
-  id,
-}: {
-  id: number;
-}): Promise<ISuccessResponse<IRoute>> => {
+const fetchRouteById = async ({ id }: { id: number | null }) => {
   const res = await api.get(`/routes/${id}`);
-  return res.data;
+  return res.data.data;
 };
 
-export const useFetchRouteById = ({ id }: { id: number }) => {
-  return useSuspenseQuery({
+export const useFetchRouteById = ({ id }: { id: number | null }) => {
+  return useQuery<IRoute>({
     queryKey: ['routes'],
     queryFn: () => fetchRouteById({ id }),
+    enabled: !!id,
   });
 };
