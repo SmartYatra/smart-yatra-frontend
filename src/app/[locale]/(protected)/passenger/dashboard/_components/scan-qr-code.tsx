@@ -71,11 +71,13 @@ const ScanQRCode = ({ mode }: { mode: 'onboard' | 'exit' }) => {
       stop_id: stopId, // Single stop_id for both onboard & exit
     };
 
-    scanQrCode(payload);
+    scanQrCode(payload, {
+      onSuccess: () => setIsDialogOpen(false),
+    });
   };
 
   return (
-    <Card className='mx-auto w-full max-w-lg'>
+    <Card className='w-full max-w-lg'>
       <CardHeader>
         <CardTitle className='flex items-center justify-between'>
           <span>{mode === 'onboard' ? 'Onboard' : 'Exit'} QR Scanner</span>

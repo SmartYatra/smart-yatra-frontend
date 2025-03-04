@@ -1,34 +1,17 @@
-'use client';
+import React, { Suspense } from 'react';
 
-import React, { useState } from 'react';
-
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-
+import PassengerTripSection from './_components/passenger-trip-section';
 import RouteFinder from './_components/route-finder';
-import ScanQRCode from './_components/scan-qr-code';
+import RouteFinderSkeleton from './_components/route-finder-skeleton';
 
 const PassengerDashboardPage = () => {
-  const [mode, setMode] = useState<'onboard' | 'exit'>('onboard');
-
   return (
     <div className='flex flex-col gap-4'>
-      <ToggleGroup
-        className='flex justify-center'
-        type='single'
-        value={mode}
-        onValueChange={value => setMode(value as 'onboard' | 'exit')}
-      >
-        <ToggleGroupItem className='w-32' value='onboard'>
-          Onboard
-        </ToggleGroupItem>
-        <ToggleGroupItem className='w-32' value='exit'>
-          Exit
-        </ToggleGroupItem>
-      </ToggleGroup>
+      <PassengerTripSection />
 
-      <ScanQRCode mode={mode} />
-
-      <RouteFinder />
+      <Suspense fallback={<RouteFinderSkeleton />}>
+        <RouteFinder />
+      </Suspense>
     </div>
   );
 };
