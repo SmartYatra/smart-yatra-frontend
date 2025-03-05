@@ -87,7 +87,7 @@ function RouteFinder() {
   };
 
   return (
-    <Card className='mx-auto w-full max-w-3xl'>
+    <Card className='w-full xl:max-w-3xl'>
       <CardHeader>
         <CardTitle>Find Shortest Route</CardTitle>
         <CardDescription>

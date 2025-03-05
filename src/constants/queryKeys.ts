@@ -4,4 +4,5 @@ export const QUERY_KEYS = {
   trip_status: 'trip_status',
   passenger_trip_status: 'passenger_trip_status',
   all_possible_routes: 'all_possible_routes',
+  balance: 'balance',
 };

@@ -1,4 +1,4 @@
-import { BusFront, MapPin } from 'lucide-react';
+import { BusFront, Clock, MapPin } from 'lucide-react';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -10,10 +10,10 @@ interface TripStatusCardProps {
 
 const TripStatusCard = ({ tripStatus }: TripStatusCardProps) => {
   const boardingTime = new Date(tripStatus?.boarding_time);
-  // const timeElapsed = Math.floor((Date.now() - boardingTime.getTime()) / 60000); // in minutes
+  const timeElapsed = Math.floor((Date.now() - boardingTime.getTime()) / 60000); // in minutes
 
   return (
-    <Card className='size-full max-w-lg grow'>
+    <Card className='size-full w-full max-w-3xl grow'>
       <CardHeader>
         <CardTitle className='flex items-center gap-2'>
           <BusFront className='h-6 w-6 text-primary' />
@@ -29,12 +29,12 @@ const TripStatusCard = ({ tripStatus }: TripStatusCardProps) => {
           <strong>Bus:</strong> {tripStatus?.bus?.bus_number} (
           {tripStatus?.bus?.model})
         </p>
-        {/* <p className='flex items-center gap-2'>
+        <p className='flex items-center gap-2'>
           <Clock className='h-4 w-4 text-muted-foreground' />
           <span>
             Trip Duration: <strong>{timeElapsed} mins</strong>
           </span>
-        </p> */}
+        </p>
         {tripStatus?.bus?.latitude && tripStatus?.bus?.longitude && (
           <p className='flex items-center gap-2'>
             <MapPin className='h-4 w-4 text-muted-foreground' />

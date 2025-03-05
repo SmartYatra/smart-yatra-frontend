@@ -77,7 +77,7 @@ const ScanQRCode = ({ mode }: { mode: 'onboard' | 'exit' }) => {
   };
 
   return (
-    <Card className='w-full max-w-lg'>
+    <Card className=' w-full max-w-3xl'>
       <CardHeader>
         <CardTitle className='flex items-center justify-between'>
           <span>{mode === 'onboard' ? 'Onboard' : 'Exit'} QR Scanner</span>
