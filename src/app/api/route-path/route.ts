@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import axios from 'axios';
+import axios, { isAxiosError } from 'axios';
 
 const ORS_API_KEY = process.env.ORS_API_KEY; // Store this in .env.local
 
@@ -8,9 +8,8 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const coords = searchParams.get('coords'); // Expecting "lng1,lat1;lng2,lat2;..."
 
-  if (!coords) {
+  if (!coords)
     return NextResponse.json({ error: 'Missing coordinates' }, { status: 400 });
-  }
 
   try {
     const url =
@@ -31,10 +30,18 @@ export async function GET(request: Request) {
 
     return NextResponse.json(response.data);
   } catch (error) {
-    console.error('ORS Error:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch route' },
-      { status: 500 }
-    );
+    if (isAxiosError(error)) {
+      console.error('ORS Error:', error.response?.data);
+      return NextResponse.json(
+        { error: error.response?.data?.message || 'Failed to fetch route' },
+        { status: error.response?.status }
+      );
+    } else {
+      console.error('ORS Error:', error);
+      return NextResponse.json(
+        { error: 'Failed to fetch route' },
+        { status: 500 }
+      );
+    }
   }
 }

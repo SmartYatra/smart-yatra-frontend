@@ -28,7 +28,6 @@ export const usePassengerTripStatus = () => {
     queryKey: [QUERY_KEYS.passenger_trip_status],
     queryFn: async () => {
       const response = await api.get('/trips/status');
-      console.log(response.data);
       return response.data.data.length === 0 ? null : response.data.data;
     },
   });
