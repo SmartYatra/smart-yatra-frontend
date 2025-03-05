@@ -21,12 +21,8 @@ export const manageRoutesSchema = z.object({
         name: z
           .string()
           .min(3, { message: 'Name must be at least 3 characters long' }),
-        location_lat: z
-          .string()
-          .regex(/^\d{1,2}\.\d{4}$/, { message: 'Invalid latitude' }),
-        location_lng: z
-          .string()
-          .regex(/^\d{1,3}\.\d{4}$/, { message: 'Invalid longitude' }),
+        location_lat: z.string().min(1, { message: 'Location is required' }),
+        location_lng: z.string().min(1, { message: 'Location is required' }),
         order: z
           .number()
           .min(1, { message: 'Order must be a positive number' }),

@@ -12,7 +12,7 @@ import { StartTrip } from './_components/start-trip';
 
 const DriverDashboardPage = () => {
   return (
-    <div className='my-8'>
+    <div className='my-8 w-full'>
       {/* Recent Trips */}
       <section className='flex flex-col gap-16 lg:flex-row'>
         {/* QR code for bus with download/extract option */}
@@ -26,7 +26,7 @@ const DriverDashboardPage = () => {
         </div>
 
         {/* Select a route and start the trip */}
-        <div className='w-full'>
+        <div className='w-full md:min-w-[32rem] lg:w-auto'>
           <DashboardTitle>Start a Trip</DashboardTitle>
           <DashboardSubtitle>
             Select a route and start the trip

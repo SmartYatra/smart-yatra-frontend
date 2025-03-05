@@ -46,11 +46,11 @@ interface SidebarProps {
 const sidebarConfig = {
   admin: [
     { title: 'Dashboard', url: '/admin/dashboard', icon: Grid },
-    {
-      title: 'Manage Routes',
-      url: '/admin/dashboard/manage-routes',
-      icon: Map,
-    },
+    // {
+    //   title: 'Manage Routes',
+    //   url: '/admin/dashboard/manage-routes',
+    //   icon: Map,
+    // },
     // { title: 'Settings', url: '/admin/dashboard/settings', icon: Settings },
   ],
   driver: [

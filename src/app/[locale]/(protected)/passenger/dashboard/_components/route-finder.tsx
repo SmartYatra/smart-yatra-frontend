@@ -3,7 +3,7 @@
 import { Suspense, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { ChevronDown, ChevronUp, Map, MapPin, Route } from 'lucide-react';
+import { Map, MapPin } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
+import { RouteCard } from './route-card';
 import RouteFinderSkeleton from './route-finder-skeleton';
 
 import { useFetchShortestRoutes } from '../_hooks/useFetchShortestRoute';
@@ -216,104 +217,6 @@ function RouteFinder() {
     </Card>
   );
 }
-
-interface IRouteCardProps {
-  route: {
-    route: { id: number; name: string };
-    segment: {
-      id: number;
-      name: string;
-      location_lat: string;
-      location_lng: string;
-      created_at: string;
-      updated_at: string;
-      geohash: string | null;
-      pivot?: { route_id: number; stop_id: number; order: number } | undefined;
-    }[];
-    distance: number;
-    fare: number | string;
-  };
-  expandedRoute: number | null;
-  setExpandedRoute: (routeId: number | null) => void;
-  handleViewSpecificRouteOnMap: (routeId: number) => void;
-}
-
-const RouteCard = ({
-  route,
-  expandedRoute,
-  setExpandedRoute,
-  handleViewSpecificRouteOnMap,
-}: IRouteCardProps) => {
-  const isExpanded = expandedRoute === route.route.id;
-
-  return (
-    <Card className='overflow-hidden'>
-      <CardHeader
-        className='flex cursor-pointer flex-row items-center justify-between bg-muted px-4 py-3 hover:bg-muted/70'
-        onClick={() => setExpandedRoute(isExpanded ? null : route.route.id)}
-      >
-        <div className='flex flex-col gap-2'>
-          <div className='flex items-center space-x-2'>
-            <Route className='h-5 w-5 text-blue-500' />
-            <CardTitle className='text-muted-foreground'>
-              {route.route.name}
-            </CardTitle>
-          </div>
-          <CardDescription>
-            <span className='text-secondary-foreground'>Distance:</span>{' '}
-            {route.distance} km |{' '}
-            <span className='text-secondary-foreground'>Fare:</span> Rs.{' '}
-            {route.fare}
-          </CardDescription>
-        </div>
-        <div className='flex items-center space-x-2'>
-          <Button
-            size='sm'
-            variant='ghost'
-            onClick={e => {
-              e.stopPropagation();
-              handleViewSpecificRouteOnMap(route.route.id);
-            }}
-          >
-            <Map className='mr-2 h-4 w-4' />
-            View on Map
-          </Button>
-          <Button
-            size='icon'
-            variant='ghost'
-            onClick={e => {
-              e.stopPropagation();
-              setExpandedRoute(isExpanded ? null : route.route.id);
-            }}
-          >
-            {isExpanded ? (
-              <ChevronUp className='h-5 w-5' />
-            ) : (
-              <ChevronDown className='h-5 w-5' />
-            )}
-          </Button>
-        </div>
-      </CardHeader>
-
-      {isExpanded && (
-        <CardContent className='px-6 py-4'>
-          <ol className='relative border-l border-gray-200 dark:border-gray-700'>
-            {route.segment.map((stop, index) => (
-              <li className='mb-10 ml-6' key={index}>
-                <span className='absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 ring-8 ring-white dark:bg-blue-900 dark:ring-gray-900'>
-                  <MapPin className='h-3 w-3 text-blue-800 dark:text-blue-300' />
-                </span>
-                <h3 className='mb-1 font-semibold text-gray-900 dark:text-white'>
-                  {stop.name}
-                </h3>
-              </li>
-            ))}
-          </ol>
-        </CardContent>
-      )}
-    </Card>
-  );
-};
 
 export default function RouteFinderWithSuspense() {
   return (

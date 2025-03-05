@@ -144,8 +144,9 @@ export function RouteForm({
         <Input
           required
           id='distance'
+          step={0.1}
           type='number'
-          {...register('distance')}
+          {...register('distance', { valueAsNumber: true })}
           error={errors.distance?.message}
         />
       </div>
@@ -208,6 +209,7 @@ export function RouteForm({
               <Label htmlFor={`stops.${index}.location_lat`}>Latitude</Label>
               <Input
                 placeholder='Latitude'
+                step={0.00000001}
                 type='number'
                 {...register(`stops.${index}.location_lat`)}
                 defaultValue={stop.location_lat}
@@ -217,6 +219,7 @@ export function RouteForm({
               <Label htmlFor={`stops.${index}.location_lng`}>Longitude</Label>
               <Input
                 placeholder='Longitude'
+                step={0.00000001}
                 type='number'
                 {...register(`stops.${index}.location_lng`)}
                 defaultValue={stop.location_lng}
