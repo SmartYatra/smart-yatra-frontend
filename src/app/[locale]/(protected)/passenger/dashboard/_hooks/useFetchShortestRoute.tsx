@@ -33,7 +33,7 @@ const fetchShortestRoute = async (
   params: TShortestRouteParams
 ): Promise<IShortestRoute[]> => {
   const res = await api.get('/shortest-route', { params });
-  return res.data.shortest_route;
+  return res.data.shortest_route ? res.data.shortest_route : [];
 };
 
 export const useFetchShortestRoutes = ({

@@ -22,7 +22,7 @@ export interface IGetAllPossibleRoutes {
     };
   }>;
   distance: number;
-  fare: string;
+  fare: string | number;
 }
 
 export const useGetAllPossibleRoutes = ({
@@ -40,7 +40,7 @@ export const useGetAllPossibleRoutes = ({
       const response = await api.get('/possible-routes', {
         params: { start_stop_id: startStopId, end_stop_id: endStopId },
       });
-      return response.data.all_routes;
+      return response.data.all_routes ? response.data.all_routes : [];
     },
     enabled,
   });

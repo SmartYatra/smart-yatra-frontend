@@ -261,11 +261,9 @@ const RouteCard = ({
           </div>
           <CardDescription>
             <span className='text-secondary-foreground'>Distance:</span>{' '}
-            {route.distance.toFixed(3)} km |{' '}
+            {route.distance} km |{' '}
             <span className='text-secondary-foreground'>Fare:</span> Rs.{' '}
-            {typeof route.fare === 'string'
-              ? route.fare
-              : route.fare.toFixed(2)}
+            {route.fare}
           </CardDescription>
         </div>
         <div className='flex items-center space-x-2'>
@@ -300,8 +298,8 @@ const RouteCard = ({
       {isExpanded && (
         <CardContent className='px-6 py-4'>
           <ol className='relative border-l border-gray-200 dark:border-gray-700'>
-            {route.segment.map(stop => (
-              <li className='mb-10 ml-6' key={stop.id}>
+            {route.segment.map((stop, index) => (
+              <li className='mb-10 ml-6' key={index}>
                 <span className='absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 ring-8 ring-white dark:bg-blue-900 dark:ring-gray-900'>
                   <MapPin className='h-3 w-3 text-blue-800 dark:text-blue-300' />
                 </span>

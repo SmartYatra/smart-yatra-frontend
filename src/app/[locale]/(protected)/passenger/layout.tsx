@@ -17,7 +17,7 @@ const PassengerDashboardLayout = async ({
       defaultOpen={defaultOpen}
     >
       <DashboardSidebar role='user' />
-      <main className='relative min-h-[calc(100svh-1rem)] w-full p-2 sm:m-2'>
+      <main className='relative flex min-h-[calc(100svh-1rem)] w-full flex-col p-2 sm:m-2'>
         <DashboardNavbar role='user' />
 
         {children}
