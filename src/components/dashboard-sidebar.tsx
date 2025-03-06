@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import {
   Bus,
+  BusFront,
   Car,
   ChevronDown,
   DollarSign,
@@ -63,6 +64,7 @@ const sidebarConfig = {
   user: [
     { title: 'Dashboard', url: '/passenger/dashboard', icon: Grid },
     { title: 'Live Map', url: '/passenger/live-map', icon: Map },
+    { title: 'Nearby Stops', url: '/passenger/nearby-stops', icon: BusFront },
     // { title: 'My Trips', url: '/passenger/my-trips', icon: Car },
     // {
     //   title: 'Payments',

@@ -6,8 +6,6 @@ import { useSearchParams } from 'next/navigation';
 
 import L from 'leaflet';
 
-// Import your custom marker image
-import UserMarker from '@/assets/passenger/user-marker.png';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import OSRMRouting from './live-map/osrm-routing';
@@ -34,11 +32,15 @@ interface ICoordinate {
 }
 
 // Create a custom icon using the imported image.
-const stopIcon = L.icon({
-  iconUrl: UserMarker.src,
-  iconSize: [20, 20],
-  iconAnchor: [15, 30],
-  popupAnchor: [0, -30],
+const stopIcon = new L.Icon({
+  iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+  iconRetinaUrl:
+    'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+  iconSize: [20, 31],
+  iconAnchor: [12, 31],
+  popupAnchor: [1, -34],
+  shadowSize: [32, 32],
 });
 
 export const LiveMap = () => {
@@ -102,7 +104,7 @@ export const LiveMap = () => {
     <MapContainer
       scrollWheelZoom
       center={userLocation || { lat: 27.7172, lng: 85.324 }}
-      className='relative z-50 size-full rounded-lg'
+      className='relative z-50 size-full rounded-lg border-4 border-border'
       zoom={13}
     >
       <TileLayer
