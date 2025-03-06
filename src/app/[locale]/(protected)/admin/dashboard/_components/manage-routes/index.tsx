@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { Filter, Search } from 'lucide-react';
 
 import { DashboardTitle } from '@/components/dashboard-components';
@@ -9,12 +11,15 @@ import { Input } from '@/components/ui/input';
 import AddRouteDialog from './add-route-dialog';
 import RoutesTable from './routes-table';
 
-// import { useFetchRouteById } from '../../_hooks/useFetchRouteById';
 import { useFetchRoutes } from '../../_hooks/useFetchRoutes';
 
 const ManageRoutes = () => {
   const { data: routes } = useFetchRoutes();
-  // const { data: route } = useFetchRouteById({ id: 1 });
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
 
   return (
     <div>
@@ -28,13 +33,15 @@ const ManageRoutes = () => {
           className='w-full min-w-96'
           leftIcon={Search}
           placeholder='Search routes...'
+          value={searchQuery}
+          onChange={handleSearchChange}
         />
         <Button variant='outline'>
           <Filter className='mr-2 h-4 w-4' /> Filter
         </Button>
       </div>
 
-      <RoutesTable routes={routes.data} />
+      <RoutesTable routes={routes.data} searchQuery={searchQuery} />
     </div>
   );
 };

@@ -6,4 +6,7 @@ export const QUERY_KEYS = {
   all_possible_routes: 'all_possible_routes',
   balance: 'balance',
   nearby_stop: 'nearby_stop',
+
+  // admin
+  fares: 'fares',
 };

@@ -15,9 +15,14 @@ import { IRoute } from '../../_hooks/useFetchRoutes';
 
 interface RoutesTableProps {
   routes: IRoute[];
+  searchQuery: string;
 }
 
-const RoutesTable: React.FC<RoutesTableProps> = ({ routes }) => {
+const RoutesTable: React.FC<RoutesTableProps> = ({ routes, searchQuery }) => {
+  const filteredRoutes = routes.filter(route =>
+    route.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className='overflow-hidden'>
       <Table>
@@ -32,7 +37,7 @@ const RoutesTable: React.FC<RoutesTableProps> = ({ routes }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {routes?.map(route => (
+          {filteredRoutes.map(route => (
             <TableRow key={route.id}>
               <TableCell className='font-medium'>{route.name}</TableCell>
               <TableCell>
