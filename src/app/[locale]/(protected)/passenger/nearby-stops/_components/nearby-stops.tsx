@@ -92,7 +92,7 @@ export const NearbyStops = () => {
               View All Stops on Map
             </Button>
           </DialogTrigger>
-          <DialogContent className='flex h-[calc(100vh-90px)] w-[calc(100vw-200px)] max-w-full flex-col p-4'>
+          <DialogContent className='flex h-[calc(100vh-90px)] w-full max-w-full flex-col p-4 md:h-[calc(100vh-90px)] md:w-[calc(100vw-200px)]'>
             <DialogHeader className='h-fit'>
               <DialogTitle>All Nearby Bus Stops</DialogTitle>
             </DialogHeader>
@@ -130,7 +130,7 @@ export const NearbyStops = () => {
                           View on Map
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className='flex h-[calc(100vh-90px)] w-[calc(100vw-200px)] max-w-full flex-col p-4'>
+                      <DialogContent className='flex h-[calc(100vh-90px)] w-full max-w-full flex-col p-4 md:h-[calc(100vh-90px)] md:w-[calc(100vw-200px)]'>
                         <DialogHeader className='h-fit'>
                           <DialogTitle>{stop.name}</DialogTitle>
                           <DialogDescription>
