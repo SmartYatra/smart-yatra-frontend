@@ -209,7 +209,7 @@ export function RouteForm({
               <Label htmlFor={`stops.${index}.location_lat`}>Latitude</Label>
               <Input
                 placeholder='Latitude'
-                step={0.00000001}
+                step={0.00000000000000000000000000000001}
                 type='number'
                 {...register(`stops.${index}.location_lat`)}
                 defaultValue={stop.location_lat}
@@ -219,7 +219,7 @@ export function RouteForm({
               <Label htmlFor={`stops.${index}.location_lng`}>Longitude</Label>
               <Input
                 placeholder='Longitude'
-                step={0.00000001}
+                step={0.00000000000000000000000000000001}
                 type='number'
                 {...register(`stops.${index}.location_lng`)}
                 defaultValue={stop.location_lng}
@@ -230,7 +230,9 @@ export function RouteForm({
               <Input
                 placeholder='Order'
                 type='number'
-                {...register(`stops.${index}.order`)}
+                {...register(`stops.${index}.order`, {
+                  valueAsNumber: true,
+                })}
                 defaultValue={stop.order}
               />
             </div>

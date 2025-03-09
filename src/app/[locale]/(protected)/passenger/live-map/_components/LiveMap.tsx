@@ -92,8 +92,6 @@ export const LiveMap = () => {
     return colors[routeId % colors.length];
   };
 
-  console.log(isShortestRoutePending, isAllRoutesPending);
-
   if (!allRoutesFlag && isShortestRoutePending)
     return <Skeleton className='size-full' />;
 

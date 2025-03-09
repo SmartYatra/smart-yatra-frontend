@@ -62,6 +62,9 @@ function RouteFinder() {
 
   const STOPS = stopsData?.stops || [];
 
+  // Sort stops alphabetically by name
+  const sortedStops = STOPS.sort((a, b) => a.name.localeCompare(b.name));
+
   const handleFindRoute = async () => {
     if (startStop !== undefined && endStop !== undefined) {
       await Promise.all([fetchShortestRoute(), fetchAllPossibleRoutes()]);
@@ -111,7 +114,7 @@ function RouteFinder() {
                 <SelectValue placeholder='Select start stop' />
               </SelectTrigger>
               <SelectContent>
-                {STOPS.map(stop => (
+                {sortedStops.map(stop => (
                   <SelectItem key={stop.id} value={stop.id.toString()}>
                     <div className='flex items-center'>
                       <MapPin className='mr-2 h-4 w-4' /> {stop.name}
@@ -131,7 +134,7 @@ function RouteFinder() {
                 <SelectValue placeholder='Select end stop' />
               </SelectTrigger>
               <SelectContent>
-                {STOPS.map(stop => (
+                {sortedStops.map(stop => (
                   <SelectItem key={stop.id} value={stop.id.toString()}>
                     <div className='flex items-center'>
                       <MapPin className='mr-2 h-4 w-4' /> {stop.name}
