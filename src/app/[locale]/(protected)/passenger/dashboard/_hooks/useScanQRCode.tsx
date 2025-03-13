@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 type TScanQrCodePayload = {
   bus_id: number;
   stop_id: number | null;
+  passenger_count?: number;
 };
 
 export const useScanQrCode = () => {

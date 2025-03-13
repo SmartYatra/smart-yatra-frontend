@@ -38,7 +38,7 @@ interface DashboardNavbarProps {
 
 const DashboardNavbar = ({ role }: DashboardNavbarProps) => {
   const router = useRouter();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
 
   const handleLogout = async () => {
     await logout();
@@ -98,7 +98,9 @@ const DashboardNavbar = ({ role }: DashboardNavbarProps) => {
         <DropdownMenuTrigger asChild>
           <Avatar className='cursor-pointer'>
             <AvatarImage alt='User Avatar' src={AvatarImg} />
-            <AvatarFallback>DB</AvatarFallback>
+            <AvatarFallback>
+              {user && user.name ? `${user.name[0].toUpperCase()}` : 'U'}
+            </AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end' className='w-60'>

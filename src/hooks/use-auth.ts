@@ -7,7 +7,8 @@ import { TUser } from '@/types/user.type';
 
 export type TSession = {
   token: string;
-  user: TUser;
+  role: string;
+  name: string;
   expiresAt: string;
   iat: number;
   exp: number;
@@ -25,7 +26,9 @@ export const useAuth = () => {
         .catch(err => console.error(err))
         .finally(() => setIsLoading(false));
 
-      setUser(session?.user);
+      setUser(
+        session?.role ? { role: session.role, name: session.name } : null
+      );
     };
 
     void getSession();

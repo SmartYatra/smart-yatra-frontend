@@ -10,13 +10,15 @@ const encodedKey = new TextEncoder().encode(secretKey);
 export async function createSession({
   token,
   role,
+  name,
 }: {
   token: string;
   role: string;
+  name: string;
 }) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
 
-  const session = await encrypt({ token, role, expiresAt });
+  const session = await encrypt({ token, role, name, expiresAt });
   const cookieStore = await cookies();
 
   cookieStore.set('session', session, {
@@ -67,6 +69,7 @@ export async function getSession() {
 type SessionPayload = {
   token: string;
   role: string;
+  name: string;
   expiresAt: Date;
 };
 

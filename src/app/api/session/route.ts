@@ -12,16 +12,16 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { token, role } = await req.json();
+    const { token, role, name } = await req.json();
 
-    if (!token || !role) {
+    if (!token || !role || !name) {
       return NextResponse.json(
-        { message: 'Token and role are required' },
+        { message: 'Token, role and name are required' },
         { status: 400 }
       );
     }
 
-    await createSession({ role, token });
+    await createSession({ role, token, name });
 
     return NextResponse.json({ message: 'Session created' }, { status: 200 });
   } catch {

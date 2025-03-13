@@ -20,6 +20,7 @@ const useSignin = () => {
         await nextApi.post('/api/session', {
           token: data.data.token,
           role: data.data.type,
+          name: data.data.name,
         });
 
         addTokenToLocalStorage(data.data.token);

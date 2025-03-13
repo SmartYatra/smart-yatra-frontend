@@ -22,6 +22,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -35,32 +36,12 @@ import { useFetchStops } from '../_hooks/useFetchStops';
 import { useScanQrCode } from '../_hooks/useScanQRCode';
 
 const ScanQRCode = ({ mode }: { mode: 'onboard' | 'exit' }) => {
-  // const [error, setError] = useState<string | null>(null);
-  // const [latitude, setLatitude] = useState<number | null>(null);
-  // const [longitude, setLongitude] = useState<number | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const [stopId, setStopId] = useState<number | null>(null); // Single stopId instead of start/end
+  const [stopId, setStopId] = useState<number | null>(null);
+  const [passengerCount, setPassengerCount] = useState<number>(1);
 
   const { mutate: scanQrCode, isPending: isScanning } = useScanQrCode();
   const { data: stopsData } = useFetchStops();
-
-  // useEffect(() => {
-  //   if (isDialogOpen) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       position => {
-  //         setLatitude(position.coords.latitude);
-  //         setLongitude(position.coords.longitude);
-  //       },
-  //       error => {
-  //         console.error(error);
-  //         setError('Failed to get your location');
-  //       }
-  //     );
-  //   } else {
-  //     setLatitude(null);
-  //     setLongitude(null);
-  //   }
-  // }, [isDialogOpen]);
 
   const handleResult = (qrText: string) => {
     if (!qrText) return;
@@ -68,14 +49,15 @@ const ScanQRCode = ({ mode }: { mode: 'onboard' | 'exit' }) => {
 
     const payload = {
       bus_id: qrData.bus_id,
-      stop_id: stopId, // Single stop_id for both onboard & exit
+      stop_id: stopId,
+      passenger_count: passengerCount,
     };
 
     scanQrCode(payload, { onSuccess: () => setIsDialogOpen(false) });
   };
 
   return (
-    <Card className=' w-full max-w-3xl'>
+    <Card className='w-full max-w-3xl'>
       <CardHeader>
         <CardTitle className='flex items-center justify-between'>
           <span>{mode === 'onboard' ? 'Onboard' : 'Exit'} QR Scanner</span>
@@ -101,6 +83,21 @@ const ScanQRCode = ({ mode }: { mode: 'onboard' | 'exit' }) => {
             ))}
           </SelectContent>
         </Select>
+
+        {mode === 'onboard' && (
+          <div className='space-y-2'>
+            <label className='text-sm font-medium' htmlFor='passenger-count'>
+              Number of Passengers
+            </label>
+            <Input
+              id='passenger-count'
+              min={1}
+              type='number'
+              value={passengerCount}
+              onChange={e => setPassengerCount(Number(e.target.value))}
+            />
+          </div>
+        )}
 
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
@@ -130,8 +127,6 @@ const ScanQRCode = ({ mode }: { mode: 'onboard' | 'exit' }) => {
             {isScanning && (
               <p className='mt-2 text-sm text-blue-600'>Scanning QR code...</p>
             )}
-
-            {/* {error && <p className='mt-2 text-sm text-red-600'>{error}</p>} */}
 
             <DialogFooter>
               <DialogClose asChild>
