@@ -36,7 +36,7 @@ export function StartTrip() {
 
   if (isBusLoading || isRouteLoading || isTripLoading) {
     return (
-      <Card className='mt-8 w-full max-w-xl'>
+      <Card className='mt-8 size-full'>
         <CardHeader className='rounded-t-lg bg-primary/5'>
           <Badge className='mb-2 w-fit' variant='outline'>
             Loading Route Data
@@ -66,9 +66,9 @@ export function StartTrip() {
     tripStatus?.success && tripStatus?.data?.status === 'in_progress';
 
   return (
-    <section className='mt-8 w-full max-w-xl space-y-6'>
+    <section className='mt-8 flex size-full flex-1 flex-col gap-6'>
       {isTripActive ? (
-        <Card>
+        <Card className='flex size-full flex-col'>
           <CardHeader className='rounded-t-lg bg-primary/5'>
             <Badge className='mb-2 w-fit' variant='outline'>
               Active Trip
@@ -79,19 +79,24 @@ export function StartTrip() {
               {new Date(tripStatus?.data.start_time).toLocaleTimeString()}
             </CardDescription>
           </CardHeader>
-          <CardContent className='pt-6'>
-            <div className='mb-4 flex items-center gap-2 text-sm text-muted-foreground'>
+          <CardContent className='flex flex-col gap-4 pt-6'>
+            <div className='flex items-center gap-2 text-sm text-muted-foreground'>
               <MapPin className='h-4 w-4' />
-              <span>
-                {routeData?.stops.length} stops • Est. {routeData?.duration} min
-              </span>
+              <span>{routeData?.stops?.length} stops</span>
             </div>
+
+            {/* Estimated duration */}
+            <div className='flex items-center gap-2 text-sm text-muted-foreground'>
+              <MapPin className='h-4 w-4' />
+              <span>Estimated duration: {routeData?.duration} min</span>
+            </div>
+
             <div className='flex items-center gap-2 text-sm font-medium'>
               <Check className='h-4 w-4 text-green-500' />
               <span>Trip in progress</span>
             </div>
           </CardContent>
-          <CardFooter>
+          <CardFooter className='flex-1 items-end'>
             <Button
               className='w-full'
               disabled={isEnding}
@@ -122,8 +127,8 @@ export function StartTrip() {
                 <div className='flex items-center gap-2 text-sm text-muted-foreground'>
                   <MapPin className='h-4 w-4' />
                   <span>
-                    {routeData?.stops.length} stops • Est. {routeData?.duration}{' '}
-                    min
+                    {routeData?.stops?.length} stops • Est.{' '}
+                    {routeData?.duration} min
                   </span>
                 </div>
               </div>

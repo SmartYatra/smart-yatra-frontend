@@ -64,7 +64,7 @@ const DriverQrCode = () => {
   };
 
   return (
-    <Card className='mt-8 w-full sm:w-fit'>
+    <Card className='mt-8 w-full'>
       <CardContent className='relative flex items-center justify-center pt-10'>
         {isPending ? (
           <Skeleton className='size-60' />

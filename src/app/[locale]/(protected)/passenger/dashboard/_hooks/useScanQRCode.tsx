@@ -25,6 +25,9 @@ export const useScanQrCode = () => {
       await queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.balance],
       });
+      await queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.trip_status],
+      });
       toast.success(data.message || 'Successfully scanned QR code');
     },
     onError: error => {

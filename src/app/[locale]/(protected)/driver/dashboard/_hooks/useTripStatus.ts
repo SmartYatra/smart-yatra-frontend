@@ -23,6 +23,7 @@ export const useTripStatus = () => {
     queryKey: [QUERY_KEYS.trip_status],
     queryFn: async () => {
       const res = await api.get('bus/trip-status');
+      console.log(res.data.data);
       return res.data;
     },
   });

@@ -71,9 +71,7 @@ const ScanQRCode = ({ mode }: { mode: 'onboard' | 'exit' }) => {
       stop_id: stopId, // Single stop_id for both onboard & exit
     };
 
-    scanQrCode(payload, {
-      onSuccess: () => setIsDialogOpen(false),
-    });
+    scanQrCode(payload, { onSuccess: () => setIsDialogOpen(false) });
   };
 
   return (
