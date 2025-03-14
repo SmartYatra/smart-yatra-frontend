@@ -22,6 +22,7 @@ const useSignUp = () => {
         await nextApi.post('/api/session', {
           token: data.data.token,
           role: data.data.user_type,
+          name: data.data.name,
         });
 
         addTokenToLocalStorage(data.data.token);
