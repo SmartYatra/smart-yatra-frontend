@@ -15,6 +15,7 @@ import RecenterMap from './RecenterMap';
 
 import 'leaflet/dist/leaflet.css';
 
+// @ts-expect-error - No types available for this package
 import 'react-leaflet-markercluster/styles';
 import {
   IShortestRoute,

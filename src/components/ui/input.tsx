@@ -4,8 +4,7 @@ import { Eye, EyeOff, LucideIcon } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   leftIcon?: LucideIcon;
   rightIcon?: LucideIcon;

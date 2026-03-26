@@ -20,6 +20,7 @@ export interface IOnBoardingFormData {
 // }
 
 export interface IOnBoardingFormProps {
-  setValue: UseFormSetValue<IOnBoardingFormData>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setValue: UseFormSetValue<any>;
   errors: FieldErrors<IOnBoardingFormData>;
 }

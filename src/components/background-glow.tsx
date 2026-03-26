@@ -51,7 +51,8 @@ const backgroundGlowVariants = cva(
 );
 
 export interface BackgroundGlowVariants
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof backgroundGlowVariants> {}
 
 const BackgroundGlow = React.forwardRef<HTMLDivElement, BackgroundGlowVariants>(

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { motion } from 'framer-motion';
-import { ChevronDown, Github, Menu } from 'lucide-react';
+import { ChevronDown, Menu } from 'lucide-react';
 
 // import { LocaleSwitcher } from '@/components/locale-switcher';
 import Logo from '@/components/logo';
@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/sheet';
 import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
+import { IconBrandGithub } from '@tabler/icons-react';
 
 import NavMenuItem, { IRouteList } from './NavMenuItem';
 
@@ -105,7 +106,7 @@ export function Navbar() {
               href='https://github.com/diwashbhattarai999/smart-yatra'
               target='_blank'
             >
-              <Github className='size-5' />
+              <IconBrandGithub className='size-5' />
             </Link>
 
             {/* Theme Toggle */}

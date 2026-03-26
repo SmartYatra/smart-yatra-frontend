@@ -1,18 +1,17 @@
-import { JSX } from 'react';
-
-import {
-  Github,
-  Link2,
-  Linkedin,
-  LucideIcon,
-  Twitter,
-  Youtube,
-} from 'lucide-react';
+import { ForwardRefExoticComponent, JSX, RefAttributes } from 'react';
 
 import { Link } from '@/i18n/routing';
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandTwitter,
+  IconBrandYoutube,
+  IconLink,
+  IconProps,
+} from '@tabler/icons-react';
 
 type ISocialLink = {
-  icon: LucideIcon;
+  icon: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>;
   href: string;
   name: string;
 };
@@ -27,11 +26,11 @@ const SocialLinks = (): JSX.Element => {
    * @type {ISocialLink[]}
    */
   const SOCIAL_LINKS: ISocialLink[] = [
-    { icon: Github, href: 'https://github.com', name: 'Github' },
-    { icon: Twitter, href: 'https://twitter.com', name: 'Twitter' },
-    { icon: Linkedin, href: 'https://linkedin.com', name: 'Linkedin' },
-    { icon: Youtube, href: 'https://youtube.com', name: 'Youtube' },
-    { icon: Link2, href: 'https://link.com', name: 'Link' },
+    { icon: IconBrandGithub, href: 'https://github.com', name: 'Github' },
+    { icon: IconBrandTwitter, href: 'https://twitter.com', name: 'Twitter' },
+    { icon: IconBrandLinkedin, href: 'https://linkedin.com', name: 'Linkedin' },
+    { icon: IconBrandYoutube, href: 'https://youtube.com', name: 'Youtube' },
+    { icon: IconLink, href: 'https://link.com', name: 'Link' },
   ];
 
   return (

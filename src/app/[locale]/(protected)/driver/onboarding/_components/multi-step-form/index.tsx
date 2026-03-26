@@ -47,6 +47,7 @@ const MultiStepForm = () => {
           : finishStepSchema
     ),
   });
+
   const {
     setValue,
     register,
@@ -55,10 +56,8 @@ const MultiStepForm = () => {
     trigger, // Used to trigger validation programmatically
   } = methods;
 
-  console.log(errors);
-
-  const onSubmit = (data: IOnBoardingFormData) => {
-    console.log(data);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onSubmit = (data: any) => {
     // Submit the data to the server
     onBoardDriver(data);
   };

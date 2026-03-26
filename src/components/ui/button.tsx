@@ -40,7 +40,8 @@ const buttonVariants = cva(
 
 // Interface for the Button component props
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean; // Allows button to be rendered as a child of another component
   isLoading?: boolean;
